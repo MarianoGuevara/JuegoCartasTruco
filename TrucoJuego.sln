@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entidades", "TrucoJuego\Entidades.csproj", "{122DB67B-F15C-426F-8BD0-8B93D581E950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Formularios", "Formularios\Formularios.csproj", "{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{122DB67B-F15C-426F-8BD0-8B93D581E950}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122DB67B-F15C-426F-8BD0-8B93D581E950}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122DB67B-F15C-426F-8BD0-8B93D581E950}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122DB67B-F15C-426F-8BD0-8B93D581E950}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E521F9E6-0346-4758-B734-30590A17CDCC}
+	EndGlobalSection
+EndGlobal

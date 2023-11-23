@@ -1,0 +1,2 @@
+-fondo similar al del juego solitario
+-Ver como hacer los tamaños del form relativos para q se adapten a cada pantalla. O fijos al menos
