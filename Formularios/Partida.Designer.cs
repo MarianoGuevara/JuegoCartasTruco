@@ -43,12 +43,25 @@
             lblPuntajePropio = new Label();
             lblPuntajeVisual = new Label();
             label2 = new Label();
+            pbCartaPropiaPanio1 = new PictureBox();
+            pbCartaPropiaPanio2 = new PictureBox();
+            pbCartaPropiaPanio3 = new PictureBox();
+            pbCartaRivalPanio1 = new PictureBox();
+            pbCartaRivalPanio2 = new PictureBox();
+            pbCartaRivalPanio3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
+            panelPanio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaPropiaPanio1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaPropiaPanio2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaPropiaPanio3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaRivalPanio1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaRivalPanio2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaRivalPanio3).BeginInit();
             SuspendLayout();
             // 
             // pbCartaPropia1
@@ -59,10 +72,12 @@
             pbCartaPropia1.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaPropia1.TabIndex = 1;
             pbCartaPropia1.TabStop = false;
+            pbCartaPropia1.MouseEnter += Partida_MouseEnter;
+            pbCartaPropia1.MouseLeave += Partida_MouseLeave;
             // 
             // pbCartaRival1
             // 
-            pbCartaRival1.Location = new Point(880, 78);
+            pbCartaRival1.Location = new Point(890, 78);
             pbCartaRival1.Name = "pbCartaRival1";
             pbCartaRival1.Size = new Size(97, 136);
             pbCartaRival1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -73,6 +88,12 @@
             // 
             panelPanio.BackgroundImage = (Image)resources.GetObject("panelPanio.BackgroundImage");
             panelPanio.BackgroundImageLayout = ImageLayout.Zoom;
+            panelPanio.Controls.Add(pbCartaRivalPanio3);
+            panelPanio.Controls.Add(pbCartaRivalPanio2);
+            panelPanio.Controls.Add(pbCartaRivalPanio1);
+            panelPanio.Controls.Add(pbCartaPropiaPanio3);
+            panelPanio.Controls.Add(pbCartaPropiaPanio2);
+            panelPanio.Controls.Add(pbCartaPropiaPanio1);
             panelPanio.Location = new Point(12, 78);
             panelPanio.Name = "panelPanio";
             panelPanio.Size = new Size(862, 605);
@@ -115,6 +136,8 @@
             pbCartaPropia3.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaPropia3.TabIndex = 7;
             pbCartaPropia3.TabStop = false;
+            pbCartaPropia3.MouseEnter += Partida_MouseEnter;
+            pbCartaPropia3.MouseLeave += Partida_MouseLeave;
             // 
             // pbCartaPropia2
             // 
@@ -124,6 +147,8 @@
             pbCartaPropia2.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaPropia2.TabIndex = 8;
             pbCartaPropia2.TabStop = false;
+            pbCartaPropia2.MouseEnter += Partida_MouseEnter;
+            pbCartaPropia2.MouseLeave += Partida_MouseLeave;
             // 
             // lblInfoYo
             // 
@@ -191,6 +216,66 @@
             label2.TabIndex = 14;
             label2.Text = "SALIR";
             // 
+            // pbCartaPropiaPanio1
+            // 
+            pbCartaPropiaPanio1.BackColor = Color.FromArgb(48, 98, 41);
+            pbCartaPropiaPanio1.Location = new Point(122, 397);
+            pbCartaPropiaPanio1.Name = "pbCartaPropiaPanio1";
+            pbCartaPropiaPanio1.Size = new Size(97, 136);
+            pbCartaPropiaPanio1.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCartaPropiaPanio1.TabIndex = 15;
+            pbCartaPropiaPanio1.TabStop = false;
+            // 
+            // pbCartaPropiaPanio2
+            // 
+            pbCartaPropiaPanio2.BackColor = Color.FromArgb(48, 98, 41);
+            pbCartaPropiaPanio2.Location = new Point(364, 397);
+            pbCartaPropiaPanio2.Name = "pbCartaPropiaPanio2";
+            pbCartaPropiaPanio2.Size = new Size(97, 136);
+            pbCartaPropiaPanio2.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCartaPropiaPanio2.TabIndex = 16;
+            pbCartaPropiaPanio2.TabStop = false;
+            // 
+            // pbCartaPropiaPanio3
+            // 
+            pbCartaPropiaPanio3.BackColor = Color.FromArgb(48, 98, 41);
+            pbCartaPropiaPanio3.Location = new Point(610, 397);
+            pbCartaPropiaPanio3.Name = "pbCartaPropiaPanio3";
+            pbCartaPropiaPanio3.Size = new Size(97, 136);
+            pbCartaPropiaPanio3.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCartaPropiaPanio3.TabIndex = 17;
+            pbCartaPropiaPanio3.TabStop = false;
+            // 
+            // pbCartaRivalPanio1
+            // 
+            pbCartaRivalPanio1.BackColor = Color.FromArgb(48, 98, 41);
+            pbCartaRivalPanio1.Location = new Point(122, 62);
+            pbCartaRivalPanio1.Name = "pbCartaRivalPanio1";
+            pbCartaRivalPanio1.Size = new Size(97, 136);
+            pbCartaRivalPanio1.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCartaRivalPanio1.TabIndex = 18;
+            pbCartaRivalPanio1.TabStop = false;
+            // 
+            // pbCartaRivalPanio2
+            // 
+            pbCartaRivalPanio2.BackColor = Color.FromArgb(48, 98, 41);
+            pbCartaRivalPanio2.Location = new Point(364, 62);
+            pbCartaRivalPanio2.Name = "pbCartaRivalPanio2";
+            pbCartaRivalPanio2.Size = new Size(97, 136);
+            pbCartaRivalPanio2.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCartaRivalPanio2.TabIndex = 19;
+            pbCartaRivalPanio2.TabStop = false;
+            // 
+            // pbCartaRivalPanio3
+            // 
+            pbCartaRivalPanio3.BackColor = Color.FromArgb(48, 98, 41);
+            pbCartaRivalPanio3.Location = new Point(610, 62);
+            pbCartaRivalPanio3.Name = "pbCartaRivalPanio3";
+            pbCartaRivalPanio3.Size = new Size(97, 136);
+            pbCartaRivalPanio3.SizeMode = PictureBoxSizeMode.Zoom;
+            pbCartaRivalPanio3.TabIndex = 20;
+            pbCartaRivalPanio3.TabStop = false;
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -215,12 +300,21 @@
             Name = "Partida";
             ShowIcon = false;
             Text = "Partida Truco";
+            MouseEnter += Partida_MouseEnter;
+            MouseLeave += Partida_MouseLeave;
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).EndInit();
+            panelPanio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaPropiaPanio1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaPropiaPanio2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaPropiaPanio3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaRivalPanio1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaRivalPanio2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbCartaRivalPanio3).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -240,5 +334,11 @@
         private Label lblPuntajePropio;
         private Label lblPuntajeVisual;
         private Label label2;
+        private PictureBox pbCartaPropiaPanio1;
+        private PictureBox pbCartaRivalPanio3;
+        private PictureBox pbCartaRivalPanio2;
+        private PictureBox pbCartaRivalPanio1;
+        private PictureBox pbCartaPropiaPanio3;
+        private PictureBox pbCartaPropiaPanio2;
     }
 }
