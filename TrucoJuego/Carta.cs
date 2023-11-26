@@ -12,7 +12,7 @@
         static Carta()
         {
             Carta.listaImagenes = new List<string>();
-            listaImagenes.Add("../../../../media/cartas/REVERSO.png");
+            //listaImagenes.Add("../../../../media/cartas/REVERSO.png");
             listaImagenes.Add("../../../../media/cartas/1 DE BASTO.png");
             listaImagenes.Add("../../../../media/cartas/1 DE ESPADA.png");
             listaImagenes.Add("../../../../media/cartas/1 DE COPA.png");
@@ -66,9 +66,11 @@
         private string CartaRandom()
         {
             Random rnd = new Random();
-            int indice = rnd.Next(0, Carta.listaImagenes.Count+1);
+            int indice = rnd.Next(0, Carta.listaImagenes.Count);
             return Carta.listaImagenes[indice];
         }
+
+        #region Sobrecargas equals y tostring
         public override bool Equals(object? obj)
         {
             bool retorno = false;
@@ -83,6 +85,6 @@
         {
             return this.cartaActual;
         }
-
+        #endregion
     }
 }

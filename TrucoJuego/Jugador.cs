@@ -11,16 +11,22 @@ namespace Entidades
     public class Jugador
     {
         private List<Carta> cartas;
-
+        private int cartasJugadas;
         public List<Carta> Cartas { get { return this.cartas; } }
-
-        public Jugador(Jugador jugadorBis = null)
+        public int CartasJugadas 
+        {
+            get { return this.cartasJugadas; } 
+            set { this.cartasJugadas = value; }
+        }
+        public Jugador(Jugador? jugadorBis = null)
         {
             this.cartas = new List<Carta>();
-
+            this.cartasJugadas = 0;
             if (jugadorBis is not null) this.CartasJugador(jugadorBis);
             else this.CartasJugador();
         }
+
+        #region Añadir y asignar cartas
         private void CartasJugador()
         {
             this.cartas.Add(this.AsignarCarta());
@@ -57,7 +63,9 @@ namespace Entidades
 
             return cartaObjeto;
         }
+        #endregion
 
+        #region Verificar carta unica
         private bool CartaUnica(Jugador j1, Carta c1)
         {
             bool retorno = true;
@@ -84,5 +92,6 @@ namespace Entidades
             }
             return retorno;
         }
+        #endregion
     }
 }
