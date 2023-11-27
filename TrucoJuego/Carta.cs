@@ -1,22 +1,24 @@
-﻿namespace TrucoJuego
+﻿using System.Text.RegularExpressions;
+
+namespace TrucoJuego
 {
     public class Carta
     {
         static List<string> listaImagenes;
         private string cartaActual;
 
-        public string CartaActual 
-        {
-            get {return this.cartaActual ; }
-        }
+        #region Propiedades
+        public string CartaActual { get { return this.cartaActual; } }
+        #endregion
+
         static Carta()
         {
             Carta.listaImagenes = new List<string>();
             //listaImagenes.Add("../../../../media/cartas/REVERSO.png");
-            listaImagenes.Add("../../../../media/cartas/1 DE BASTO.png");
-            listaImagenes.Add("../../../../media/cartas/1 DE ESPADA.png");
-            listaImagenes.Add("../../../../media/cartas/1 DE COPA.png");
-            listaImagenes.Add("../../../../media/cartas/1 DE ORO.png");
+            listaImagenes.Add("../../../../media/cartas/1 BASTO.png");
+            listaImagenes.Add("../../../../media/cartas/1 ESPADA.png");
+            listaImagenes.Add("../../../../media/cartas/1 COPA.png");
+            listaImagenes.Add("../../../../media/cartas/1 ORO.png");
             listaImagenes.Add("../../../../media/cartas/2 ORO.png");
             listaImagenes.Add("../../../../media/cartas/2 BASTO.png");
             listaImagenes.Add("../../../../media/cartas/2 COPA.png");
@@ -86,5 +88,43 @@
             return this.cartaActual;
         }
         #endregion
+
+        //#region Duelo de cartas; logica ganador por valor 
+        //public string Ganador(Carta cartaPropia, Carta cartaRival)
+        //{
+        //    string estadoRonda;
+
+        //    int puntajePropio = this.AsignarPuntajeCarta(cartaPropia);
+        //    int puntajeRival = this.AsignarPuntajeCarta(cartaRival);
+
+        //    if (puntajePropio > puntajeRival) estadoRonda = "gano";
+        //    else if (puntajePropio < puntajeRival) estadoRonda = "perdio";
+        //    else estadoRonda = "empato";
+        //    return estadoRonda;
+        //}
+
+        //private int AsignarPuntajeCarta(Carta cartaPropia)
+        //{
+        //    string carta = cartaPropia.ToString();
+        //    int puntaje;
+
+        //    if (Regex.IsMatch(carta, "1 ESPADA")) puntaje = 14;
+        //    else if(Regex.IsMatch(carta, "1 BASTO")) puntaje = 13;
+        //    else if(Regex.IsMatch(carta, "7 ESPADA")) puntaje = 12;
+        //    else if(Regex.IsMatch(carta, "7 ORO")) puntaje = 11;
+        //    else if (Regex.IsMatch(carta, "3 [A-Z]")) puntaje = 10;
+        //    else if (Regex.IsMatch(carta, "2 [A-Z]")) puntaje = 9;
+        //    else if (Regex.IsMatch(carta, "1 COPA") || Regex.IsMatch(carta, "1 ORO")) puntaje = 8;
+        //    else if (Regex.IsMatch(carta, "12 [A-Z]")) puntaje = 7;
+        //    else if (Regex.IsMatch(carta, "11 [A-Z]")) puntaje = 6;
+        //    else if (Regex.IsMatch(carta, "10 [A-Z]")) puntaje = 5;
+        //    else if (Regex.IsMatch(carta, "7 BASTO") || Regex.IsMatch(carta, "7 COPA")) puntaje = 4;
+        //    else if (Regex.IsMatch(carta, "6 [A-Z]")) puntaje = 3;
+        //    else if (Regex.IsMatch(carta, "5 [A-Z]")) puntaje = 2;
+        //    else puntaje = 1;
+
+        //    return puntaje;
+        //}
+        //#endregion
     }
 }

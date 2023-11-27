@@ -1,7 +1,4 @@
--fondo similar al del juego solitario
--Ver como hacer los tamaños del form relativos para q se adapten a cada pantalla. O fijos al menos
-
-
--> cuando haga click, que la imagen se ponga correspondiente a la carta
--> cuando estén las 2 cartas en la mesa (rival y mia) que se batan a duelo y le anoten 1 
-   punto al jugador que haya ganado
+-> Si se gana antes de la 3ra mano
+-> Hilos... Mejorar los tiempos (errores cuando gana rival; no espera antes de la nueva carta
+				 y en la 3 ronda reparte al instante tambien)
+-> agregarle excepciones; modularizar codigo

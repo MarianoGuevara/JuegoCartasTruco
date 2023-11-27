@@ -5,14 +5,20 @@ using TrucoJuego;
 
 namespace Formularios
 {
-    public delegate void ComenzarJuego();
+    public delegate void DelegadoComenzarJuego();
+    public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
         private Jugador yo;
         private Jugador rival;
-        private event ComenzarJuego EventoComenzarJuego;
+        private event DelegadoComenzarJuego EventoComenzarJuego;
         private CancellationToken cancelarFlujo;
         private CancellationTokenSource fuenteDeCancelacion;
+        private string ganadorActual;
+        private bool manoYo;
+        private Carta cartaYo;
+        private Carta cartaRival;
+
 
         public Partida()
         {
@@ -23,8 +29,11 @@ namespace Formularios
             this.ShowIcon = false;
             this.Text = "Partida Truco";
 
-            this.EventoComenzarJuego += new ComenzarJuego(RepartirCartasYo);
-            this.EventoComenzarJuego += new ComenzarJuego(RepartirCartasRival);
+            this.ganadorActual = string.Empty;
+            this.manoYo = true;
+
+            this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
+            this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
             this.EventoComenzarJuego.Invoke();
 
         }
@@ -85,6 +94,23 @@ namespace Formularios
             this.pbCartaPropia3.Image = Image.FromFile(yo.Cartas[2].ToString());
             this.pbCartaPropia3.Tag = yo.Cartas[2].ToString();
         }
+        private void IniciarRonda()
+        {
+            this.yo.CartasJugadas = 0;
+            this.rival.CartasJugadas = 0;
+
+            this.pbCartaPropiaPanio1.Image = null;
+            this.pbCartaPropiaPanio2.Image = null;
+            this.pbCartaPropiaPanio3.Image = null;
+
+            this.pbCartaRivalPanio1.Image = null;
+            this.pbCartaRivalPanio2.Image = null;
+            this.pbCartaRivalPanio3.Image = null;
+
+            this.RepartirCartasYo();
+            this.RepartirCartasRival();
+        }
+
         #endregion
 
         #region clicks cartas
@@ -103,43 +129,116 @@ namespace Formularios
         #endregion
 
         #region Jugar cartas
-        private void JugarCartaPropia(PictureBox pb)
+        private void JugarCartaPropia(PictureBox cartaAJugar)
         {
-            Task taskTiempo;
+            Task taskRival;
+
+            if (this.manoYo)
+            {
+                if (this.ganadorActual == "gano" || yo.CartasJugadas == 0)
+                {
+                    this.cartaYo = this.JuegoYo(cartaAJugar);
+                    this.cartaRival = this.JuegaRival();
+                }
+                else //(this.ganadorActual == "perdio")
+                {
+                    this.cartaYo = this.JuegoYo(cartaAJugar);
+                }
+            }
+            else
+            {
+                if (this.ganadorActual == "perdio" || rival.CartasJugadas == 0)
+                {
+                    cartaRival = this.JuegaRival();
+                    cartaYo = this.JuegoYo(cartaAJugar);
+                }
+                else
+                {
+                    cartaYo = this.JuegoYo(cartaAJugar);
+                    cartaRival = this.JuegaRival();
+                }
+
+            }
+            this.ganadorActual = Jugador.CartaVsCarta(cartaYo, cartaRival);
+            if (this.ganadorActual == "perdio") this.cartaRival = this.JuegaRival();
+            if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3) this.IniciarRonda();
+        }
+
+        private Carta JuegoYo(PictureBox cartaAJugar)
+        {
+            Carta cartaYo;
+            int indiceCoincidencia = -1;
+
             switch (yo.CartasJugadas)
             {
                 case 0:
-                    this.ModificarEstadoCartaJugada(pb, this.pbCartaPropiaPanio1);
-                    yo.CartasJugadas += 1;
+                    indiceCoincidencia = this.yo.CoincidirCartaConJugador(cartaAJugar.Tag.ToString());
 
-                    taskTiempo = Task.Run(() => this.ModificarEstadoCartaJugadaRival(this.pbCartaRival1, this.pbCartaRivalPanio1));
+                    this.ModificarEstadoCartaJugada(cartaAJugar, this.pbCartaPropiaPanio1);
+
                     break;
                 case 1:
-                    this.ModificarEstadoCartaJugada(pb, this.pbCartaPropiaPanio2);
-                    yo.CartasJugadas += 1;
+                    indiceCoincidencia = this.yo.CoincidirCartaConJugador(cartaAJugar.Tag.ToString());
 
-                    taskTiempo = Task.Run(() => this.ModificarEstadoCartaJugadaRival(this.pbCartaRival2, this.pbCartaRivalPanio2));
+                    this.ModificarEstadoCartaJugada(cartaAJugar, this.pbCartaPropiaPanio2);
+
                     break;
                 case 2:
-                    this.ModificarEstadoCartaJugada(pb, this.pbCartaPropiaPanio3);
+                    indiceCoincidencia = this.yo.CoincidirCartaConJugador(cartaAJugar.Tag.ToString());
 
-                    taskTiempo = Task.Run(() => this.ModificarEstadoCartaJugadaRival(this.pbCartaRival3, this.pbCartaRivalPanio3));
+                    this.ModificarEstadoCartaJugada(cartaAJugar, this.pbCartaPropiaPanio3);
+
+                    this.manoYo = !this.manoYo;
                     break;
             }
-        }
+            this.yo.CartasJugadas += 1;
+            cartaYo = this.yo.Cartas[indiceCoincidencia];
+            return cartaYo;
+        } 
 
-        //private void JugarCartaRival(PictureBox pb, PictureBox pbPanio)
-        //{
-        //    this.ModificarEstadoCartaJugada(p)
-        //    pb.Image = ria
-        //}
+        private Carta JuegaRival()
+        {
+            Task taskRival;
+            Carta cartaRival = null;
+
+            switch (rival.CartasJugadas)
+            {
+                case 0:
+                    taskRival = Task.Run(() => this.ModificarEstadoCartaJugadaRival(this.pbCartaRival1, this.pbCartaRivalPanio1));
+                    
+                    cartaRival = this.rival.Cartas[0];
+                    break;
+                case 1:
+                    taskRival = Task.Run(() => this.ModificarEstadoCartaJugadaRival(this.pbCartaRival2, this.pbCartaRivalPanio2));
+                    
+                    cartaRival = this.rival.Cartas[1];
+                    break;
+                case 2:
+                    taskRival = Task.Run(() => this.ModificarEstadoCartaJugadaRival(this.pbCartaRival3, this.pbCartaRivalPanio3));
+
+                    cartaRival = this.rival.Cartas[2];
+                    break;
+            }
+            this.rival.CartasJugadas += 1;
+            return cartaRival;
+        }
 
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio)
         {
-            pbPanio.Image = Image.FromFile(pb.Tag.ToString());
-            pb.Tag = null;
-            pb.Image = null;
-            pb.Enabled = false;
+            if (pbPanio.InvokeRequired)
+            {
+                DelegadoJuegoRival d = new DelegadoJuegoRival(ModificarEstadoCartaJugada);
+                object[] arrayParametros = { pb, pbPanio };
+
+                pb.Invoke(d, arrayParametros);
+            }
+            else
+            {
+                pbPanio.Image = Image.FromFile(pb.Tag.ToString());
+                pb.Tag = null;
+                pb.Image = null;
+                pb.Enabled = false;
+            }
         }
 
         private void ModificarEstadoCartaJugadaRival(PictureBox pb, PictureBox pbPanio)
@@ -149,6 +248,7 @@ namespace Formularios
             this.fuenteDeCancelacion = new CancellationTokenSource();
             this.cancelarFlujo = this.fuenteDeCancelacion.Token;
         }
+
 
 
         #endregion
