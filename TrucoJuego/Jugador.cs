@@ -14,6 +14,7 @@ namespace Entidades
         private List<Carta> cartas;
         private int cartasJugadas;
         private int puntaje;
+        private int puntosRondaActual;
 
         #region Propiedades
         public List<Carta> Cartas { get { return this.cartas; } }
@@ -27,15 +28,30 @@ namespace Entidades
             get { return this.puntaje; }
             set { this.puntaje = value; }
         }
+        public int PuntosRondaActual
+        {
+            get { return this.puntosRondaActual; }
+            set { this.puntosRondaActual = value; }
+        }
         #endregion
         public Jugador(Jugador? jugadorBis = null)
         {
+            this.puntaje = 0;
+            if (jugadorBis is null) this.ComenzarJugador();
+            else this.ComenzarJugador(jugadorBis);
+        }
+
+        public void ComenzarJugador()
+        {
             this.cartas = new List<Carta>();
             this.cartasJugadas = 0;
-            this.puntaje = 0;
-
-            if (jugadorBis is not null) this.CartasJugador(jugadorBis);
-            else this.CartasJugador();
+            this.CartasJugador();
+        }
+        public void ComenzarJugador(Jugador jugadorBis)
+        {
+            this.cartas = new List<Carta>();
+            this.cartasJugadas = 0;
+            this.CartasJugador(jugadorBis);
         }
 
         #region Añadir y asignar cartas

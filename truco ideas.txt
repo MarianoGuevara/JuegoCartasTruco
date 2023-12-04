@@ -1,9 +1,11 @@
--> Si se gana antes de la 3ra mano
--> Hilos... Mejorar los tiempos (errores cuando gana rival; no espera antes de la nueva carta
-				 y en la 3 ronda reparte al instante tambien)
+COSAS RARAS
+-> Si yo gano, tarda re poco en repartir de nuevo; si no, tarda lo normal (3000ms)
+-> Cambiar hilos por thread.sleep al final de las animaciones o ver donde
+   porque con hilos no funciona bien. Ej: Tiempos irregulares como lo de arriba o que
+   puedo seguir jugando aunque esté calculando si gané o perdí la mano
+-> si hay empate ¿?
 
--> cuando pierdo en 3ra ronda no me vuelve a repartir
--> Cuando reparte no me deja volver a jugar otra ronda
 
-
--> agregarle excepciones; modularizar codigo
+COSAS A AGREGAR
+-> Organizar el codigo; atomizar, acomodar
+-> Capturar excepciones

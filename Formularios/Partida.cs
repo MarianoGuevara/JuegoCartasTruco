@@ -19,7 +19,6 @@ namespace Formularios
         private bool manoYo;
         private Carta cartaYo;
         private Carta cartaRival;
-        private int puntosRondaActual;
 
         public Partida()
         {
@@ -30,9 +29,11 @@ namespace Formularios
             this.ShowIcon = false;
             this.Text = "Partida Truco";
 
+            this.yo = new Jugador();
+            this.rival = new Jugador(this.yo);
+
             this.ganadorActual = string.Empty;
             this.manoYo = true;
-            this.puntosRondaActual = 0;
 
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
@@ -70,7 +71,7 @@ namespace Formularios
         #region Repartir cartas; rival y yo
         private void RepartirCartasRival()
         {
-            this.rival = new Jugador(yo);
+            this.rival.ComenzarJugador(this.yo);
 
             this.pbCartaRival1.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
             this.pbCartaRival1.Tag = rival.Cartas[0].ToString();
@@ -84,7 +85,7 @@ namespace Formularios
 
         private void RepartirCartasYo()
         {
-            this.yo = new Jugador();
+            this.yo.ComenzarJugador();
 
             this.pbCartaPropia1.Image = Image.FromFile(yo.Cartas[0].ToString());
             this.pbCartaPropia1.Tag = yo.Cartas[0].ToString();
@@ -105,6 +106,8 @@ namespace Formularios
             }
             else
             {
+                this.yo.PuntosRondaActual = 0;
+                this.rival.PuntosRondaActual = 0;
                 this.yo.CartasJugadas = 0;
                 this.rival.CartasJugadas = 0;
 
@@ -122,7 +125,6 @@ namespace Formularios
 
                 this.ganadorActual = string.Empty;
                 this.manoYo = true;
-                this.puntosRondaActual = 0;
 
                 this.EventoComenzarJuego.Invoke();
             }
@@ -130,7 +132,7 @@ namespace Formularios
 
         private void RepartirNuevamente()
         {
-            Thread.Sleep(2500);
+            Thread.Sleep(3200);
             this.IniciarRonda();
             this.fuenteDeCancelacion = new CancellationTokenSource();
             this.cancelarFlujo = this.fuenteDeCancelacion.Token;
@@ -185,14 +187,61 @@ namespace Formularios
 
             }
             this.ganadorActual = Jugador.CartaVsCarta(cartaYo, cartaRival);
-            if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3) this.cartaRival = this.JuegaRival();
-            if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
-            {
-                taskRival = Task.Run(() => this.RepartirNuevamente());
-                //MessageBox.Show($"{}");
-            }
-        }
+            this.DarPuntoPorMano(this.ganadorActual);
 
+            if (yo.PuntosRondaActual == 2 || rival.PuntosRondaActual == 2)
+            {
+                if (yo.PuntosRondaActual == 2)
+                {
+                    yo.Puntaje += 1;
+                }
+                else if (rival.PuntosRondaActual == 2)
+                {
+                    rival.Puntaje += 1;
+                }
+                taskRival = Task.Run(() => this.RepartirNuevamente());
+            }
+            else if (yo.PuntosRondaActual == -1)
+            {
+                //if (yo.CartasJugadas != 2)
+                //{
+
+                //}
+                //taskRival = Task.Run(() => this.RepartirNuevamente());
+                
+                //taskRival = Task.Run(() => this.RepartirNuevamente());
+            }
+            else
+            {
+                if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3) this.cartaRival = this.JuegaRival();
+                if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
+                {
+                    taskRival = Task.Run(() => this.RepartirNuevamente());
+                }
+            }
+            this.ActualizarPuntajes();
+        }
+        private void ActualizarPuntajes()
+        {
+            this.lblPuntajePropio.Text = this.yo.Puntaje.ToString();
+            this.lblPuntajeRival.Text = this.rival.Puntaje.ToString();
+        }
+        private void DarPuntoPorMano(string ganadorActual)
+        {
+            switch (ganadorActual)
+            {
+                case "gano":
+                    yo.PuntosRondaActual += 1;
+                    break;
+                case "perdio":
+                    rival.PuntosRondaActual += 1;
+                    break;
+                case "empato":
+                    yo.PuntosRondaActual = -1;
+                    break;
+            }
+
+        }
         private Carta JuegoYo(PictureBox cartaAJugar)
         {
             Carta cartaYo;
