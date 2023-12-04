@@ -1,4 +1,9 @@
 -> Si se gana antes de la 3ra mano
 -> Hilos... Mejorar los tiempos (errores cuando gana rival; no espera antes de la nueva carta
 				 y en la 3 ronda reparte al instante tambien)
+
+-> cuando pierdo en 3ra ronda no me vuelve a repartir
+-> Cuando reparte no me deja volver a jugar otra ronda
+
+
 -> agregarle excepciones; modularizar codigo

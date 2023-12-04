@@ -71,7 +71,7 @@ namespace Entidades
             {
                 cartaObjeto.DefinirCarta();
 
-            } while (this.CartaUnica(player, cartaObjeto) == false && this.CartaUnica(cartaObjeto) == false);
+            } while ((this.CartaUnica(player, cartaObjeto) == false) || (this.CartaUnica(cartaObjeto) == false));
 
             return cartaObjeto;
         }

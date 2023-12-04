@@ -6,6 +6,7 @@ using TrucoJuego;
 namespace Formularios
 {
     public delegate void DelegadoComenzarJuego();
+    public delegate void DelegadoComenzarJuegoDos();
     public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
@@ -18,7 +19,7 @@ namespace Formularios
         private bool manoYo;
         private Carta cartaYo;
         private Carta cartaRival;
-
+        private int puntosRondaActual;
 
         public Partida()
         {
@@ -31,11 +32,11 @@ namespace Formularios
 
             this.ganadorActual = string.Empty;
             this.manoYo = true;
+            this.puntosRondaActual = 0;
 
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
             this.EventoComenzarJuego.Invoke();
-
         }
 
         #region Animaciones
@@ -96,19 +97,43 @@ namespace Formularios
         }
         private void IniciarRonda()
         {
-            this.yo.CartasJugadas = 0;
-            this.rival.CartasJugadas = 0;
+            if (this.pbCartaPropia1.InvokeRequired)
+            {
+                DelegadoComenzarJuegoDos d = new DelegadoComenzarJuegoDos(IniciarRonda);
 
-            this.pbCartaPropiaPanio1.Image = null;
-            this.pbCartaPropiaPanio2.Image = null;
-            this.pbCartaPropiaPanio3.Image = null;
+                this.pbCartaPropia1.Invoke(d);
+            }
+            else
+            {
+                this.yo.CartasJugadas = 0;
+                this.rival.CartasJugadas = 0;
 
-            this.pbCartaRivalPanio1.Image = null;
-            this.pbCartaRivalPanio2.Image = null;
-            this.pbCartaRivalPanio3.Image = null;
+                pbCartaPropia1.Enabled = true;
+                pbCartaPropia2.Enabled = true;
+                pbCartaPropia3.Enabled = true;
 
-            this.RepartirCartasYo();
-            this.RepartirCartasRival();
+                this.pbCartaPropiaPanio1.Image = null;
+                this.pbCartaPropiaPanio2.Image = null;
+                this.pbCartaPropiaPanio3.Image = null;
+
+                this.pbCartaRivalPanio1.Image = null;
+                this.pbCartaRivalPanio2.Image = null;
+                this.pbCartaRivalPanio3.Image = null;
+
+                this.ganadorActual = string.Empty;
+                this.manoYo = true;
+                this.puntosRondaActual = 0;
+
+                this.EventoComenzarJuego.Invoke();
+            }
+        }
+
+        private void RepartirNuevamente()
+        {
+            Thread.Sleep(2500);
+            this.IniciarRonda();
+            this.fuenteDeCancelacion = new CancellationTokenSource();
+            this.cancelarFlujo = this.fuenteDeCancelacion.Token;
         }
 
         #endregion
@@ -160,8 +185,12 @@ namespace Formularios
 
             }
             this.ganadorActual = Jugador.CartaVsCarta(cartaYo, cartaRival);
-            if (this.ganadorActual == "perdio") this.cartaRival = this.JuegaRival();
-            if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3) this.IniciarRonda();
+            if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3) this.cartaRival = this.JuegaRival();
+            if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
+            {
+                taskRival = Task.Run(() => this.RepartirNuevamente());
+                //MessageBox.Show($"{}");
+            }
         }
 
         private Carta JuegoYo(PictureBox cartaAJugar)
@@ -248,8 +277,6 @@ namespace Formularios
             this.fuenteDeCancelacion = new CancellationTokenSource();
             this.cancelarFlujo = this.fuenteDeCancelacion.Token;
         }
-
-
 
         #endregion
     }
