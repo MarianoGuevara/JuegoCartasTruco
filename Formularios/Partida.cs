@@ -1,5 +1,6 @@
 using Entidades;
 using System.Diagnostics;
+using System.Drawing.Printing;
 using System.Windows.Forms;
 using TrucoJuego;
 
@@ -99,8 +100,10 @@ namespace Formularios
             this.pbCartaPropia3.Image = Image.FromFile(yo.Cartas[2].ToString());
             this.pbCartaPropia3.Tag = yo.Cartas[2].ToString();
         }
-        private void IniciarRonda()
+        private async void IniciarRonda()
         {
+            this.manoYo = !this.manoYo;
+
             this.yo.PuntosRondaActual = 0;
             this.rival.PuntosRondaActual = 0;
             this.yo.CartasJugadas = 0;
@@ -119,25 +122,45 @@ namespace Formularios
             this.pbCartaRivalPanio3.Image = null;
 
             this.ganadorActual = string.Empty;
-            this.manoYo = true;
 
             this.EventoComenzarJuego.Invoke();
+
+            if (this.manoYo == false && rival.CartasJugadas == 0)
+            {
+                await Task.Delay(2000);
+                this.cartaRival = this.JuegaRival();
+            }
         }
 
         #endregion
 
         #region clicks cartas
+        private bool HabilitarClick()
+        {
+            bool juego = false;
+
+            if (this.manoYo == false)
+            {
+                if (this.rival.CartasJugadas == 0) juego = false;
+                else if (this.habilitado) juego = true;
+            }
+            else if (this.habilitado) juego = true;
+            return juego;
+        }
         private void pbCartaPropia1_Click(object sender, EventArgs e)
         {
-            if (this.habilitado) this.JugarCartaPropia(this.pbCartaPropia1);
+            bool juego = this.HabilitarClick();
+            if (juego) this.JugarCartaPropia(this.pbCartaPropia1); 
         }
         private void pbCartaPropia2_Click(object sender, EventArgs e)
         {
-            if (this.habilitado) this.JugarCartaPropia(this.pbCartaPropia2);
+            bool juego = this.HabilitarClick();
+            if (juego) this.JugarCartaPropia(this.pbCartaPropia2);
         }
         private void pbCartaPropia3_Click(object sender, EventArgs e)
         {
-            if (this.habilitado) this.JugarCartaPropia(this.pbCartaPropia3);
+            bool juego = this.HabilitarClick();
+            if (juego) this.JugarCartaPropia(this.pbCartaPropia3);
         }
         #endregion
 
@@ -158,17 +181,12 @@ namespace Formularios
             }
             else
             {
-                if (this.ganadorActual == "perdio" || rival.CartasJugadas == 0)
-                {
-                    await Task.Delay(2000);
-                    cartaRival = this.JuegaRival();
-                    cartaYo = this.JuegoYo(cartaAJugar);
-                }
+                if (this.ganadorActual == "perdio" || this.yo.CartasJugadas == 0) this.cartaYo = this.JuegoYo(cartaAJugar);
                 else
                 {
-                    cartaYo = this.JuegoYo(cartaAJugar);
+                    this.cartaYo = this.JuegoYo(cartaAJugar);
                     await Task.Delay(2000);
-                    cartaRival = this.JuegaRival();
+                    this.cartaRival = this.JuegaRival();
                 }
             }
 
@@ -192,12 +210,6 @@ namespace Formularios
 
             if (this.parda)
             {
-                //this.parda = false;
-
-                //cartaYo = this.JuegoYo(cartaAJugar);
-                //await Task.Delay(2000);
-                //cartaRival = this.JuegaRival();
-
                 if (this.ganadorActual == "gano") this.yo.Puntaje += 1;
                 else if (this.ganadorActual == "perdio") this.rival.Puntaje += 1;
 
@@ -216,7 +228,7 @@ namespace Formularios
                     await Task.Delay(2000);
                     this.IniciarRonda();
                 }
-                else
+                else 
                 {
                     if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3)
                     {
@@ -228,7 +240,6 @@ namespace Formularios
                     {
                         await Task.Delay(2000);
                         this.IniciarRonda();
-                        //taskRival = Task.Run(() => this.RepartirNuevamente());
                     }
                 }
             }
@@ -263,9 +274,6 @@ namespace Formularios
                 case "perdio":
                     rival.PuntosRondaActual += 1;
                     break;
-                //case "empato":
-                //    yo.PuntosRondaActual = -1;
-                //    break;
             }
 
         }
@@ -278,22 +286,15 @@ namespace Formularios
             {
                 case 0:
                     indiceCoincidencia = this.yo.CoincidirCartaConJugador(cartaAJugar.Tag.ToString());
-
                     this.ModificarEstadoCartaJugada(cartaAJugar, this.pbCartaPropiaPanio1);
-
                     break;
                 case 1:
                     indiceCoincidencia = this.yo.CoincidirCartaConJugador(cartaAJugar.Tag.ToString());
-
                     this.ModificarEstadoCartaJugada(cartaAJugar, this.pbCartaPropiaPanio2);
-
                     break;
                 case 2:
                     indiceCoincidencia = this.yo.CoincidirCartaConJugador(cartaAJugar.Tag.ToString());
-
                     this.ModificarEstadoCartaJugada(cartaAJugar, this.pbCartaPropiaPanio3);
-
-                    this.manoYo = !this.manoYo;
                     break;
             }
             this.yo.CartasJugadas += 1;

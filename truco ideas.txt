@@ -1,6 +1,7 @@
 COSAS RARAS
--> Hay una situacion IRREGULAR (no sucede siempre) cuando gano 1 y 2da, reparte de una, no se pq
+->
 
 COSAS A AGREGAR
 -> Organizar el codigo; atomizar, acomodar
--> Que el mano se intercambie ronda a ronda
+-> Cambiar puntaje numerico por clasico de truco
+-> logica 'truco, retruco, vale cuatro...'
