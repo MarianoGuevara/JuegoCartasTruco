@@ -4,4 +4,5 @@ COSAS RARAS
 COSAS A AGREGAR
 -> Organizar el codigo; atomizar, acomodar
 -> Cambiar puntaje numerico por clasico de truco
+-> ''Inteligencia'' en las jugadas del rival
 -> logica 'truco, retruco, vale cuatro...'

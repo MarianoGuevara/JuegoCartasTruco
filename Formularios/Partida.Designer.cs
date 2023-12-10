@@ -44,11 +44,11 @@
             pbCartaPropia3 = new PictureBox();
             pbCartaPropia2 = new PictureBox();
             lblInfoYo = new Label();
-            label1 = new Label();
             lblPuntajeRival = new Label();
             lblPuntajePropio = new Label();
             lblPuntajeVisual = new Label();
             label2 = new Label();
+            lblTruco = new Label();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             panelPanio.SuspendLayout();
@@ -224,17 +224,6 @@
             lblInfoYo.TabIndex = 9;
             lblInfoYo.Text = "YO: [Nombre, Apellido]";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = Color.LightGray;
-            label1.Location = new Point(164, 720);
-            label1.Name = "label1";
-            label1.Size = new Size(495, 30);
-            label1.TabIndex = 10;
-            label1.Text = "ENVIDO   |   TRUCO   |   FLOR   |   MAZO";
-            // 
             // lblPuntajeRival
             // 
             lblPuntajeRival.AutoSize = true;
@@ -279,17 +268,31 @@
             label2.TabIndex = 14;
             label2.Text = "SALIR";
             // 
+            // lblTruco
+            // 
+            lblTruco.AutoSize = true;
+            lblTruco.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTruco.ForeColor = Color.LightGray;
+            lblTruco.Location = new Point(376, 720);
+            lblTruco.Name = "lblTruco";
+            lblTruco.Size = new Size(96, 30);
+            lblTruco.TabIndex = 15;
+            lblTruco.Text = "TRUCO";
+            lblTruco.Click += lblTruco_Click;
+            lblTruco.MouseEnter += Partida_MouseEnter;
+            lblTruco.MouseLeave += Partida_MouseLeave;
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
             ClientSize = new Size(1269, 785);
+            Controls.Add(lblTruco);
             Controls.Add(label2);
             Controls.Add(lblPuntajeVisual);
             Controls.Add(lblPuntajePropio);
             Controls.Add(lblPuntajeRival);
-            Controls.Add(label1);
             Controls.Add(pbCartaPropia1);
             Controls.Add(pbCartaRival1);
             Controls.Add(lblInfoYo);
@@ -332,7 +335,6 @@
         private PictureBox pbCartaPropia3;
         private PictureBox pbCartaPropia2;
         private Label lblInfoYo;
-        private Label label1;
         private Label lblPuntajeRival;
         private Label lblPuntajePropio;
         private Label lblPuntajeVisual;
@@ -343,5 +345,6 @@
         private PictureBox pbCartaRivalPanio1;
         private PictureBox pbCartaPropiaPanio3;
         private PictureBox pbCartaPropiaPanio2;
+        private Label lblTruco;
     }
 }

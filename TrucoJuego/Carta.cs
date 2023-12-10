@@ -56,15 +56,8 @@ namespace TrucoJuego
             listaImagenes.Add("../../../../media/cartas/12 COPA.png");
             listaImagenes.Add("../../../../media/cartas/12 ESPADA.png");
         }
-        public Carta()
-        {
-            //this.cartaActual = this.CartaRandom(); // me da null si llamo a DefinirCarta :/
-        }
-
-        public void DefinirCarta()
-        {
-            this.cartaActual = this.CartaRandom();
-        }
+        public Carta() { }
+        public void DefinirCarta() { this.cartaActual = this.CartaRandom(); }
         private string CartaRandom()
         {
             Random rnd = new Random();
@@ -88,6 +81,5 @@ namespace TrucoJuego
             return this.cartaActual;
         }
         #endregion
-
     }
 }

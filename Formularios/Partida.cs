@@ -1,6 +1,7 @@
 using Entidades;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 using TrucoJuego;
 
@@ -15,13 +16,18 @@ namespace Formularios
         //private CancellationTokenSource fuenteDeCancelacion;
         private Jugador yo;
         private Jugador rival;
+
         private event DelegadoComenzarJuego EventoComenzarJuego;
+
         private string ganadorActual;
         private bool manoYo;
         private bool parda;
+        private bool habilitado = true;
+
+        private Ronda rondaActual;
+
         private Carta cartaYo;
         private Carta cartaRival;
-        private bool habilitado = true;
 
         public Partida()
         {
@@ -35,6 +41,8 @@ namespace Formularios
 
             this.yo = new Jugador();
             this.rival = new Jugador(this.yo);
+
+            this.rondaActual = new Ronda(this.yo, this.rival);
 
             this.ganadorActual = string.Empty;
             this.manoYo = true;
@@ -61,14 +69,30 @@ namespace Formularios
         private void Partida_MouseEnter(object sender, EventArgs e)
         {
             if (sender is PictureBox pb) this.AnimacionCartas(pb, true);
+            else if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl, true);
         }
+
         [DebuggerStepThrough]
         private void Partida_MouseLeave(object sender, EventArgs e)
         {
             if (sender is PictureBox pb) this.AnimacionCartas(pb, false);
+            else if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl);
         }
 
-
+        [DebuggerStepThrough]
+        private void AsignarHover(System.Windows.Forms.Label label, bool hover = false)
+        {
+            if (hover)
+            {
+                FontFamily f = new FontFamily("Century Gothic");
+                label.Font = new Font(f, 14F, FontStyle.Bold);
+            }
+            else
+            {
+                FontFamily f = new FontFamily("Century Gothic");
+                label.Font = new Font(f, 12F, FontStyle.Regular);
+            }
+        }
 
         #endregion
 
@@ -102,6 +126,10 @@ namespace Formularios
         }
         private async void IniciarRonda()
         {
+            this.rondaActual.ResetRonda();
+            this.lblTruco.Enabled = true;
+            this.lblTruco.Text = "TRUCO";
+
             this.manoYo = !this.manoYo;
 
             this.yo.PuntosRondaActual = 0;
@@ -150,7 +178,7 @@ namespace Formularios
         private void pbCartaPropia1_Click(object sender, EventArgs e)
         {
             bool juego = this.HabilitarClick();
-            if (juego) this.JugarCartaPropia(this.pbCartaPropia1); 
+            if (juego) this.JugarCartaPropia(this.pbCartaPropia1);
         }
         private void pbCartaPropia2_Click(object sender, EventArgs e)
         {
@@ -165,7 +193,7 @@ namespace Formularios
         #endregion
 
         #region Jugar cartas
-        private async void JugarCartaPropia(PictureBox cartaAJugar)
+        public async void JugarCartaPropia(PictureBox cartaAJugar)
         {
             this.habilitado = false;
 
@@ -192,26 +220,26 @@ namespace Formularios
 
             // Hasta aca tengo 2 cartas en mesa, haya jugado yo primero o el rival.
             this.ganadorActual = Jugador.CartaVsCarta(cartaYo, cartaRival);
-            this.DarPuntoPorMano(this.ganadorActual);
+            this.rondaActual.DarPuntoPorMano(this.ganadorActual);
 
             if (this.ganadorActual == "empato")
             {
                 if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
                 {
-                    if (this.rival.PuntosRondaActual > 0) this.rival.Puntaje += 1;
-                    else this.yo.Puntaje += 1;
-                    
+                    if (this.rival.PuntosRondaActual > 0) this.rondaActual.SumarPuntaje(this.rival);
+                    else this.rondaActual.SumarPuntaje(this.yo);
+
                     await Task.Delay(2000);
                     this.IniciarRonda();
-                    
+
                 }
                 else this.parda = true;
             }
 
             if (this.parda)
             {
-                if (this.ganadorActual == "gano") this.yo.Puntaje += 1;
-                else if (this.ganadorActual == "perdio") this.rival.Puntaje += 1;
+                if (this.ganadorActual == "gano") this.rondaActual.SumarPuntaje(this.yo);
+                else if (this.ganadorActual == "perdio") this.rondaActual.SumarPuntaje(this.rival);
 
                 if (this.ganadorActual != "empato")
                 {
@@ -224,11 +252,11 @@ namespace Formularios
             {
                 if (yo.PuntosRondaActual == 2 || rival.PuntosRondaActual == 2)
                 {
-                    this.AnalizarPuntaje();
+                    this.rondaActual.AnalizarPuntaje();
                     await Task.Delay(2000);
                     this.IniciarRonda();
                 }
-                else 
+                else
                 {
                     if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3)
                     {
@@ -247,35 +275,10 @@ namespace Formularios
             this.ActualizarPuntajes();
             this.habilitado = true;
         }
-
-        private void AnalizarPuntaje()
-        {
-            if (yo.PuntosRondaActual == 2)
-            {
-                yo.Puntaje += 1;
-            }
-            else if (rival.PuntosRondaActual == 2)
-            {
-                rival.Puntaje += 1;
-            }
-        }
         private void ActualizarPuntajes()
         {
             this.lblPuntajePropio.Text = this.yo.Puntaje.ToString();
             this.lblPuntajeRival.Text = this.rival.Puntaje.ToString();
-        }
-        private void DarPuntoPorMano(string ganadorActual)
-        {
-            switch (ganadorActual)
-            {
-                case "gano":
-                    yo.PuntosRondaActual += 1;
-                    break;
-                case "perdio":
-                    rival.PuntosRondaActual += 1;
-                    break;
-            }
-
         }
         private Carta JuegoYo(PictureBox cartaAJugar)
         {
@@ -300,7 +303,7 @@ namespace Formularios
             this.yo.CartasJugadas += 1;
             cartaYo = this.yo.Cartas[indiceCoincidencia];
             return cartaYo;
-        } 
+        }
 
         private Carta JuegaRival()
         {
@@ -309,12 +312,12 @@ namespace Formularios
             switch (rival.CartasJugadas)
             {
                 case 0:
-                
+
                     this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1);
                     cartaRival = this.rival.Cartas[0];
                     break;
                 case 1:
-         
+
                     this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2);
                     cartaRival = this.rival.Cartas[1];
                     break;
@@ -336,5 +339,11 @@ namespace Formularios
             pb.Enabled = false;
         }
         #endregion
+
+        private void lblTruco_Click(object sender, EventArgs e)
+        {
+            this.lblTruco.Text = this.rondaActual.ValorPuntosTruco(this.lblTruco.Text);
+            if (this.lblTruco.Text == "VALE CUATRO") this.lblTruco.Enabled = false;
+        }
     }
 }
