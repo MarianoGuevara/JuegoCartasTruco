@@ -156,7 +156,7 @@ namespace Formularios
             if (this.manoYo == false && rival.CartasJugadas == 0)
             {
                 await Task.Delay(2000);
-                this.cartaRival = this.JuegaRival();
+                this.cartaRival = this.JuegaRival(this.cartaYo);
             }
         }
 
@@ -203,7 +203,7 @@ namespace Formularios
                 {
                     this.cartaYo = this.JuegoYo(cartaAJugar);
                     await Task.Delay(2000);
-                    this.cartaRival = this.JuegaRival();
+                    this.cartaRival = this.JuegaRival(this.cartaYo);
                 }
                 else this.cartaYo = this.JuegoYo(cartaAJugar);
             }
@@ -214,12 +214,12 @@ namespace Formularios
                 {
                     this.cartaYo = this.JuegoYo(cartaAJugar);
                     await Task.Delay(2000);
-                    this.cartaRival = this.JuegaRival();
+                    this.cartaRival = this.JuegaRival(this.cartaYo);
                 }
             }
 
             // Hasta aca tengo 2 cartas en mesa, haya jugado yo primero o el rival.
-            this.ganadorActual = Jugador.CartaVsCarta(cartaYo, cartaRival);
+            this.ganadorActual = Jugador.CartaVsCarta(this.cartaYo, this.cartaRival);
             this.rondaActual.DarPuntoPorMano(this.ganadorActual);
 
             if (this.ganadorActual == "empato")
@@ -261,7 +261,7 @@ namespace Formularios
                     if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3)
                     {
                         await Task.Delay(2000);
-                        this.cartaRival = this.JuegaRival();
+                        this.cartaRival = this.JuegaRival(this.cartaYo);
                     }
 
                     if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
@@ -305,29 +305,18 @@ namespace Formularios
             return cartaYo;
         }
 
-        private Carta JuegaRival()
+        private Carta JuegaRival(Carta cartaYo)
         {
-            Carta cartaRival = null;
+            Carta cartaRival;
 
-            switch (rival.CartasJugadas)
-            {
-                case 0:
+            cartaRival = this.rival.JugarInteligente(cartaYo);
 
-                    this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1);
-                    cartaRival = this.rival.Cartas[0];
-                    break;
-                case 1:
+            if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1);
+            else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2);
+            else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3);
 
-                    this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2);
-                    cartaRival = this.rival.Cartas[1];
-                    break;
-                case 2:
-
-                    this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3);
-                    cartaRival = this.rival.Cartas[2];
-                    break;
-            }
             this.rival.CartasJugadas += 1;
+
             return cartaRival;
         }
 
@@ -342,7 +331,7 @@ namespace Formularios
 
         private void lblTruco_Click(object sender, EventArgs e)
         {
-            this.lblTruco.Text = this.rondaActual.ValorPuntosTruco(this.lblTruco.Text);
+            this.lblTruco.Text = this.rondaActual.ValorPuntosTruco(this.lblTruco.Text, "yo");
             if (this.lblTruco.Text == "VALE CUATRO") this.lblTruco.Enabled = false;
         }
     }

@@ -44,12 +44,16 @@ namespace Entidades
             player.Puntaje += this.sumaPuntaje;
         }
 
-        public string ValorPuntosTruco(string str)
+        public string ValorPuntosTruco(string str, string player)
         {
             switch (str)
             {
                 case "TRUCO":
-                    str = "RETRUCO";
+                    if (player == "yo")
+                    {
+                        str = "VALE CUATRO";
+                    }
+                    else str = "RETRUCO";
                     this.sumaPuntaje = 2;
                     break;
                 case "RETRUCO":

@@ -156,7 +156,8 @@ namespace Entidades
             string carta = cartaPropia.ToString();
             int puntaje;
 
-            if (Regex.IsMatch(carta, @"\b1 ESPADA")) puntaje = 14;
+            if (cartaPropia is null) puntaje = -1;
+            else if (Regex.IsMatch(carta, @"\b1 ESPADA")) puntaje = 14;
             else if (Regex.IsMatch(carta, @"\b1 BASTO")) puntaje = 13;
             else if (Regex.IsMatch(carta, @"\b7 ESPADA")) puntaje = 12;
             else if (Regex.IsMatch(carta, @"\b7 ORO")) puntaje = 11;
@@ -173,6 +174,114 @@ namespace Entidades
 
             return puntaje;
         }
+        #endregion
+
+        #region JugarInteligenteIA
+        public Carta JugarInteligente(Carta cartaRival)
+        {
+            int puntajeRival = Jugador.AsignarPuntajeCarta(cartaRival);
+
+            int carta1 = Jugador.AsignarPuntajeCarta(this.cartas[0]);
+            int carta2 = Jugador.AsignarPuntajeCarta(this.cartas[1]);
+            int carta3 = Jugador.AsignarPuntajeCarta(this.cartas[2]);
+
+            List<int> list = new List<int> { carta1, carta2, carta3 };
+
+            int cantidadSuperaciones = this.HayCartaMasAlta(list, puntajeRival);
+
+            int indiceFinal = -1;
+            switch (cantidadSuperaciones)
+            {
+                case 0:
+                case 3:
+                    indiceFinal = this.NumeroMenor(list);
+                    break;
+                case 1:
+                    indiceFinal = this.IndiceSuperacionUnica(list, puntajeRival); 
+                    break;
+                case 2:
+                    indiceFinal = this.IndiceSuperacionDos(list, puntajeRival);
+                    break;
+            }
+
+            return this.cartas[indiceFinal];
+        }
+
+        private int HayCartaMasAlta(List<int> listaPuntajes, int puntajeASuperar)
+        {
+            int cantidadSuperaciones = 0;
+
+            foreach(int i in listaPuntajes) 
+            {
+                if (i > puntajeASuperar) cantidadSuperaciones++;
+            }
+
+            return cantidadSuperaciones;
+        }
+        private int IndiceSuperacionUnica(List<int> listaPuntajes, int puntajeASuperar) // 1 SUPERADO
+        {
+            int mayorIndice = -1;
+
+            for (int i = 0; i < listaPuntajes.Count; i++)
+            {
+                if (listaPuntajes[i] > puntajeASuperar) mayorIndice = i;
+            }
+
+            return mayorIndice;
+        }
+        private int IndiceSuperacionDos(List<int> listaPuntajes, int puntajeASuperar)
+        {
+            int superacion1 = -1;
+            int indiceSuperacion1 = 0;
+            int superacion2 = -1;
+            int indiceSuperacion2 = 0;
+
+            for (int i = 0; i < listaPuntajes.Count; i++)
+            {
+                if (listaPuntajes[i] > puntajeASuperar && superacion1 == -1)
+                {
+                    superacion1 = listaPuntajes[i];
+                    indiceSuperacion1 = i;
+                }
+                else if (listaPuntajes[i] > puntajeASuperar)
+                {
+                    superacion2 = listaPuntajes[i];
+                    indiceSuperacion2 = i;
+                }
+            }
+
+            int indiceRetorno;
+            int menorDeDos = this.DevolverSuperacionMenorDos(superacion1, superacion2);
+            if (superacion1 == menorDeDos) indiceRetorno = indiceSuperacion1;
+            else indiceRetorno = indiceSuperacion2;
+
+            return indiceRetorno;
+        }
+        private int DevolverSuperacionMenorDos(int puntaje1, int puntaje2) // !! NO ANDA -> devuelve numero en vez de indice
+        {
+            int retorno;
+            if (puntaje1 > puntaje2 ) retorno = puntaje1;
+            else retorno = puntaje2;
+            return retorno; 
+        }
+
+        private int NumeroMenor(List<int> listaPuntajes)
+        {
+            bool bandera = false;
+            int menor = -1;
+
+            for (int i=0; i<listaPuntajes.Count; i++)
+            {
+                if (listaPuntajes[i] != -1 && bandera == false)
+                {
+                    bandera = true;
+                    menor = i;
+                }
+                else if (listaPuntajes[i] != -1 && listaPuntajes[i] < menor) menor = i;
+            }
+            return menor;
+        }
+
         #endregion
     }
 }
