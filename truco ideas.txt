@@ -1,11 +1,8 @@
 COSAS RARAS
 ->
-
+ 
 COSAS A AGREGAR
--> ''Inteligencia'' en las jugadas del rival
-!!! TERMINAR DE HACER INTELIGENCIA. !!!
-	-> cuando el rival gana y vuelve a jugar, captura la carta anterior para jugar
-
--> Que cuando cante YO truco, no me deje retruco. Y que el rival cante truco a veces.
+-> Truco lógica
+-> Envido logica
 -> Organizar el codigo; atomizar, acomodar
 -> Cambiar puntaje numerico por clasico de truco

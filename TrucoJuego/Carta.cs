@@ -78,7 +78,8 @@ namespace TrucoJuego
 
         public override string ToString()
         {
-            return this.cartaActual;
+            try { return this.cartaActual; }
+            catch (Exception ex) { return null; }
         }
         #endregion
     }

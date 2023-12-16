@@ -102,13 +102,8 @@ namespace Formularios
             this.rival.ComenzarJugador(this.yo);
 
             this.pbCartaRival1.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
-            this.pbCartaRival1.Tag = rival.Cartas[0].ToString();
-
             this.pbCartaRival2.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
-            this.pbCartaRival2.Tag = rival.Cartas[1].ToString();
-
             this.pbCartaRival3.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
-            this.pbCartaRival3.Tag = rival.Cartas[2].ToString();
         }
 
         private void RepartirCartasYo()
@@ -178,22 +173,22 @@ namespace Formularios
         private void pbCartaPropia1_Click(object sender, EventArgs e)
         {
             bool juego = this.HabilitarClick();
-            if (juego) this.JugarCartaPropia(this.pbCartaPropia1);
+            if (juego) this.LogicaJuego(this.pbCartaPropia1);
         }
         private void pbCartaPropia2_Click(object sender, EventArgs e)
         {
             bool juego = this.HabilitarClick();
-            if (juego) this.JugarCartaPropia(this.pbCartaPropia2);
+            if (juego) this.LogicaJuego(this.pbCartaPropia2);
         }
         private void pbCartaPropia3_Click(object sender, EventArgs e)
         {
             bool juego = this.HabilitarClick();
-            if (juego) this.JugarCartaPropia(this.pbCartaPropia3);
+            if (juego) this.LogicaJuego(this.pbCartaPropia3);
         }
         #endregion
 
         #region Jugar cartas
-        public async void JugarCartaPropia(PictureBox cartaAJugar)
+        public async void LogicaJuego(PictureBox cartaAJugar)
         {
             this.habilitado = false;
 
@@ -309,20 +304,32 @@ namespace Formularios
         {
             Carta cartaRival;
 
-            cartaRival = this.rival.JugarInteligente(cartaYo);
+            int indice;
+            indice = this.rival.IndicePanio(this.yo);
 
-            if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1);
-            else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2);
-            else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3);
+            if (indice != -1) indice = this.rival.JugarInteligente(cartaYo);
+            else
+            {
+                indice = this.rival.JugarInteligente(null);
+            }
+
+            cartaRival = this.rival.Cartas[indice];
+            this.rival.Cartas[indice] = null;
+
+            if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
+            else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
+            else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3, cartaRival);
 
             this.rival.CartasJugadas += 1;
 
             return cartaRival;
         }
 
-        private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio)
+        private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta=null)
         {
-            pbPanio.Image = Image.FromFile(pb.Tag.ToString());
+            if (carta is not null) pbPanio.Image = Image.FromFile(carta.ToString());
+            else pbPanio.Image = Image.FromFile(pb.Tag.ToString());
+
             pb.Tag = null;
             pb.Image = null;
             pb.Enabled = false;

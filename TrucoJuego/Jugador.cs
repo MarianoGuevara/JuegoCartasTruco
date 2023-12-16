@@ -153,10 +153,12 @@ namespace Entidades
 
         private static int AsignarPuntajeCarta(Carta cartaPropia)
         {
-            string carta = cartaPropia.ToString();
+            string carta;
+            if (cartaPropia is null) carta = "null";
+            else carta = cartaPropia.ToString();
             int puntaje;
 
-            if (cartaPropia is null) puntaje = -1;
+            if (carta == "null") puntaje = -1;
             else if (Regex.IsMatch(carta, @"\b1 ESPADA")) puntaje = 14;
             else if (Regex.IsMatch(carta, @"\b1 BASTO")) puntaje = 13;
             else if (Regex.IsMatch(carta, @"\b7 ESPADA")) puntaje = 12;
@@ -177,7 +179,17 @@ namespace Entidades
         #endregion
 
         #region JugarInteligenteIA
-        public Carta JugarInteligente(Carta cartaRival)
+
+        public int IndicePanio(Jugador rival)
+        {
+            int retorno = -1;
+            if (rival.cartasJugadas == 1 && this.cartasJugadas == 0) retorno = 1;
+            else if (rival.cartasJugadas == 2 && this.cartasJugadas == 1) retorno = 2;
+            else if (rival.cartasJugadas == 3 && this.cartasJugadas == 2) retorno = 3;
+            return retorno;
+        }
+
+        public int JugarInteligente(Carta cartaRival)
         {
             int puntajeRival = Jugador.AsignarPuntajeCarta(cartaRival);
 
@@ -204,7 +216,7 @@ namespace Entidades
                     break;
             }
 
-            return this.cartas[indiceFinal];
+            return indiceFinal;
         }
 
         private int HayCartaMasAlta(List<int> listaPuntajes, int puntajeASuperar)
@@ -224,7 +236,11 @@ namespace Entidades
 
             for (int i = 0; i < listaPuntajes.Count; i++)
             {
-                if (listaPuntajes[i] > puntajeASuperar) mayorIndice = i;
+                if (listaPuntajes[i] > puntajeASuperar)
+                {
+                    mayorIndice = i;
+                    break;
+                }
             }
 
             return mayorIndice;
@@ -260,7 +276,7 @@ namespace Entidades
         private int DevolverSuperacionMenorDos(int puntaje1, int puntaje2) // !! NO ANDA -> devuelve numero en vez de indice
         {
             int retorno;
-            if (puntaje1 > puntaje2 ) retorno = puntaje1;
+            if (puntaje1 < puntaje2 ) retorno = puntaje1;
             else retorno = puntaje2;
             return retorno; 
         }
@@ -269,17 +285,24 @@ namespace Entidades
         {
             bool bandera = false;
             int menor = -1;
+            int indiceMenor = -1;
 
             for (int i=0; i<listaPuntajes.Count; i++)
             {
                 if (listaPuntajes[i] != -1 && bandera == false)
                 {
                     bandera = true;
-                    menor = i;
+
+                    menor = listaPuntajes[i];
+                    indiceMenor = i;
                 }
-                else if (listaPuntajes[i] != -1 && listaPuntajes[i] < menor) menor = i;
+                else if (listaPuntajes[i] != -1 && listaPuntajes[i] < menor)
+                {
+                    menor = listaPuntajes[i];
+                    indiceMenor = i;
+                }
             }
-            return menor;
+            return indiceMenor;
         }
 
         #endregion
