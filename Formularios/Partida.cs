@@ -15,7 +15,7 @@ namespace Formularios
         //private CancellationToken cancelarFlujo;
         //private CancellationTokenSource fuenteDeCancelacion;
         private Jugador yo;
-        private Jugador rival;
+        private JugadorIA rival;
 
         private event DelegadoComenzarJuego EventoComenzarJuego;
 
@@ -32,6 +32,7 @@ namespace Formularios
         public Partida()
         {
             InitializeComponent();
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -40,7 +41,7 @@ namespace Formularios
             this.parda = false;
 
             this.yo = new Jugador();
-            this.rival = new Jugador(this.yo);
+            this.rival = new JugadorIA(this.yo);
 
             this.rondaActual = new Ronda(this.yo, this.rival);
 
@@ -272,8 +273,19 @@ namespace Formularios
         }
         private void ActualizarPuntajes()
         {
-            this.lblPuntajePropio.Text = this.yo.Puntaje.ToString();
-            this.lblPuntajeRival.Text = this.rival.Puntaje.ToString();
+
+            if (this.yo.Puntaje <= 15)
+            {
+                this.pbPuntajeYo1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+                this.pbPuntajeRival1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+            }
+            else
+            {
+                this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+                this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+            }
+            //this.lblPuntajePropio.Text = this.yo.Puntaje.ToString();
+            //this.lblPuntajeRival.Text = this.rival.Puntaje.ToString();
         }
         private Carta JuegoYo(PictureBox cartaAJugar)
         {
@@ -325,7 +337,7 @@ namespace Formularios
             return cartaRival;
         }
 
-        private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta=null)
+        private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
         {
             if (carta is not null) pbPanio.Image = Image.FromFile(carta.ToString());
             else pbPanio.Image = Image.FromFile(pb.Tag.ToString());

@@ -44,11 +44,13 @@
             pbCartaPropia3 = new PictureBox();
             pbCartaPropia2 = new PictureBox();
             lblInfoYo = new Label();
-            lblPuntajeRival = new Label();
-            lblPuntajePropio = new Label();
             lblPuntajeVisual = new Label();
             label2 = new Label();
             lblTruco = new Label();
+            pbPuntajeYo1 = new PictureBox();
+            pbPuntajeYo2 = new PictureBox();
+            pbPuntajeRival1 = new PictureBox();
+            pbPuntajeRival2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             panelPanio.SuspendLayout();
@@ -62,6 +64,10 @@
             ((System.ComponentModel.ISupportInitialize)pbCartaRival3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeYo1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeYo2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeRival1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).BeginInit();
             SuspendLayout();
             // 
             // pbCartaPropia1
@@ -224,34 +230,12 @@
             lblInfoYo.TabIndex = 9;
             lblInfoYo.Text = "YO: [Nombre, Apellido]";
             // 
-            // lblPuntajeRival
-            // 
-            lblPuntajeRival.AutoSize = true;
-            lblPuntajeRival.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPuntajeRival.ForeColor = Color.LightGray;
-            lblPuntajeRival.Location = new Point(1047, 285);
-            lblPuntajeRival.Name = "lblPuntajeRival";
-            lblPuntajeRival.Size = new Size(26, 30);
-            lblPuntajeRival.TabIndex = 11;
-            lblPuntajeRival.Text = "0";
-            // 
-            // lblPuntajePropio
-            // 
-            lblPuntajePropio.AutoSize = true;
-            lblPuntajePropio.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPuntajePropio.ForeColor = Color.LightGray;
-            lblPuntajePropio.Location = new Point(1047, 416);
-            lblPuntajePropio.Name = "lblPuntajePropio";
-            lblPuntajePropio.Size = new Size(26, 30);
-            lblPuntajePropio.TabIndex = 12;
-            lblPuntajePropio.Text = "0";
-            // 
             // lblPuntajeVisual
             // 
             lblPuntajeVisual.AutoSize = true;
             lblPuntajeVisual.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblPuntajeVisual.ForeColor = Color.LightGray;
-            lblPuntajeVisual.Location = new Point(1009, 353);
+            lblPuntajeVisual.Location = new Point(1007, 353);
             lblPuntajeVisual.Name = "lblPuntajeVisual";
             lblPuntajeVisual.Size = new Size(102, 30);
             lblPuntajeVisual.TabIndex = 13;
@@ -282,17 +266,59 @@
             lblTruco.MouseEnter += Partida_MouseEnter;
             lblTruco.MouseLeave += Partida_MouseLeave;
             // 
+            // pbPuntajeYo1
+            // 
+            pbPuntajeYo1.BackColor = Color.FromArgb(45, 50, 59);
+            pbPuntajeYo1.Location = new Point(890, 399);
+            pbPuntajeYo1.Name = "pbPuntajeYo1";
+            pbPuntajeYo1.Size = new Size(173, 74);
+            pbPuntajeYo1.SizeMode = PictureBoxSizeMode.Zoom;
+            pbPuntajeYo1.TabIndex = 21;
+            pbPuntajeYo1.TabStop = false;
+            // 
+            // pbPuntajeYo2
+            // 
+            pbPuntajeYo2.BackColor = Color.FromArgb(45, 50, 59);
+            pbPuntajeYo2.Location = new Point(1084, 399);
+            pbPuntajeYo2.Name = "pbPuntajeYo2";
+            pbPuntajeYo2.Size = new Size(173, 74);
+            pbPuntajeYo2.SizeMode = PictureBoxSizeMode.Zoom;
+            pbPuntajeYo2.TabIndex = 22;
+            pbPuntajeYo2.TabStop = false;
+            // 
+            // pbPuntajeRival1
+            // 
+            pbPuntajeRival1.BackColor = Color.FromArgb(45, 50, 59);
+            pbPuntajeRival1.Location = new Point(890, 262);
+            pbPuntajeRival1.Name = "pbPuntajeRival1";
+            pbPuntajeRival1.Size = new Size(173, 74);
+            pbPuntajeRival1.SizeMode = PictureBoxSizeMode.Zoom;
+            pbPuntajeRival1.TabIndex = 23;
+            pbPuntajeRival1.TabStop = false;
+            // 
+            // pbPuntajeRival2
+            // 
+            pbPuntajeRival2.BackColor = Color.FromArgb(45, 50, 59);
+            pbPuntajeRival2.Location = new Point(1084, 262);
+            pbPuntajeRival2.Name = "pbPuntajeRival2";
+            pbPuntajeRival2.Size = new Size(173, 74);
+            pbPuntajeRival2.SizeMode = PictureBoxSizeMode.Zoom;
+            pbPuntajeRival2.TabIndex = 24;
+            pbPuntajeRival2.TabStop = false;
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
-            ClientSize = new Size(1269, 785);
+            ClientSize = new Size(1278, 785);
+            Controls.Add(pbPuntajeRival2);
+            Controls.Add(pbPuntajeRival1);
+            Controls.Add(pbPuntajeYo2);
+            Controls.Add(pbPuntajeYo1);
             Controls.Add(lblTruco);
             Controls.Add(label2);
             Controls.Add(lblPuntajeVisual);
-            Controls.Add(lblPuntajePropio);
-            Controls.Add(lblPuntajeRival);
             Controls.Add(pbCartaPropia1);
             Controls.Add(pbCartaRival1);
             Controls.Add(lblInfoYo);
@@ -321,6 +347,10 @@
             ((System.ComponentModel.ISupportInitialize)pbCartaRival3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeYo1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeYo2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeRival1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -335,8 +365,6 @@
         private PictureBox pbCartaPropia3;
         private PictureBox pbCartaPropia2;
         private Label lblInfoYo;
-        private Label lblPuntajeRival;
-        private Label lblPuntajePropio;
         private Label lblPuntajeVisual;
         private Label label2;
         private PictureBox pbCartaPropiaPanio1;
@@ -346,5 +374,9 @@
         private PictureBox pbCartaPropiaPanio3;
         private PictureBox pbCartaPropiaPanio2;
         private Label lblTruco;
+        private PictureBox pbPuntajeYo1;
+        private PictureBox pbPuntajeYo2;
+        private PictureBox pbPuntajeRival1;
+        private PictureBox pbPuntajeRival2;
     }
 }

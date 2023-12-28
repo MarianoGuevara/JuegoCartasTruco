@@ -9,3 +9,4 @@ C:\Users\Mariano\Desktop\TrucoJuego\TrucoJuego\obj\Debug\net6.0\Entidades.dll
 C:\Users\Mariano\Desktop\TrucoJuego\TrucoJuego\obj\Debug\net6.0\refint\Entidades.dll
 C:\Users\Mariano\Desktop\TrucoJuego\TrucoJuego\obj\Debug\net6.0\Entidades.pdb
 C:\Users\Mariano\Desktop\TrucoJuego\TrucoJuego\obj\Debug\net6.0\ref\Entidades.dll
+C:\Users\Mariano\Desktop\TrucoJuego\TrucoJuego\obj\Debug\net6.0\Entidades.csproj.ResolveComReference.cache

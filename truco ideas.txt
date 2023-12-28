@@ -1,8 +1,12 @@
 COSAS RARAS
-->
+-> Siempre que hay parda primero tengo que jugar yo, aunque el mano sea él
  
 COSAS A AGREGAR
 -> Truco lógica
 -> Envido logica
 -> Organizar el codigo; atomizar, acomodar
 -> Cambiar puntaje numerico por clasico de truco
+
+
+-cuando gane 1 mano y me queda 1 carta mas buena (2 o mas)
+-cuando tengo 1 mano y me queda 1 carta mas buena (2 o mas)

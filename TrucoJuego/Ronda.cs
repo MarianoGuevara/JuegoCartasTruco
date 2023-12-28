@@ -90,5 +90,11 @@ namespace Entidades
                     break;
             }
         }
+
+        private void RivalInteligenciaTruco()
+        {
+
+        }
+
     }
 }
