@@ -12,7 +12,7 @@ namespace Entidades
         public JugadorIA(Jugador pj) :base(pj) { }
         public JugadorIA() : base() { }
 
-        #region JugarInteligenteIA
+        #region JugarInteligenteIA cartas
 
         public int IndicePanio(Jugador rival)
         {
@@ -139,5 +139,46 @@ namespace Entidades
         }
 
         #endregion
+
+        #region JugarInteligenteIA pensar si acepta truco
+
+        private bool MayorAAnchoFalso()
+        {
+            bool retorno = false;
+            foreach (Carta c in base.cartas)
+            {
+                if (Jugador.AsignarPuntajeCarta(c) >= 7 )
+                {
+                    retorno = true;
+                    break;
+                }
+            }
+            return retorno;
+        }
+
+        //private bool MayorASiete0ro()
+        //{
+
+        //}
+        //public bool AceptaTruco()
+        //{
+        //    int puntajeCarta1 = Jugador.AsignarPuntajeCarta(base.cartas[0]);
+        //    int puntajeCarta2 = Jugador.AsignarPuntajeCarta(base.cartas[1]);
+        //    int puntajeCarta3 = Jugador.AsignarPuntajeCarta(base.cartas[2]);
+
+        //    switch (base.cartasJugadas)
+        //    {
+        //        case 0:
+
+        //            break;
+        //        case 1:
+        //            break;
+        //        case 2:
+        //            break;
+        //    }
+        //}
+
+        #endregion
+
     }
 }

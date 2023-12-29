@@ -33,6 +33,8 @@ namespace Formularios
         {
             InitializeComponent();
 
+            //this.pbDialogoRival.Image = Image.FromFile("../../../../media/dialogos/quiero.jpg");
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -123,6 +125,8 @@ namespace Formularios
         private async void IniciarRonda()
         {
             this.rondaActual.ResetRonda();
+
+            this.lblMazo.Enabled = true;
             this.lblTruco.Enabled = true;
             this.lblTruco.Text = "TRUCO";
 
@@ -209,8 +213,12 @@ namespace Formularios
                 else
                 {
                     this.cartaYo = this.JuegoYo(cartaAJugar);
-                    await Task.Delay(2000);
-                    this.cartaRival = this.JuegaRival(this.cartaYo);
+                    if (this.parda == false)
+                    {
+                        await Task.Delay(2000);
+                        this.cartaRival = this.JuegaRival(this.cartaYo);
+                    }
+                    
                 }
             }
 
@@ -243,10 +251,16 @@ namespace Formularios
                     await Task.Delay(2000);
                     this.IniciarRonda();
                 }
+
+                if (this.manoYo == false)
+                {
+                    await Task.Delay(2000);
+                    this.cartaRival = this.JuegaRival(this.cartaYo);
+                }
             }
             else
             {
-                if (yo.PuntosRondaActual == 2 || rival.PuntosRondaActual == 2)
+                if (this.yo.PuntosRondaActual == 2 || this.rival.PuntosRondaActual == 2)
                 {
                     this.rondaActual.AnalizarPuntaje();
                     await Task.Delay(2000);
@@ -352,6 +366,19 @@ namespace Formularios
         {
             this.lblTruco.Text = this.rondaActual.ValorPuntosTruco(this.lblTruco.Text, "yo");
             if (this.lblTruco.Text == "VALE CUATRO") this.lblTruco.Enabled = false;
+        }
+
+        private async void lblMazo_Click(object sender, EventArgs e)
+        {
+            bool juego = this.HabilitarClick();
+            if (juego)
+            {
+                this.lblMazo.Enabled = false;
+                await Task.Delay(2000);
+                this.rival.Puntaje += 1;
+                this.ActualizarPuntajes();
+                this.IniciarRonda();
+            }
         }
     }
 }
