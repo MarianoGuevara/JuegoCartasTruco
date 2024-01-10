@@ -156,28 +156,47 @@ namespace Entidades
             return retorno;
         }
 
-        //private bool MayorASiete0ro()
-        //{
+        private int valorMinimoEsperado(string situacionAJugar)
+        {
+            int valorMinimo=-1;
 
-        //}
-        //public bool AceptaTruco()
-        //{
-        //    int puntajeCarta1 = Jugador.AsignarPuntajeCarta(base.cartas[0]);
-        //    int puntajeCarta2 = Jugador.AsignarPuntajeCarta(base.cartas[1]);
-        //    int puntajeCarta3 = Jugador.AsignarPuntajeCarta(base.cartas[2]);
+            switch (this.cartasJugadas)
+            {
+                case 0:
+                    if (situacionAJugar == "truco") valorMinimo = 23;
+                    else if (situacionAJugar == "retruco") valorMinimo = 28;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 30;
+                    break;
+                case 1:
+                    if (situacionAJugar == "truco") valorMinimo = 16;
+                    else if (situacionAJugar == "retruco") valorMinimo = 20;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 23;
+                    break;
+                case 2:
+                    if (situacionAJugar == "truco") valorMinimo = 10;
+                    else if (situacionAJugar == "retruco" || situacionAJugar == "valeCuatro") valorMinimo = 11;
+                    break;
+            }
+            return valorMinimo;
+        }
+        public bool AceptaTruco(string situacionAJugar)
+        {
+            bool retorno = false;
+            int puntajeFinal = 0;
 
-        //    switch (base.cartasJugadas)
-        //    {
-        //        case 0:
+            int puntajeCarta1 = Jugador.AsignarPuntajeCarta(base.cartas[0]);
+            int puntajeCarta2 = Jugador.AsignarPuntajeCarta(base.cartas[1]);
+            int puntajeCarta3 = Jugador.AsignarPuntajeCarta(base.cartas[2]);
 
-        //            break;
-        //        case 1:
-        //            break;
-        //        case 2:
-        //            break;
-        //    }
-        //}
-
+            List<int> l = new List<int> { puntajeCarta1, puntajeCarta2, puntajeCarta3 };
+            foreach (int i in l) 
+            {
+                if (i != -1) puntajeFinal += i;
+            }
+            
+            if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar)) retorno = true;
+            return retorno;
+        }
         #endregion
 
     }

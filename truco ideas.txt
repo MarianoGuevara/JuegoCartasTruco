@@ -3,12 +3,5 @@ COSAS RARAS
 COSAS A AGREGAR
 -> Truco lógica
 	.Que el rival lo cante
-	.Que el rival acepte o rechace
+	.Que los botones se desactiven si yo canté truco hasta que el rival cante de nuevo y así...
 -> Envido lógica
--> Flor lógica
-
-MACHETES
-	TRUCO LOGICA; POSIBILIDADES
-	-cuando gane 1 mano y me queda 1 carta mas buena (2 o mas)
-	-cuando tengo 2 cartas mayores a 3 
-	-cuando en 3ra 

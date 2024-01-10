@@ -18,8 +18,39 @@ namespace Entidades
             string stringFinal = Puntaje.ObtenerPuntaje(puntaje);
             return $"../../../../media/puntaje/{stringFinal}";
         }
+        public static void SumarPuntaje(Jugador player, int sumaPuntaje)
+        {
+            player.Puntaje += sumaPuntaje;
+        }
 
+        public static void AnalizarPuntaje(Jugador yo, Jugador rival, int sumaPuntaje)
+        {
+            if (yo.PuntosRondaActual == 2)
+            {
+                Puntaje.SumarPuntaje(yo, sumaPuntaje);
+            }
+            else if (rival.PuntosRondaActual == 2)
+            {
+                Puntaje.SumarPuntaje(rival, sumaPuntaje);
+            }
+        }
 
-
+        public static string TrucoTexto(string situacion)
+        {
+            string retorno = "";
+            switch(situacion)
+            {
+                case "no":
+                    retorno = "TRUCO";
+                    break;
+                case "truco":
+                    retorno = "RETRUCO";
+                    break;
+                case "retruco":
+                    retorno = "VALE CUATRO";
+                    break;
+            }
+            return retorno;
+        }
     }
 }

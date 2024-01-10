@@ -16,14 +16,21 @@ namespace Entidades
     public class Ronda
     {
         private Jugador yo;
-        private Jugador rival;
+        private JugadorIA rival;
 
         private int sumaPuntaje;
+
+        private string estadoTruco; // no-truco-retruco-valeCuatro
 
         private bool truco;
         private bool retruco;
         private bool valeCuatro;
-        public Ronda(Jugador yo, Jugador rival)
+        public bool Truco { get { return this.truco; } }
+        public bool Retruco { get { return this.retruco; } }
+        public bool ValeCuatro { get { return this.valeCuatro; } }
+        public int SumaPuntaje { get { return this.sumaPuntaje; } }
+        public string EstadoTruco { get { return this.estadoTruco; } }
+        public Ronda(Jugador yo, JugadorIA rival)
         {
             this.yo = yo;
             this.rival = rival;
@@ -33,50 +40,11 @@ namespace Entidades
         public void ResetRonda()
         {
             this.sumaPuntaje = 1;
+            this.estadoTruco = "no";
 
             this.truco = false;
             this.retruco = false;
             this.valeCuatro = false;
-        }
-
-        public void SumarPuntaje(Jugador player)
-        {
-            player.Puntaje += this.sumaPuntaje;
-        }
-
-        public string ValorPuntosTruco(string str, string player)
-        {
-            switch (str)
-            {
-                case "TRUCO":
-                    if (player == "yo")
-                    {
-                        str = "VALE CUATRO";
-                    }
-                    else str = "RETRUCO";
-                    this.sumaPuntaje = 2;
-                    break;
-                case "RETRUCO":
-                    str = "VALE CUATRO";
-                    this.sumaPuntaje = 3;
-                    break;
-                case "VALE CUATRO":
-                    this.sumaPuntaje = 4;
-                    break;
-
-            }
-            return str;
-        }
-        public void AnalizarPuntaje()
-        {
-            if (yo.PuntosRondaActual == 2)
-            {
-                this.SumarPuntaje(this.yo);
-            }
-            else if (rival.PuntosRondaActual == 2)
-            {
-                this.SumarPuntaje(this.rival);
-            }
         }
         public void DarPuntoPorMano(string ganadorActual)
         {
@@ -90,10 +58,39 @@ namespace Entidades
                     break;
             }
         }
-
-        private void RivalInteligenciaTruco()
+        public bool TrucoBoton()
         {
-
+            bool retorno = false;
+            switch (this.estadoTruco)
+            {
+                case "no":
+                    if (this.rival.AceptaTruco("truco"))
+                    {
+                        retorno = true;
+                        this.sumaPuntaje = 2;
+                        this.estadoTruco = "truco";
+                    }
+                    break;
+                case "truco":
+                    if (this.rival.AceptaTruco("retruco"))
+                    {
+                        retorno = true;
+                        this.sumaPuntaje = 3;
+                        this.estadoTruco = "retruco";
+                    }
+                    break;
+                case "retruco":
+                    if (this.rival.AceptaTruco("valeCuatro"))
+                    {
+                        retorno = true;
+                        this.sumaPuntaje = 4;
+                        this.estadoTruco = "valeCuatro";
+                    }
+                    break;
+                case "valeCuatro":
+                    break;
+            }
+            return retorno;
         }
 
     }

@@ -96,7 +96,6 @@ namespace Formularios
                 label.Font = new Font(f, 12F, FontStyle.Regular);
             }
         }
-
         #endregion
 
         #region Repartir cartas; rival y yo
@@ -166,13 +165,14 @@ namespace Formularios
         private bool HabilitarClick()
         {
             bool juego = false;
-
+            
             if (this.manoYo == false)
             {
                 if (this.rival.CartasJugadas == 0) juego = false;
                 else if (this.habilitado) juego = true;
             }
             else if (this.habilitado) juego = true;
+           
             return juego;
         }
         private void pbCartaPropia1_Click(object sender, EventArgs e)
@@ -230,8 +230,9 @@ namespace Formularios
             {
                 if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
                 {
-                    if (this.rival.PuntosRondaActual > 0) this.rondaActual.SumarPuntaje(this.rival);
-                    else this.rondaActual.SumarPuntaje(this.yo);
+
+                    if (this.rival.PuntosRondaActual > 0) Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
+                    else Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje); ;
 
                     await Task.Delay(2000);
                     this.IniciarRonda();
@@ -242,8 +243,8 @@ namespace Formularios
 
             if (this.parda)
             {
-                if (this.ganadorActual == "gano") this.rondaActual.SumarPuntaje(this.yo);
-                else if (this.ganadorActual == "perdio") this.rondaActual.SumarPuntaje(this.rival);
+                if (this.ganadorActual == "gano") Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje);
+                else if (this.ganadorActual == "perdio") Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
 
                 if (this.ganadorActual != "empato")
                 {
@@ -262,7 +263,7 @@ namespace Formularios
             {
                 if (this.yo.PuntosRondaActual == 2 || this.rival.PuntosRondaActual == 2)
                 {
-                    this.rondaActual.AnalizarPuntaje();
+                    Puntaje.AnalizarPuntaje(this.yo, this.rival, this.rondaActual.SumaPuntaje);
                     await Task.Delay(2000);
                     this.IniciarRonda();
                 }
@@ -362,14 +363,33 @@ namespace Formularios
         }
         #endregion
 
-        private void lblTruco_Click(object sender, EventArgs e)
+        #region PseudoAnimaciones
+        private async void DialogoRival(string imagenDialogo)
         {
-            this.lblTruco.Text = this.rondaActual.ValorPuntosTruco(this.lblTruco.Text, "yo");
-            if (this.lblTruco.Text == "VALE CUATRO") this.lblTruco.Enabled = false;
+            pbDialogoRival.Image = Image.FromFile(imagenDialogo);
+            await Task.Delay(2000);
+            pbDialogoRival.Image = null;
+            await Task.Delay(2000);
+        }
+        private void ModificarEstadoBotones(bool desactivar = false)
+        {
+            this.lblEnvido.Enabled = true;
+            this.lblTruco.Enabled = true;
+            this.lblMazo.Enabled = true;
+
+            if (desactivar)
+            {
+                this.lblEnvido.Enabled = false;
+                this.lblTruco.Enabled = false;
+                this.lblMazo.Enabled = false;
+            }
         }
 
+
+        #endregion
         private async void lblMazo_Click(object sender, EventArgs e)
         {
+            this.ModificarEstadoBotones(true);
             bool juego = this.HabilitarClick();
             if (juego)
             {
@@ -379,6 +399,33 @@ namespace Formularios
                 this.ActualizarPuntajes();
                 this.IniciarRonda();
             }
+            this.ModificarEstadoBotones();
+        }
+        private async void lblTruco_Click(object sender, EventArgs e)
+        {
+            this.ModificarEstadoBotones(true);
+
+            bool juego = this.HabilitarClick();
+            if (juego)
+            {
+                await Task.Delay(2000);
+
+                if (this.rondaActual.TrucoBoton())
+                {
+                    this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
+                    this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
+                } 
+                else
+                {
+                    this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
+                    this.yo.Puntaje += 1;
+                    await Task.Delay(2000);
+                    this.ActualizarPuntajes();
+                    this.IniciarRonda();
+                }
+            }
+
+            this.ModificarEstadoBotones();
         }
     }
 }
