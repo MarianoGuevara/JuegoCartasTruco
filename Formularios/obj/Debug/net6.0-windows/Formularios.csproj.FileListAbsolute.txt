@@ -19,3 +19,4 @@ C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formula
 C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\ref\Formularios.dll
 C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.Partida.resources
 C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.Properties.Resources.resources
+C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.QuieroNoQuiero.resources

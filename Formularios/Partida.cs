@@ -32,7 +32,6 @@ namespace Formularios
         public Partida()
         {
             InitializeComponent();
-
             //this.pbDialogoRival.Image = Image.FromFile("../../../../media/dialogos/quiero.jpg");
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -123,6 +122,7 @@ namespace Formularios
         }
         private async void IniciarRonda()
         {
+
             this.rondaActual.ResetRonda();
 
             this.lblMazo.Enabled = true;
@@ -165,14 +165,14 @@ namespace Formularios
         private bool HabilitarClick()
         {
             bool juego = false;
-            
+
             if (this.manoYo == false)
             {
                 if (this.rival.CartasJugadas == 0) juego = false;
                 else if (this.habilitado) juego = true;
             }
             else if (this.habilitado) juego = true;
-           
+
             return juego;
         }
         private void pbCartaPropia1_Click(object sender, EventArgs e)
@@ -218,7 +218,7 @@ namespace Formularios
                         await Task.Delay(2000);
                         this.cartaRival = this.JuegaRival(this.cartaYo);
                     }
-                    
+
                 }
             }
 
@@ -331,6 +331,11 @@ namespace Formularios
         {
             Carta cartaRival;
 
+            if (rival.CartasJugadas != 0)
+            {
+                this.RivalTruco(cartaYo);
+            }
+
             int indice;
             indice = this.rival.IndicePanio(this.yo);
 
@@ -401,6 +406,8 @@ namespace Formularios
             }
             this.ModificarEstadoBotones();
         }
+
+        #region Truco
         private async void lblTruco_Click(object sender, EventArgs e)
         {
             this.ModificarEstadoBotones(true);
@@ -414,11 +421,11 @@ namespace Formularios
                 {
                     this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
                     this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
-                } 
+                }
                 else
                 {
                     this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
-                    this.yo.Puntaje += 1;
+                    this.yo.Puntaje += this.rondaActual.SumaPuntaje;
                     await Task.Delay(2000);
                     this.ActualizarPuntajes();
                     this.IniciarRonda();
@@ -426,6 +433,43 @@ namespace Formularios
             }
 
             this.ModificarEstadoBotones();
+            this.QuienCanto();
         }
+        private void QuienCanto()
+        {
+            if (this.yo.cantoTruco == true && this.lblTruco.Text != "VALE CUATRO")
+            {
+                this.lblTruco.Enabled = false;
+            }
+        }
+        private async void RivalTruco(Carta carta)
+        {
+            if (rondaActual.TrucoBoton(this.rondaActual.EstadoTruco, this.rival, carta) == true)
+            {
+                this.DialogoRival($"../../../../media/dialogos/{this.rival.CantarTruco(this.rondaActual.EstadoTruco)}.jpg");
+                this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
+                await Task.Delay(2000);
+
+                QuieroNoQuiero quieroNoQuiero = new QuieroNoQuiero();
+                this.Hide();
+                quieroNoQuiero.ShowDialog();
+                this.Show();
+                if (quieroNoQuiero.DialogResult == DialogResult.Cancel)
+                {
+                    if (this.rondaActual.SumaPuntaje > 1)
+                    {
+                        this.rival.Puntaje += this.rondaActual.SumaPuntaje - 1;
+                    }
+                    else this.rival.Puntaje += this.rondaActual.SumaPuntaje;
+
+                    await Task.Delay(2000);
+                    this.ActualizarPuntajes();
+                    this.IniciarRonda();
+                }
+                this.Opacity = 100;
+            }
+        }
+
+        #endregion 
     }
 }

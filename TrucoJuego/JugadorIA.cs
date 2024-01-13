@@ -141,63 +141,91 @@ namespace Entidades
         #endregion
 
         #region JugarInteligenteIA pensar si acepta truco
-
-        private bool MayorAAnchoFalso()
-        {
-            bool retorno = false;
-            foreach (Carta c in base.cartas)
-            {
-                if (Jugador.AsignarPuntajeCarta(c) >= 7 )
-                {
-                    retorno = true;
-                    break;
-                }
-            }
-            return retorno;
-        }
-
         private int valorMinimoEsperado(string situacionAJugar)
         {
-            int valorMinimo=-1;
+            int valorMinimo = -1;
 
             switch (this.cartasJugadas)
             {
                 case 0:
-                    if (situacionAJugar == "truco") valorMinimo = 23;
-                    else if (situacionAJugar == "retruco") valorMinimo = 28;
-                    else if (situacionAJugar == "valeCuatro") valorMinimo = 30;
+                    if (situacionAJugar == "truco") valorMinimo = 18;
+                    else if (situacionAJugar == "retruco") valorMinimo = 21;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 24;
                     break;
                 case 1:
-                    if (situacionAJugar == "truco") valorMinimo = 16;
-                    else if (situacionAJugar == "retruco") valorMinimo = 20;
-                    else if (situacionAJugar == "valeCuatro") valorMinimo = 23;
+                    if (situacionAJugar == "truco") valorMinimo = 14;
+                    else if (situacionAJugar == "retruco") valorMinimo = 17;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 20;
                     break;
                 case 2:
-                    if (situacionAJugar == "truco") valorMinimo = 10;
+                    if (situacionAJugar == "truco") valorMinimo = 9;
                     else if (situacionAJugar == "retruco" || situacionAJugar == "valeCuatro") valorMinimo = 11;
                     break;
             }
             return valorMinimo;
         }
-        public bool AceptaTruco(string situacionAJugar)
-        {
-            bool retorno = false;
-            int puntajeFinal = 0;
 
+        private List<int> PuntajesCartas()
+        {
             int puntajeCarta1 = Jugador.AsignarPuntajeCarta(base.cartas[0]);
             int puntajeCarta2 = Jugador.AsignarPuntajeCarta(base.cartas[1]);
             int puntajeCarta3 = Jugador.AsignarPuntajeCarta(base.cartas[2]);
 
             List<int> l = new List<int> { puntajeCarta1, puntajeCarta2, puntajeCarta3 };
-            foreach (int i in l) 
+
+            return l;
+        }
+
+        public int PuntajeCartas()
+        {
+            int puntajeFinal = 0;
+
+            List<int> l = this.PuntajesCartas();
+
+            foreach (int i in l)
             {
                 if (i != -1) puntajeFinal += i;
             }
-            
+            return puntajeFinal;
+        }
+        public bool AceptaTruco(string situacionAJugar)
+        {
+            bool retorno = false;
+            int puntajeFinal = this.PuntajeCartas();
+
             if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar)) retorno = true;
             return retorno;
         }
         #endregion
 
+        #region  JugarInteligenteIA canta truco
+
+        public string CantarTruco(string situacionAJugar)
+        {
+            string retorno = "";
+            if (this.AceptaTruco(situacionAJugar))
+            {
+                if (situacionAJugar == "no")
+                {
+                    situacionAJugar = "truco";
+                    retorno = "truco";
+                }
+                    
+                else if (situacionAJugar == "truco")
+                {
+                    situacionAJugar = "retruco";
+                    retorno = "retruco";
+                }
+
+                else if (situacionAJugar == "retruco")
+                {
+                    //situacionAJugar = "truco";
+                    retorno = "valeCuatro";
+                } 
+            }
+            return retorno;
+        }
+
+        #endregion
     }
 }

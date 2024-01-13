@@ -15,6 +15,7 @@ namespace Entidades
         protected int cartasJugadas;
         protected int puntaje;
         protected int puntosRondaActual;
+        public bool cantoTruco;
 
         #region Propiedades
         public List<Carta> Cartas { get { return this.cartas; } }
@@ -36,6 +37,7 @@ namespace Entidades
         #endregion
         public Jugador(Jugador? jugadorBis = null)
         {
+            this.cantoTruco = false;
             this.puntaje = 0;
             if (jugadorBis is null) this.ComenzarJugador();
             else this.ComenzarJugador(jugadorBis);
@@ -151,7 +153,7 @@ namespace Entidades
             return estadoRonda;
         }
 
-        protected static int AsignarPuntajeCarta(Carta cartaPropia)
+        public static int AsignarPuntajeCarta(Carta cartaPropia)
         {
             string carta;
             if (cartaPropia is null) carta = "null";
@@ -177,5 +179,10 @@ namespace Entidades
             return puntaje;
         }
         #endregion
+
+        //public bool AceptaTruco(string acepta)
+        //{
+        //    if (acepta == "quiero")
+        //}
     }
 }

@@ -17,17 +17,14 @@ namespace Entidades
     {
         private Jugador yo;
         private JugadorIA rival;
+        public bool truco;
+        public bool retruco;
+        public bool valeCuatro;
 
         private int sumaPuntaje;
 
         private string estadoTruco; // no-truco-retruco-valeCuatro
 
-        private bool truco;
-        private bool retruco;
-        private bool valeCuatro;
-        public bool Truco { get { return this.truco; } }
-        public bool Retruco { get { return this.retruco; } }
-        public bool ValeCuatro { get { return this.valeCuatro; } }
         public int SumaPuntaje { get { return this.sumaPuntaje; } }
         public string EstadoTruco { get { return this.estadoTruco; } }
         public Ronda(Jugador yo, JugadorIA rival)
@@ -39,12 +36,10 @@ namespace Entidades
         }
         public void ResetRonda()
         {
+            this.yo.cantoTruco = false;
+
             this.sumaPuntaje = 1;
             this.estadoTruco = "no";
-
-            this.truco = false;
-            this.retruco = false;
-            this.valeCuatro = false;
         }
         public void DarPuntoPorMano(string ganadorActual)
         {
@@ -69,6 +64,8 @@ namespace Entidades
                         retorno = true;
                         this.sumaPuntaje = 2;
                         this.estadoTruco = "truco";
+ 
+                        this.yo.cantoTruco = true;
                     }
                     break;
                 case "truco":
@@ -93,5 +90,50 @@ namespace Entidades
             return retorno;
         }
 
+        public bool TrucoBoton(string estadoJuego, JugadorIA rival, Carta carta)
+        {
+            bool retorno = false;
+            if (this.truco == false)
+            {
+                int minimo = 0;
+                if (rival.CartasJugadas == 1)
+                {
+                    this.truco = true;
+
+                    int puntajeRival = rival.PuntajeCartas();
+
+                    if (estadoJuego == "no")
+                    {
+                        estadoJuego = "truco";
+                        minimo = 12;
+                    }
+                    else if (estadoJuego == "truco")
+                    {
+                        estadoJuego = "retruco";
+                        minimo = 15;
+                    }
+                    else if (estadoJuego == "retruco")
+                    {
+                        estadoJuego = "valeCuatro";
+                        minimo = 18;
+                    }
+                    else if (estadoJuego == "valeCuatro")
+                    {
+                        minimo = 21;
+                    }
+
+                    if (puntajeRival > minimo) retorno = true;
+                }
+                else if (rival.CartasJugadas == 2)
+                {
+                    int puntajeYo = Jugador.AsignarPuntajeCarta(carta);
+                    int puntajeRival = rival.PuntajeCartas();
+
+                    if (puntajeRival > puntajeYo) retorno = true;
+                }
+
+            }
+            return retorno;
+        }
     }
 }
