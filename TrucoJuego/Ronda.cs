@@ -36,6 +36,10 @@ namespace Entidades
         }
         public void ResetRonda()
         {
+            this.truco = false;
+            this.retruco = false;
+            this.valeCuatro = false;
+
             this.yo.cantoTruco = false;
 
             this.sumaPuntaje = 1;
@@ -53,23 +57,24 @@ namespace Entidades
                     break;
             }
         }
-        public bool TrucoBoton()
+        public bool TrucoBoton(bool rival=false, Carta carta=null)
         {
             bool retorno = false;
             switch (this.estadoTruco)
             {
                 case "no":
-                    if (this.rival.AceptaTruco("truco"))
+                    if (this.rival.AceptaTruco("truco", this.yo, this.rival))
                     {
                         retorno = true;
                         this.sumaPuntaje = 2;
                         this.estadoTruco = "truco";
  
-                        this.yo.cantoTruco = true;
+                        if (rival == false) this.yo.cantoTruco = true;
+                        else this.rival.cantoTruco = true;
                     }
                     break;
                 case "truco":
-                    if (this.rival.AceptaTruco("retruco"))
+                    if (this.rival.AceptaTruco("retruco", this.yo, this.rival))
                     {
                         retorno = true;
                         this.sumaPuntaje = 3;
@@ -77,7 +82,7 @@ namespace Entidades
                     }
                     break;
                 case "retruco":
-                    if (this.rival.AceptaTruco("valeCuatro"))
+                    if (this.rival.AceptaTruco("valeCuatro", this.yo, this.rival))
                     {
                         retorno = true;
                         this.sumaPuntaje = 4;
@@ -87,51 +92,48 @@ namespace Entidades
                 case "valeCuatro":
                     break;
             }
+
+            if (rival == true)
+            {
+                retorno = this.TrucoFinal(retorno, this.rival, carta);
+            }
+
             return retorno;
         }
 
-        public bool TrucoBoton(string estadoJuego, JugadorIA rival, Carta carta)
+        public bool TrucoFinal(bool estado, JugadorIA rival, Carta carta)
+        {
+            bool retorno = estado;
+
+            if (rival.CartasJugadas == 2)
+            {
+                int puntajeYo = Jugador.AsignarPuntajeCarta(carta);
+                int puntajeRival = rival.PuntajeCartas();
+
+                if (puntajeRival > puntajeYo) retorno = true;
+            }
+
+            return retorno;
+        }
+
+        public bool PuedeCantar(Jugador player)
         {
             bool retorno = false;
-            if (this.truco == false)
+            switch (this.estadoTruco)
             {
-                int minimo = 0;
-                if (rival.CartasJugadas == 1)
-                {
-                    this.truco = true;
-
-                    int puntajeRival = rival.PuntajeCartas();
-
-                    if (estadoJuego == "no")
-                    {
-                        estadoJuego = "truco";
-                        minimo = 12;
-                    }
-                    else if (estadoJuego == "truco")
-                    {
-                        estadoJuego = "retruco";
-                        minimo = 15;
-                    }
-                    else if (estadoJuego == "retruco")
-                    {
-                        estadoJuego = "valeCuatro";
-                        minimo = 18;
-                    }
-                    else if (estadoJuego == "valeCuatro")
-                    {
-                        minimo = 21;
-                    }
-
-                    if (puntajeRival > minimo) retorno = true;
-                }
-                else if (rival.CartasJugadas == 2)
-                {
-                    int puntajeYo = Jugador.AsignarPuntajeCarta(carta);
-                    int puntajeRival = rival.PuntajeCartas();
-
-                    if (puntajeRival > puntajeYo) retorno = true;
-                }
-
+                case "no":
+                    retorno = true;
+                    //player.cantoTruco = truco;
+                    break;
+                case "truco":
+                    if (player.cantoTruco == true) retorno = false;
+                    break;
+                case "retruco":
+                    if (player.cantoTruco == true) retorno = true;
+                    break;
+                case "valeCuatro":
+                    retorno = false;
+                    break;
             }
             return retorno;
         }

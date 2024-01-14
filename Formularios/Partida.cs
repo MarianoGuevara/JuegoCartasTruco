@@ -122,7 +122,7 @@ namespace Formularios
         }
         private async void IniciarRonda()
         {
-
+            this.yo.cantoTruco = false;
             this.rondaActual.ResetRonda();
 
             this.lblMazo.Enabled = true;
@@ -327,13 +327,14 @@ namespace Formularios
             return cartaYo;
         }
 
+
         private Carta JuegaRival(Carta cartaYo)
         {
             Carta cartaRival;
 
-            if (rival.CartasJugadas != 0)
+            if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
-                this.RivalTruco(cartaYo);
+                    this.RivalTruco(cartaYo);
             }
 
             int indice;
@@ -421,6 +422,7 @@ namespace Formularios
                 {
                     this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
                     this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
+                    this.yo.cantoTruco = true;
                 }
                 else
                 {
@@ -433,27 +435,37 @@ namespace Formularios
             }
 
             this.ModificarEstadoBotones();
-            this.QuienCanto();
+            this.ActualizarBotonTruco();
         }
-        private void QuienCanto()
+        private void ActualizarBotonTruco()
         {
-            if (this.yo.cantoTruco == true && this.lblTruco.Text != "VALE CUATRO")
+            if (rondaActual.EstadoTruco == "no")
             {
-                this.lblTruco.Enabled = false;
+                this.lblTruco.Text = "TRUCO";
+            }
+            else if (rondaActual.EstadoTruco == "truco")
+            {
+                this.lblTruco.Text = "RETRUCO";
+                if (this.yo.cantoTruco) this.lblTruco.Enabled = false;
+            }
+            else if (rondaActual.EstadoTruco == "retruco")
+            {
+                this.lblTruco.Text = "VALE CUATRO";
+                if (this.yo.cantoTruco == false) this.lblTruco.Enabled = false;
             }
         }
         private async void RivalTruco(Carta carta)
         {
-            if (rondaActual.TrucoBoton(this.rondaActual.EstadoTruco, this.rival, carta) == true)
+            if (rondaActual.TrucoBoton(true, carta))
             {
-                this.DialogoRival($"../../../../media/dialogos/{this.rival.CantarTruco(this.rondaActual.EstadoTruco)}.jpg");
+                this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
                 this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
-                await Task.Delay(2000);
+                await Task.Delay(3000);
 
                 QuieroNoQuiero quieroNoQuiero = new QuieroNoQuiero();
-                this.Hide();
+                //this.Hide();
                 quieroNoQuiero.ShowDialog();
-                this.Show();
+                //this.Show();
                 if (quieroNoQuiero.DialogResult == DialogResult.Cancel)
                 {
                     if (this.rondaActual.SumaPuntaje > 1)

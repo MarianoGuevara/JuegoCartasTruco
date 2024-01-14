@@ -1,13 +1,7 @@
 COSAS RARAS
--> se puede cantar más de una vez el truco en la misma mano
--> no agrega bien los puntos cuando rival canta truco
--> cuando el rival canta truco, tira carta también
+-> cuando el rival canta truco, tira carta también; mal timing
 -> no se cambia el texto de los botones cuando el rival canta 
--> abro en forma modal el form de quiero no quiero, se cierra el otro; quiero opacidad
--> VER SI USO LA MISMA FUNCION QUE TRUCO_CLICK...
 
 COSAS A AGREGAR
 
 -> Envido lógica
-
-.Cuando tenga 1 ganada y le quede 1 carta buena

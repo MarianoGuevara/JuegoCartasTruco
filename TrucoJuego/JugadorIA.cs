@@ -141,7 +141,7 @@ namespace Entidades
         #endregion
 
         #region JugarInteligenteIA pensar si acepta truco
-        private int valorMinimoEsperado(string situacionAJugar)
+        private int valorMinimoEsperado(string situacionAJugar, Jugador yo, JugadorIA rival)
         {
             int valorMinimo = -1;
 
@@ -162,6 +162,12 @@ namespace Entidades
                     else if (situacionAJugar == "retruco" || situacionAJugar == "valeCuatro") valorMinimo = 11;
                     break;
             }
+
+            if (yo.PuntosRondaActual == 0 && rival.puntosRondaActual == 1)
+            {
+                valorMinimo -= 7;
+            }
+
             return valorMinimo;
         }
 
@@ -188,43 +194,43 @@ namespace Entidades
             }
             return puntajeFinal;
         }
-        public bool AceptaTruco(string situacionAJugar)
+        public bool AceptaTruco(string situacionAJugar, Jugador yo, JugadorIA rival)
         {
             bool retorno = false;
             int puntajeFinal = this.PuntajeCartas();
 
-            if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar)) retorno = true;
+            if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar, yo, rival)) retorno = true;
             return retorno;
         }
         #endregion
 
         #region  JugarInteligenteIA canta truco
 
-        public string CantarTruco(string situacionAJugar)
-        {
-            string retorno = "";
-            if (this.AceptaTruco(situacionAJugar))
-            {
-                if (situacionAJugar == "no")
-                {
-                    situacionAJugar = "truco";
-                    retorno = "truco";
-                }
+        //public string CantarTruco(string situacionAJugar, Jugador yo, JugadorIA rival)
+        //{
+        //    string retorno = "";
+        //    if (this.AceptaTruco(situacionAJugar, yo, rival))
+        //    {
+        //        if (situacionAJugar == "no")
+        //        {
+        //            //situacionAJugar = "truco";
+        //            retorno = "truco";
+        //        }
                     
-                else if (situacionAJugar == "truco")
-                {
-                    situacionAJugar = "retruco";
-                    retorno = "retruco";
-                }
+        //        else if (situacionAJugar == "truco")
+        //        {
+        //            //situacionAJugar = "retruco";
+        //            retorno = "retruco";
+        //        }
 
-                else if (situacionAJugar == "retruco")
-                {
-                    //situacionAJugar = "truco";
-                    retorno = "valeCuatro";
-                } 
-            }
-            return retorno;
-        }
+        //        else if (situacionAJugar == "retruco")
+        //        {
+        //            //situacionAJugar = "truco";
+        //            retorno = "valeCuatro";
+        //        } 
+        //    }
+        //    return retorno;
+        //}
 
         #endregion
     }
