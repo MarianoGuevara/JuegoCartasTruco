@@ -13,14 +13,16 @@ namespace Formularios
 {
     public partial class QuieroNoQuiero : Form
     {
+        private bool apretoBoton;
         public QuieroNoQuiero()
         {
             InitializeComponent();
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ShowIcon = false;
             this.Text = "Decide...";
+
+            this.apretoBoton = false;
         }
 
         #region Mismas animaciones botones
@@ -68,12 +70,19 @@ namespace Formularios
 
         private void lblQuiero_Click(object sender, EventArgs e)
         {
+            this.apretoBoton = true;
             this.DialogResult = DialogResult.OK;
         }
 
         private void lblNoQuiero_Click(object sender, EventArgs e)
         {
-            this.DialogResult= DialogResult.Cancel;
+            this.apretoBoton = true;
+            this.DialogResult = DialogResult.Cancel;
+        }
+
+        private void QuieroNoQuiero_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.apretoBoton == false) e.Cancel = true;
         }
     }
 }

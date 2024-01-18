@@ -334,7 +334,7 @@ namespace Formularios
 
             if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
-                    this.RivalTruco(cartaYo);
+                this.RivalTruco(cartaYo);
             }
 
             int indice;
@@ -373,9 +373,9 @@ namespace Formularios
         private async void DialogoRival(string imagenDialogo)
         {
             pbDialogoRival.Image = Image.FromFile(imagenDialogo);
-            await Task.Delay(2000);
+            await Task.Delay(3500);
             pbDialogoRival.Image = null;
-            await Task.Delay(2000);
+            await Task.Delay(3500);
         }
         private void ModificarEstadoBotones(bool desactivar = false)
         {
@@ -390,7 +390,6 @@ namespace Formularios
                 this.lblMazo.Enabled = false;
             }
         }
-
 
         #endregion
         private async void lblMazo_Click(object sender, EventArgs e)
@@ -422,7 +421,6 @@ namespace Formularios
                 {
                     this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
                     this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
-                    this.yo.cantoTruco = true;
                 }
                 else
                 {
@@ -460,12 +458,11 @@ namespace Formularios
             {
                 this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
                 this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
-                await Task.Delay(3000);
 
                 QuieroNoQuiero quieroNoQuiero = new QuieroNoQuiero();
-                //this.Hide();
+
                 quieroNoQuiero.ShowDialog();
-                //this.Show();
+
                 if (quieroNoQuiero.DialogResult == DialogResult.Cancel)
                 {
                     if (this.rondaActual.SumaPuntaje > 1)
@@ -478,10 +475,8 @@ namespace Formularios
                     this.ActualizarPuntajes();
                     this.IniciarRonda();
                 }
-                this.Opacity = 100;
             }
         }
-
         #endregion 
     }
 }

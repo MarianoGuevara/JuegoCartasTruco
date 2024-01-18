@@ -1,7 +1,5 @@
 COSAS RARAS
--> cuando el rival canta truco, tira carta también; mal timing
--> no se cambia el texto de los botones cuando el rival canta 
+-> me da los puntos a mi aunq el rival gane el truco
 
 COSAS A AGREGAR
-
 -> Envido lógica

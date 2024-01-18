@@ -373,6 +373,8 @@
             Controls.Add(lblInfoRival);
             Controls.Add(panelPanio);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "Partida";
             ShowIcon = false;
             Text = "Partida Truco";

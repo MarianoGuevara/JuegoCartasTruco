@@ -68,8 +68,11 @@
             ClientSize = new Size(594, 239);
             Controls.Add(lblNoQuiero);
             Controls.Add(lblQuiero);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "QuieroNoQuiero";
             Text = "QuieroNoQuiero";
+            FormClosing += QuieroNoQuiero_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
