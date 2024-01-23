@@ -1,5 +1,6 @@
-COSAS RARAS
--> me da los puntos a mi aunq el rival gane el truco
+COSAS RARAS/A MEJORAR
+-> que primero muestre el dialogo y después el form modal de "quiero/no quiero"
+-> que si el rival jugó las 3 cartas ya (todas null) y yo le canto truco, que recupere la ultima
 
 COSAS A AGREGAR
 -> Envido lógica

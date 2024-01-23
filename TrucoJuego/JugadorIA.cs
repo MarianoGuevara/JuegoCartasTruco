@@ -148,24 +148,24 @@ namespace Entidades
             switch (this.cartasJugadas)
             {
                 case 0:
-                    if (situacionAJugar == "truco") valorMinimo = 18;
-                    else if (situacionAJugar == "retruco") valorMinimo = 21;
+                    if (situacionAJugar == "truco") valorMinimo = 20;
+                    else if (situacionAJugar == "retruco") valorMinimo = 22;
                     else if (situacionAJugar == "valeCuatro") valorMinimo = 24;
                     break;
                 case 1:
-                    if (situacionAJugar == "truco") valorMinimo = 14;
-                    else if (situacionAJugar == "retruco") valorMinimo = 17;
-                    else if (situacionAJugar == "valeCuatro") valorMinimo = 20;
+                    if (situacionAJugar == "truco") valorMinimo = 16;
+                    else if (situacionAJugar == "retruco") valorMinimo = 18;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 22;
                     break;
                 case 2:
-                    if (situacionAJugar == "truco") valorMinimo = 9;
+                    if (situacionAJugar == "truco") valorMinimo = 10;
                     else if (situacionAJugar == "retruco" || situacionAJugar == "valeCuatro") valorMinimo = 11;
                     break;
             }
 
             if (yo.PuntosRondaActual == 0 && rival.puntosRondaActual == 1)
             {
-                valorMinimo -= 7;
+                valorMinimo -= 3;
             }
 
             return valorMinimo;
@@ -182,7 +182,7 @@ namespace Entidades
             return l;
         }
 
-        public int PuntajeCartas()
+        public int PuntajeCartas(Carta carta3=null)
         {
             int puntajeFinal = 0;
 
@@ -192,6 +192,12 @@ namespace Entidades
             {
                 if (i != -1) puntajeFinal += i;
             }
+
+            if (puntajeFinal == 0)
+            {
+                puntajeFinal = Jugador.AsignarPuntajeCarta(carta3);
+            }
+
             return puntajeFinal;
         }
         public bool AceptaTruco(string situacionAJugar, Jugador yo, JugadorIA rival)
@@ -202,36 +208,6 @@ namespace Entidades
             if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar, yo, rival)) retorno = true;
             return retorno;
         }
-        #endregion
-
-        #region  JugarInteligenteIA canta truco
-
-        //public string CantarTruco(string situacionAJugar, Jugador yo, JugadorIA rival)
-        //{
-        //    string retorno = "";
-        //    if (this.AceptaTruco(situacionAJugar, yo, rival))
-        //    {
-        //        if (situacionAJugar == "no")
-        //        {
-        //            //situacionAJugar = "truco";
-        //            retorno = "truco";
-        //        }
-                    
-        //        else if (situacionAJugar == "truco")
-        //        {
-        //            //situacionAJugar = "retruco";
-        //            retorno = "retruco";
-        //        }
-
-        //        else if (situacionAJugar == "retruco")
-        //        {
-        //            //situacionAJugar = "truco";
-        //            retorno = "valeCuatro";
-        //        } 
-        //    }
-        //    return retorno;
-        //}
-
         #endregion
     }
 }

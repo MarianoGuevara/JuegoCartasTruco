@@ -180,9 +180,5 @@ namespace Entidades
         }
         #endregion
 
-        //public bool AceptaTruco(string acepta)
-        //{
-        //    if (acepta == "quiero")
-        //}
     }
 }

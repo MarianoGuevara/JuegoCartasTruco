@@ -95,24 +95,23 @@ namespace Entidades
 
             if (rival == true)
             {
-                retorno = this.TrucoFinal(retorno, this.rival, carta);
+                retorno = this.TrucoFinal(retorno, this.rival, this.yo, carta);
             }
 
             return retorno;
         }
 
-        public bool TrucoFinal(bool estado, JugadorIA rival, Carta carta)
+        public bool TrucoFinal(bool estado, JugadorIA rival, Jugador yo, Carta carta)
         {
             bool retorno = estado;
 
-            if (rival.CartasJugadas == 2)
+            if (rival.CartasJugadas == 2 && yo.CartasJugadas == 3 && this.estadoTruco != "no")
             {
                 int puntajeYo = Jugador.AsignarPuntajeCarta(carta);
                 int puntajeRival = rival.PuntajeCartas();
 
                 if (puntajeRival > puntajeYo) retorno = true;
             }
-
             return retorno;
         }
 
@@ -123,10 +122,9 @@ namespace Entidades
             {
                 case "no":
                     retorno = true;
-                    //player.cantoTruco = truco;
                     break;
                 case "truco":
-                    if (player.cantoTruco == true) retorno = false;
+                    if (player.cantoTruco == false) retorno = true;
                     break;
                 case "retruco":
                     if (player.cantoTruco == true) retorno = true;

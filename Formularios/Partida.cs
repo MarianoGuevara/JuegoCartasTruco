@@ -285,6 +285,7 @@ namespace Formularios
 
             this.ActualizarPuntajes();
             this.habilitado = true;
+            this.ActualizarBotonTruco();
         }
         private void ActualizarPuntajes()
         {
@@ -299,8 +300,6 @@ namespace Formularios
                 this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
                 this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
             }
-            //this.lblPuntajePropio.Text = this.yo.Puntaje.ToString();
-            //this.lblPuntajeRival.Text = this.rival.Puntaje.ToString();
         }
         private Carta JuegoYo(PictureBox cartaAJugar)
         {
@@ -330,32 +329,37 @@ namespace Formularios
 
         private Carta JuegaRival(Carta cartaYo)
         {
+            //this.ActualizarBotonTruco();
             Carta cartaRival;
+            bool mazoYo=false;
 
             if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
-                this.RivalTruco(cartaYo);
+                mazoYo = this.RivalTruco(cartaYo);
             }
-
-            int indice;
-            indice = this.rival.IndicePanio(this.yo);
-
-            if (indice != -1) indice = this.rival.JugarInteligente(cartaYo);
-            else
+            if (mazoYo == false)
             {
-                indice = this.rival.JugarInteligente(null);
+                int indice;
+                indice = this.rival.IndicePanio(this.yo);
+
+                if (indice != -1) indice = this.rival.JugarInteligente(cartaYo);
+                else
+                {
+                    indice = this.rival.JugarInteligente(null);
+                }
+
+                cartaRival = this.rival.Cartas[indice];
+                this.rival.Cartas[indice] = null;
+
+                if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
+                else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
+                else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3, cartaRival);
+
+                this.rival.CartasJugadas += 1;
+
+                return cartaRival;
             }
-
-            cartaRival = this.rival.Cartas[indice];
-            this.rival.Cartas[indice] = null;
-
-            if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
-            else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
-            else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3, cartaRival);
-
-            this.rival.CartasJugadas += 1;
-
-            return cartaRival;
+            else return null;
         }
 
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
@@ -372,10 +376,10 @@ namespace Formularios
         #region PseudoAnimaciones
         private async void DialogoRival(string imagenDialogo)
         {
-            pbDialogoRival.Image = Image.FromFile(imagenDialogo);
-            await Task.Delay(3500);
-            pbDialogoRival.Image = null;
-            await Task.Delay(3500);
+            this.pbDialogoRival.Image = Image.FromFile(imagenDialogo);
+            await Task.Delay(2000);
+            this.pbDialogoRival.Image = null;
+            await Task.Delay(2000);
         }
         private void ModificarEstadoBotones(bool desactivar = false)
         {
@@ -437,6 +441,7 @@ namespace Formularios
         }
         private void ActualizarBotonTruco()
         {
+            //MessageBox.Show("actualizando...");
             if (rondaActual.EstadoTruco == "no")
             {
                 this.lblTruco.Text = "TRUCO";
@@ -445,24 +450,29 @@ namespace Formularios
             {
                 this.lblTruco.Text = "RETRUCO";
                 if (this.yo.cantoTruco) this.lblTruco.Enabled = false;
+                else this.lblTruco.Enabled = true;
             }
             else if (rondaActual.EstadoTruco == "retruco")
             {
                 this.lblTruco.Text = "VALE CUATRO";
-                if (this.yo.cantoTruco == false) this.lblTruco.Enabled = false;
+                if (this.yo.cantoTruco) this.lblTruco.Enabled = true;
+                else this.lblTruco.Enabled = false;
+
             }
         }
-        private async void RivalTruco(Carta carta)
+        private bool RivalTruco(Carta carta)
         {
+            bool mazo = false;
             if (rondaActual.TrucoBoton(true, carta))
             {
                 this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
+                //Thread.Sleep(4000);
                 this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
 
                 QuieroNoQuiero quieroNoQuiero = new QuieroNoQuiero();
 
                 quieroNoQuiero.ShowDialog();
-
+                Thread.Sleep(2000);
                 if (quieroNoQuiero.DialogResult == DialogResult.Cancel)
                 {
                     if (this.rondaActual.SumaPuntaje > 1)
@@ -471,11 +481,12 @@ namespace Formularios
                     }
                     else this.rival.Puntaje += this.rondaActual.SumaPuntaje;
 
-                    await Task.Delay(2000);
                     this.ActualizarPuntajes();
                     this.IniciarRonda();
+                    mazo = true;
                 }
             }
+            return mazo;
         }
         #endregion 
     }
