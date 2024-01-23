@@ -186,7 +186,7 @@
             lblTruco.AutoSize = true;
             lblTruco.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblTruco.ForeColor = Color.LightGray;
-            lblTruco.Location = new Point(176, 720);
+            lblTruco.Location = new Point(117, 720);
             lblTruco.Name = "lblTruco";
             lblTruco.Size = new Size(96, 30);
             lblTruco.TabIndex = 15;
@@ -250,7 +250,7 @@
             lblEnvido.AutoSize = true;
             lblEnvido.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblEnvido.ForeColor = Color.LightGray;
-            lblEnvido.Location = new Point(353, 720);
+            lblEnvido.Location = new Point(376, 720);
             lblEnvido.Name = "lblEnvido";
             lblEnvido.Size = new Size(106, 30);
             lblEnvido.TabIndex = 27;
@@ -263,7 +263,7 @@
             lblMazo.AutoSize = true;
             lblMazo.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
             lblMazo.ForeColor = Color.LightGray;
-            lblMazo.Location = new Point(539, 720);
+            lblMazo.Location = new Point(651, 720);
             lblMazo.Name = "lblMazo";
             lblMazo.Size = new Size(86, 30);
             lblMazo.TabIndex = 28;

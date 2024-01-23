@@ -4,20 +4,18 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        int a = 0;
+        B();
+    }
+    private static async Task B()
+    {
 
-        switch (a)
-        {
-            case 0:
-            case 3:
-                Console.WriteLine("0 o 3");
-                break;
-            case 1:
-                Console.WriteLine("1");
-                break;
-            case 2:
-                Console.WriteLine("2");
-                break;
-        }
+        await A();
+        Console.WriteLine("chau");
+    }
+    private static async Task<bool> A()
+    {
+        await Task.Delay(2000);
+        Console.WriteLine("hola");
+        return true;
     }
 }

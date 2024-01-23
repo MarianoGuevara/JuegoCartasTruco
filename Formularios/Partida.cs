@@ -122,6 +122,7 @@ namespace Formularios
         }
         private async void IniciarRonda()
         {
+            this.yo.noQuiero = false;
             this.yo.cantoTruco = false;
             this.rondaActual.ResetRonda();
 
@@ -155,7 +156,7 @@ namespace Formularios
             if (this.manoYo == false && rival.CartasJugadas == 0)
             {
                 await Task.Delay(2000);
-                this.cartaRival = this.JuegaRival(this.cartaYo);
+                this.cartaRival = await this.JuegaRival(this.cartaYo);
             }
         }
 
@@ -203,7 +204,7 @@ namespace Formularios
                 {
                     this.cartaYo = this.JuegoYo(cartaAJugar);
                     await Task.Delay(2000);
-                    this.cartaRival = this.JuegaRival(this.cartaYo);
+                    this.cartaRival = await this.JuegaRival(this.cartaYo);
                 }
                 else this.cartaYo = this.JuegoYo(cartaAJugar);
             }
@@ -216,7 +217,7 @@ namespace Formularios
                     if (this.parda == false)
                     {
                         await Task.Delay(2000);
-                        this.cartaRival = this.JuegaRival(this.cartaYo);
+                        this.cartaRival = await this.JuegaRival(this.cartaYo);
                     }
 
                 }
@@ -256,7 +257,7 @@ namespace Formularios
                 if (this.manoYo == false)
                 {
                     await Task.Delay(2000);
-                    this.cartaRival = this.JuegaRival(this.cartaYo);
+                    this.cartaRival = await this.JuegaRival(this.cartaYo);
                 }
             }
             else
@@ -272,7 +273,7 @@ namespace Formularios
                     if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3)
                     {
                         await Task.Delay(2000);
-                        this.cartaRival = this.JuegaRival(this.cartaYo);
+                        this.cartaRival = await this.JuegaRival(this.cartaYo);
                     }
 
                     if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
@@ -327,16 +328,16 @@ namespace Formularios
         }
 
 
-        private Carta JuegaRival(Carta cartaYo)
+        private async Task<Carta> JuegaRival(Carta cartaYo)
         {
-            //this.ActualizarBotonTruco();
             Carta cartaRival;
-            bool mazoYo=false;
+            bool mazoYo = false;
 
             if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
-                mazoYo = this.RivalTruco(cartaYo);
+                mazoYo = await this.RivalTruco(cartaYo);
             }
+
             if (mazoYo == false)
             {
                 int indice;
@@ -374,12 +375,12 @@ namespace Formularios
         #endregion
 
         #region PseudoAnimaciones
-        private async void DialogoRival(string imagenDialogo)
+        private async Task DialogoRival(string imagenDialogo)
         {
             this.pbDialogoRival.Image = Image.FromFile(imagenDialogo);
-            await Task.Delay(2000);
+            await Task.Delay(2500);
             this.pbDialogoRival.Image = null;
-            await Task.Delay(2000);
+            await Task.Delay(1500);
         }
         private void ModificarEstadoBotones(bool desactivar = false)
         {
@@ -423,12 +424,12 @@ namespace Formularios
 
                 if (this.rondaActual.TrucoBoton())
                 {
-                    this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
+                    await this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
                     this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
                 }
                 else
                 {
-                    this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
+                    await this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
                     this.yo.Puntaje += this.rondaActual.SumaPuntaje;
                     await Task.Delay(2000);
                     this.ActualizarPuntajes();
@@ -460,19 +461,20 @@ namespace Formularios
 
             }
         }
-        private bool RivalTruco(Carta carta)
+        private async Task<bool> RivalTruco(Carta carta)
         {
             bool mazo = false;
             if (rondaActual.TrucoBoton(true, carta))
             {
-                this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
-                //Thread.Sleep(4000);
+                await this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
+
                 this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
 
                 QuieroNoQuiero quieroNoQuiero = new QuieroNoQuiero();
 
                 quieroNoQuiero.ShowDialog();
-                Thread.Sleep(2000);
+                await Task.Delay(1500);
+
                 if (quieroNoQuiero.DialogResult == DialogResult.Cancel)
                 {
                     if (this.rondaActual.SumaPuntaje > 1)
@@ -481,9 +483,9 @@ namespace Formularios
                     }
                     else this.rival.Puntaje += this.rondaActual.SumaPuntaje;
 
+                    mazo = true;
                     this.ActualizarPuntajes();
                     this.IniciarRonda();
-                    mazo = true;
                 }
             }
             return mazo;
