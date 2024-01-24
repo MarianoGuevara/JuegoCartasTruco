@@ -1,5 +1,11 @@
 COSAS RARAS/A MEJORAR
 -> que si el rival jugó las 3 cartas ya (todas null) y yo le canto truco, que recupere la ultima
+-> Si gana 1ra y tiene algo, es muy probable que cante truco... Podría esperar a 3ra
+-> en 3ra, acepta truco con cartas muy bajas 
+-> no dice "quiero" y "retruco/vale cuatro" en la misma jugada, y yo tampoco puedo cantar quiero 
+   y retruco en la misma jugada
+-> en 3ra a veces yo jugué y el podria cantarme algo pero no lo hace aunq gane
 
 COSAS A AGREGAR
--> Envido lógica
+-> Que yo y el rival cantemos envido, real y eso
+	

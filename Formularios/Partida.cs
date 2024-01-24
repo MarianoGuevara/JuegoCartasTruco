@@ -12,10 +12,9 @@ namespace Formularios
     public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
-        //private CancellationToken cancelarFlujo;
-        //private CancellationTokenSource fuenteDeCancelacion;
         private Jugador yo;
         private JugadorIA rival;
+        private Jugador rivalScreenshot;
 
         private event DelegadoComenzarJuego EventoComenzarJuego;
 
@@ -32,8 +31,7 @@ namespace Formularios
         public Partida()
         {
             InitializeComponent();
-            //this.pbDialogoRival.Image = Image.FromFile("../../../../media/dialogos/quiero.jpg");
-
+            
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -43,6 +41,7 @@ namespace Formularios
 
             this.yo = new Jugador();
             this.rival = new JugadorIA(this.yo);
+            this.rivalScreenshot = new Jugador(); // lo uso para el envido 
 
             this.rondaActual = new Ronda(this.yo, this.rival);
 
@@ -52,6 +51,7 @@ namespace Formularios
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
             this.EventoComenzarJuego.Invoke();
+            this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia aca pq se reemplaza la lista d cartas en el invoke
         }
 
         #region Animaciones
@@ -122,7 +122,6 @@ namespace Formularios
         }
         private async void IniciarRonda()
         {
-            this.yo.noQuiero = false;
             this.yo.cantoTruco = false;
             this.rondaActual.ResetRonda();
 
@@ -152,6 +151,7 @@ namespace Formularios
             this.ganadorActual = string.Empty;
 
             this.EventoComenzarJuego.Invoke();
+            this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia 
 
             if (this.manoYo == false && rival.CartasJugadas == 0)
             {
@@ -350,7 +350,9 @@ namespace Formularios
                 }
 
                 cartaRival = this.rival.Cartas[indice];
-                this.rival.Cartas[indice] = null;
+                this.rival.Cartas[indice] = null; // lo hago nulo porque tiene que jugar inteligente
+                                                  // y eso lo hace viendo su lista de cartas, entonces 
+                                                  // la tengo que poner nula una vez que la usé
 
                 if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
                 else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
@@ -397,20 +399,6 @@ namespace Formularios
         }
 
         #endregion
-        private async void lblMazo_Click(object sender, EventArgs e)
-        {
-            this.ModificarEstadoBotones(true);
-            bool juego = this.HabilitarClick();
-            if (juego)
-            {
-                this.lblMazo.Enabled = false;
-                await Task.Delay(2000);
-                this.rival.Puntaje += 1;
-                this.ActualizarPuntajes();
-                this.IniciarRonda();
-            }
-            this.ModificarEstadoBotones();
-        }
 
         #region Truco
         private async void lblTruco_Click(object sender, EventArgs e)
@@ -431,7 +419,6 @@ namespace Formularios
                 {
                     await this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
                     this.yo.Puntaje += this.rondaActual.SumaPuntaje;
-                    await Task.Delay(2000);
                     this.ActualizarPuntajes();
                     this.IniciarRonda();
                 }
@@ -490,6 +477,38 @@ namespace Formularios
             }
             return mazo;
         }
-        #endregion 
+        #endregion
+
+        #region Envido
+        private void ActualizarBotonEnvido()
+        {
+            // modificar estados del botón según haya cantado el o yo, o sea envido o real etc
+        }
+        private void lblEnvido_Click(object sender, EventArgs e)
+        {
+            this.ModificarEstadoBotones(true);
+            bool juego = this.HabilitarClick();
+            if (juego)
+            {
+                MessageBox.Show($"{this.rivalScreenshot.Cartas[0].ToString()} || {this.rivalScreenshot.Cartas[1].ToString()} || {this.rivalScreenshot.Cartas[2].ToString()}");
+                MessageBox.Show($"yo: {this.yo.PuntajeEnvidoNumerico()} || rival: {this.rivalScreenshot.PuntajeEnvidoNumerico()}");
+            }
+            this.ModificarEstadoBotones();
+        }
+        #endregion
+        private async void lblMazo_Click(object sender, EventArgs e)
+        {
+            this.ModificarEstadoBotones(true);
+            bool juego = this.HabilitarClick();
+            if (juego)
+            {
+                this.lblMazo.Enabled = false;
+                await Task.Delay(2000);
+                this.rival.Puntaje += 1;
+                this.ActualizarPuntajes();
+                this.IniciarRonda();
+            }
+            this.ModificarEstadoBotones();
+        }
     }
 }

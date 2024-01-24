@@ -255,6 +255,7 @@
             lblEnvido.Size = new Size(106, 30);
             lblEnvido.TabIndex = 27;
             lblEnvido.Text = "ENVIDO";
+            lblEnvido.Click += lblEnvido_Click;
             lblEnvido.MouseEnter += Partida_MouseEnter;
             lblEnvido.MouseLeave += Partida_MouseLeave;
             // 
