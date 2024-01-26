@@ -141,27 +141,31 @@ namespace Entidades
         #endregion
 
         #region JugarInteligenteIA pensar si acepta truco
-        private int valorMinimoEsperado(string situacionAJugar, Jugador yo, JugadorIA rival)
+        private int valorMinimoEsperado(string situacionAJugar, Jugador yo, JugadorIA rival, bool cantaYo)
         {
             int valorMinimo = -1;
 
             switch (this.cartasJugadas)
             {
                 case 0:
-                    if (situacionAJugar == "truco") valorMinimo = 20;
-                    else if (situacionAJugar == "retruco") valorMinimo = 22;
-                    else if (situacionAJugar == "valeCuatro") valorMinimo = 24;
+                    if (situacionAJugar == "truco") valorMinimo = 23;
+                    else if (situacionAJugar == "retruco") valorMinimo = 26;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 29;
                     break;
                 case 1:
-                    if (situacionAJugar == "truco") valorMinimo = 16;
-                    else if (situacionAJugar == "retruco") valorMinimo = 18;
-                    else if (situacionAJugar == "valeCuatro") valorMinimo = 22;
+                    if (situacionAJugar == "truco") valorMinimo = 18;
+                    else if (situacionAJugar == "retruco") valorMinimo = 21;
+                    else if (situacionAJugar == "valeCuatro") valorMinimo = 24;
                     break;
                 case 2:
                     if (situacionAJugar == "truco") valorMinimo = 10;
                     else if (situacionAJugar == "retruco" || situacionAJugar == "valeCuatro") valorMinimo = 11;
                     break;
+                case 3:
+                    valorMinimo = 10;
+                    break;
             }
+            if (cantaYo) valorMinimo -= 2;
 
             if (yo.PuntosRondaActual == 0 && rival.puntosRondaActual == 1)
             {
@@ -200,12 +204,12 @@ namespace Entidades
 
             return puntajeFinal;
         }
-        public bool AceptaTruco(string situacionAJugar, Jugador yo, JugadorIA rival)
+        public bool AceptaTruco(string situacionAJugar, Jugador yo, JugadorIA rival, bool cantaYo, Carta c=null)
         {
             bool retorno = false;
-            int puntajeFinal = this.PuntajeCartas();
+            int puntajeFinal = this.PuntajeCartas(c);
 
-            if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar, yo, rival)) retorno = true;
+            if (puntajeFinal >= this.valorMinimoEsperado(situacionAJugar, yo, rival, cantaYo)) retorno = true;
             return retorno;
         }
         #endregion

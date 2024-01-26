@@ -27,7 +27,8 @@ namespace Formularios
 
         private Carta cartaYo;
         private Carta cartaRival;
-
+        private Carta cartaRivalActual;
+        private Carta cartaYoActual;
         public Partida()
         {
             InitializeComponent();
@@ -324,6 +325,8 @@ namespace Formularios
             }
             this.yo.CartasJugadas += 1;
             cartaYo = this.yo.Cartas[indiceCoincidencia];
+            this.cartaYoActual = cartaYo;
+
             return cartaYo;
         }
 
@@ -335,7 +338,7 @@ namespace Formularios
 
             if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
-                mazoYo = await this.RivalTruco(cartaYo);
+                mazoYo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
             }
 
             if (mazoYo == false)
@@ -349,10 +352,12 @@ namespace Formularios
                     indice = this.rival.JugarInteligente(null);
                 }
 
+                /*cartaRival = this.rivalScreenshot.Cartas[indice];*/ // pq si le pongo solo rival, se pone null tmb pq es lo mismo en memoria
                 cartaRival = this.rival.Cartas[indice];
                 this.rival.Cartas[indice] = null; // lo hago nulo porque tiene que jugar inteligente
                                                   // y eso lo hace viendo su lista de cartas, entonces 
                                                   // la tengo que poner nula una vez que la usé
+                this.cartaRivalActual = this.rivalScreenshot.Cartas[indice];
 
                 if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
                 else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
@@ -410,7 +415,7 @@ namespace Formularios
             {
                 await Task.Delay(2000);
 
-                if (this.rondaActual.TrucoBoton())
+                if (this.rondaActual.TrucoBoton(true,false, this.cartaRivalActual, this.cartaYoActual))
                 {
                     await this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
                     this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
@@ -448,10 +453,10 @@ namespace Formularios
 
             }
         }
-        private async Task<bool> RivalTruco(Carta carta)
+        private async Task<bool> RivalTruco(Carta carta, Carta cartaYo)
         {
             bool mazo = false;
-            if (rondaActual.TrucoBoton(true, carta))
+            if (rondaActual.TrucoBoton(false ,true, carta, cartaYo))
             {
                 await this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
 
@@ -482,14 +487,34 @@ namespace Formularios
         #region Envido
         private void ActualizarBotonEnvido()
         {
-            // modificar estados del botón según haya cantado el o yo, o sea envido o real etc
+            if (this.rondaActual.EstadoEnvido == "no")
+            {
+                this.lblEnvido.Text = "ENVIDO";
+                if (this.yo.cantoEnvido) this.lblEnvido.Enabled = false;
+                else this.lblEnvido.Enabled = true;
+            }
+            else if (rondaActual.EstadoEnvido == "envido")
+            {
+                this.lblEnvido.Text = "ENVIDO";
+                if (this.yo.cantoEnvido) this.lblEnvido.Enabled = false;
+                else this.lblEnvido.Enabled = true;
+            }
+            else if (rondaActual.EstadoEnvido  == "envidoEnvido")
+            {
+                this.lblEnvido.Text = "REAL ENVIDO";
+                if (this.yo.cantoEnvido) this.lblEnvido.Enabled = false;
+                else this.lblEnvido.Enabled = true;
+
+            }
         }
-        private void lblEnvido_Click(object sender, EventArgs e)
+        private async void lblEnvido_Click(object sender, EventArgs e)
         {
             this.ModificarEstadoBotones(true);
             bool juego = this.HabilitarClick();
             if (juego)
             {
+                await Task.Delay(2000);
+
                 MessageBox.Show($"{this.rivalScreenshot.Cartas[0].ToString()} || {this.rivalScreenshot.Cartas[1].ToString()} || {this.rivalScreenshot.Cartas[2].ToString()}");
                 MessageBox.Show($"yo: {this.yo.PuntajeEnvidoNumerico()} || rival: {this.rivalScreenshot.PuntajeEnvidoNumerico()}");
             }

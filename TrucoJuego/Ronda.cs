@@ -20,13 +20,17 @@ namespace Entidades
         public bool truco;
         public bool retruco;
         public bool valeCuatro;
-
+        public bool envido;
+        public bool envidoEnvido;
+        public bool realEnvido;
+        public bool faltaEnvido;
         private int sumaPuntaje;
-
         private string estadoTruco; // no-truco-retruco-valeCuatro
+        private string estadoEnvido; // no-envido-envidoEnvido-realEnvido-faltaEnvido
 
         public int SumaPuntaje { get { return this.sumaPuntaje; } }
         public string EstadoTruco { get { return this.estadoTruco; } }
+        public string EstadoEnvido { get { return this.estadoEnvido; } }
         public Ronda(Jugador yo, JugadorIA rival)
         {
             this.yo = yo;
@@ -36,6 +40,11 @@ namespace Entidades
         }
         public void ResetRonda()
         {
+            this.envido = false;
+            this.envidoEnvido = false;
+            this.realEnvido = false;
+            this.faltaEnvido = false;
+
             this.truco = false;
             this.retruco = false;
             this.valeCuatro = false;
@@ -44,6 +53,7 @@ namespace Entidades
 
             this.sumaPuntaje = 1;
             this.estadoTruco = "no";
+            this.estadoEnvido = "no";
         }
         public void DarPuntoPorMano(string ganadorActual)
         {
@@ -57,13 +67,14 @@ namespace Entidades
                     break;
             }
         }
-        public bool TrucoBoton(bool rival=false, Carta carta=null)
+        #region Truco
+        public bool TrucoBoton(bool cantoYo, bool rival=false, Carta carta = null, Carta cartaYo = null)
         {
             bool retorno = false;
             switch (this.estadoTruco)
             {
                 case "no":
-                    if (this.rival.AceptaTruco("truco", this.yo, this.rival))
+                    if (this.rival.AceptaTruco("truco", this.yo, this.rival, cantoYo, carta))
                     {
                         retorno = true;
                         this.sumaPuntaje = 2;
@@ -74,7 +85,7 @@ namespace Entidades
                     }
                     break;
                 case "truco":
-                    if (this.rival.AceptaTruco("retruco", this.yo, this.rival))
+                    if (this.rival.AceptaTruco("retruco", this.yo, this.rival, cantoYo, carta))
                     {
                         retorno = true;
                         this.sumaPuntaje = 3;
@@ -82,7 +93,7 @@ namespace Entidades
                     }
                     break;
                 case "retruco":
-                    if (this.rival.AceptaTruco("valeCuatro", this.yo, this.rival))
+                    if (this.rival.AceptaTruco("valeCuatro", this.yo, this.rival, cantoYo, carta))
                     {
                         retorno = true;
                         this.sumaPuntaje = 4;
@@ -95,20 +106,20 @@ namespace Entidades
 
             if (rival == true)
             {
-                retorno = this.TrucoFinal(retorno, this.rival, this.yo, carta);
+                retorno = this.TrucoFinal(retorno, this.rival, this.yo, carta, cartaYo);
             }
 
             return retorno;
         }
 
-        public bool TrucoFinal(bool estado, JugadorIA rival, Jugador yo, Carta carta)
+        public bool TrucoFinal(bool estado, JugadorIA rival, Jugador yo, Carta carta, Carta cartaYo)
         {
             bool retorno = estado;
 
-            if (rival.CartasJugadas == 2 && yo.CartasJugadas == 3 && this.estadoTruco != "no")
+            if (rival.CartasJugadas == 2 && yo.CartasJugadas == 3)
             {
-                int puntajeYo = Jugador.AsignarPuntajeCarta(carta);
-                int puntajeRival = rival.PuntajeCartas();
+                int puntajeYo = Jugador.AsignarPuntajeCarta(cartaYo);
+                int puntajeRival = Jugador.AsignarPuntajeCarta(carta);
 
                 if (puntajeRival > puntajeYo) retorno = true;
             }
@@ -135,8 +146,42 @@ namespace Entidades
             }
             return retorno;
         }
+        #endregion
 
+        #region Envido
+        public bool EnvidoBoton() // -si la "IA" quiere jugar o no y cambia el estado de los atributos
+        {
+            bool quiereJugar = false;
+            switch (this.estadoEnvido)
+            {
+                case "no":
+                    if (this.AceptaEnvido)
+                    break;
+                case "envido":
+                    break;
+                case "envidoEnvido":
+                    break;
+                case "realEnvido":
+                    break;
+                case "faltaEnvido":
+                    break;
+            }
+            return quiereJugar;
+        }
 
+        private string AceptaEnvido()
+        {
+            string retorno;
+            int tanto = this.rival.PuntajeEnvidoNumerico();
 
+            if (tanto <= 25) retorno = "no";
+            else if (tanto <= 27) retorno = "envido";
+            else if (tanto <= 29) retorno = "realEnvido";
+            else retorno = "faltaEnvido";
+
+            return retorno;
+        }
+
+        #endregion
     } // fin clase
 } // fin namespace

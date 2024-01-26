@@ -52,5 +52,26 @@ namespace Entidades
             }
             return retorno;
         }
+
+        public static string EnvidoTexto(string situacion)
+        {
+            string retorno = "";
+            switch (situacion)
+            {
+                case "no":
+                    retorno = "ENVIDO";
+                    break;
+                case "envido":
+                    retorno = "REAL ENVIDO";
+                    break;
+                case "envidoEnvido":
+                    retorno = "REAL ENVIDO";
+                    break;
+                case "realEnvido":
+                    retorno = "FALTA ENVIDO";
+                    break;
+            }
+            return retorno;
+        }
     }
 }
