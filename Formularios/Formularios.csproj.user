@@ -7,5 +7,8 @@
     <Compile Update="QuieroNoQuiero.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Tanto.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

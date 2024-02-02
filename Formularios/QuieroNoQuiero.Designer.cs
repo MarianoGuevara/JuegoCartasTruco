@@ -79,7 +79,7 @@
 
         #endregion
 
-        private Label lblQuiero;
-        private Label lblNoQuiero;
+        protected Label lblQuiero;
+        protected Label lblNoQuiero;
     }
 }

@@ -73,5 +73,14 @@ namespace Entidades
             }
             return retorno;
         }
+
+        public static bool GaneYoEnvido(int puntajeYo, int puntajeEl, bool manoYo)
+        {
+            bool gane = false;
+            if (puntajeYo == puntajeEl && manoYo) gane = true;
+            else if (puntajeYo > puntajeEl) gane = true;
+            return gane;
+        }
+
     }
 }

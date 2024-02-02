@@ -13,7 +13,7 @@ namespace Formularios
 {
     public partial class QuieroNoQuiero : Form
     {
-        private bool apretoBoton;
+        protected bool apretoBoton;
         public QuieroNoQuiero()
         {
             InitializeComponent();
@@ -39,21 +39,21 @@ namespace Formularios
         }
 
         [DebuggerStepThrough]
-        private void Partida_MouseEnter(object sender, EventArgs e)
+        protected void Partida_MouseEnter(object sender, EventArgs e)
         {
             if (sender is PictureBox pb) this.AnimacionCartas(pb, true);
             else if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl, true);
         }
 
         [DebuggerStepThrough]
-        private void Partida_MouseLeave(object sender, EventArgs e)
+        protected void Partida_MouseLeave(object sender, EventArgs e)
         {
             if (sender is PictureBox pb) this.AnimacionCartas(pb, false);
             else if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl);
         }
 
         [DebuggerStepThrough]
-        private void AsignarHover(System.Windows.Forms.Label label, bool hover = false)
+        protected void AsignarHover(System.Windows.Forms.Label label, bool hover = false)
         {
             if (hover)
             {
@@ -77,7 +77,7 @@ namespace Formularios
         private void lblNoQuiero_Click(object sender, EventArgs e)
         {
             this.apretoBoton = true;
-            this.DialogResult = DialogResult.Cancel;
+            this.DialogResult = DialogResult.No;
         }
 
         private void QuieroNoQuiero_FormClosing(object sender, FormClosingEventArgs e)

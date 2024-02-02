@@ -252,9 +252,9 @@
             lblEnvido.ForeColor = Color.LightGray;
             lblEnvido.Location = new Point(376, 720);
             lblEnvido.Name = "lblEnvido";
-            lblEnvido.Size = new Size(106, 30);
+            lblEnvido.Size = new Size(91, 30);
             lblEnvido.TabIndex = 27;
-            lblEnvido.Text = "ENVIDO";
+            lblEnvido.Text = "TANTO";
             lblEnvido.Click += lblEnvido_Click;
             lblEnvido.MouseEnter += Partida_MouseEnter;
             lblEnvido.MouseLeave += Partida_MouseLeave;

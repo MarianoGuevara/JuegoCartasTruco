@@ -23,6 +23,8 @@ namespace Formularios
         private bool parda;
         private bool habilitado = true;
 
+        private string turnoTanto;
+
         private Ronda rondaActual;
 
         private Carta cartaYo;
@@ -32,7 +34,7 @@ namespace Formularios
         public Partida()
         {
             InitializeComponent();
-            
+
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -48,6 +50,7 @@ namespace Formularios
 
             this.ganadorActual = string.Empty;
             this.manoYo = true;
+            this.turnoTanto = "yo";
 
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
@@ -131,6 +134,8 @@ namespace Formularios
             this.lblTruco.Text = "TRUCO";
 
             this.manoYo = !this.manoYo;
+            if (this.manoYo) this.turnoTanto = "yo";
+            else this.turnoTanto = "rival";
 
             this.yo.PuntosRondaActual = 0;
             this.rival.PuntosRondaActual = 0;
@@ -329,8 +334,6 @@ namespace Formularios
 
             return cartaYo;
         }
-
-
         private async Task<Carta> JuegaRival(Carta cartaYo)
         {
             Carta cartaRival;
@@ -415,7 +418,7 @@ namespace Formularios
             {
                 await Task.Delay(2000);
 
-                if (this.rondaActual.TrucoBoton(true,false, this.cartaRivalActual, this.cartaYoActual))
+                if (this.rondaActual.TrucoBoton(true, false, this.cartaRivalActual, this.cartaYoActual))
                 {
                     await this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
                     this.lblTruco.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoTruco);
@@ -456,7 +459,7 @@ namespace Formularios
         private async Task<bool> RivalTruco(Carta carta, Carta cartaYo)
         {
             bool mazo = false;
-            if (rondaActual.TrucoBoton(false ,true, carta, cartaYo))
+            if (rondaActual.TrucoBoton(false, true, carta, cartaYo))
             {
                 await this.DialogoRival($"../../../../media/dialogos/{this.rondaActual.EstadoTruco}.jpg");
 
@@ -485,41 +488,67 @@ namespace Formularios
         #endregion
 
         #region Envido
-        private void ActualizarBotonEnvido()
+        private string DeDialogResultATanto(DialogResult result)
         {
-            if (this.rondaActual.EstadoEnvido == "no")
-            {
-                this.lblEnvido.Text = "ENVIDO";
-                if (this.yo.cantoEnvido) this.lblEnvido.Enabled = false;
-                else this.lblEnvido.Enabled = true;
-            }
-            else if (rondaActual.EstadoEnvido == "envido")
-            {
-                this.lblEnvido.Text = "ENVIDO";
-                if (this.yo.cantoEnvido) this.lblEnvido.Enabled = false;
-                else this.lblEnvido.Enabled = true;
-            }
-            else if (rondaActual.EstadoEnvido  == "envidoEnvido")
-            {
-                this.lblEnvido.Text = "REAL ENVIDO";
-                if (this.yo.cantoEnvido) this.lblEnvido.Enabled = false;
-                else this.lblEnvido.Enabled = true;
+            string tanto = string.Empty;
+            if (result == DialogResult.Abort) tanto = "envido";
+            else if (result == DialogResult.Retry) tanto = "realEnvido";
+            else if (result == DialogResult.Yes) tanto = "faltaEnvido";
 
-            }
+            return tanto;
         }
         private async void lblEnvido_Click(object sender, EventArgs e)
         {
-            this.ModificarEstadoBotones(true);
-            bool juego = this.HabilitarClick();
-            if (juego)
+            Tanto t = new Tanto(this.rondaActual, this.yo, true);
+            t.ShowDialog();
+
+            /* 
+            OK -> Quiero
+            No-> No Quiero
+            Abort -> Envido
+            Retry -> Real envido
+            Yes -> Falta envido
+            Cancel -> Volver
+            */
+            if (t.DialogResult != DialogResult.Cancel)
             {
+                string aCantar = this.DeDialogResultATanto(t.DialogResult);
+
+                //MessageBox.Show($"{t.DialogResult}");
+
                 await Task.Delay(2000);
+
+                string retorno = this.rondaActual.QueCantaTanto();
+                await this.DialogoRival($"../../../../media/dialogos/{retorno}.jpg");
+
+                MessageBox.Show($"{this.rondaActual.envido}");
+                MessageBox.Show($"{this.rondaActual.envidoEnvido}");
+                MessageBox.Show($"{this.rondaActual.realEnvido}");
+                MessageBox.Show($"{this.rondaActual.faltaEnvido}");
 
                 MessageBox.Show($"{this.rivalScreenshot.Cartas[0].ToString()} || {this.rivalScreenshot.Cartas[1].ToString()} || {this.rivalScreenshot.Cartas[2].ToString()}");
                 MessageBox.Show($"yo: {this.yo.PuntajeEnvidoNumerico()} || rival: {this.rivalScreenshot.PuntajeEnvidoNumerico()}");
+
             }
-            this.ModificarEstadoBotones();
         }
+
+        private void RivalCantaTanto()
+        {
+            //Tanto t = new Tanto(this.rondaActual, this.yo);
+            //t.ShowDialog();
+            //if (t.DialogResult == DialogResult.Cancel)
+            //{
+            //    await this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
+            //    this.lblEnvido.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoEnvido);
+            //}
+            //else
+            //{
+            //    await this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
+            //    this.yo.Puntaje += this.rondaActual.SumaPuntaje;
+            //    this.ActualizarPuntajes();
+            //}
+        }
+
         #endregion
         private async void lblMazo_Click(object sender, EventArgs e)
         {
