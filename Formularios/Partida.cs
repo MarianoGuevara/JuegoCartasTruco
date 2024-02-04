@@ -299,13 +299,21 @@ namespace Formularios
         {
             if (this.yo.Puntaje <= 15)
             {
-                this.pbPuntajeYo1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
-                this.pbPuntajeRival1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+                this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
             }
             else
             {
-                this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+                this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(15));
+                this.pbPuntajeYo1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+            }
+            if (this.rival.Puntaje <= 15)
+            {
                 this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+            }
+            else
+            {
+                this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(15));
+                this.pbPuntajeRival1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
             }
         }
         private Carta JuegoYo(PictureBox cartaAJugar)
@@ -346,7 +354,7 @@ namespace Formularios
             {
                 mazoYo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
             }
-          
+
             if (mazoYo == false)
             {
                 int indice;
@@ -543,7 +551,7 @@ namespace Formularios
             this.ActualizarBotonEnvido();
         }
 
-        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool replica =false)
+        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool replica = false)
         {
             string retorno = this.rondaActual.QueCantaTanto(rivalScreenshot);
 
@@ -558,13 +566,13 @@ namespace Formularios
             else if (retorno == "quiero")
             {
                 if (this.rondaActual.faltaEnvido == true) this.rondaActual.SumaPuntajeTanto = 10;
-                else await this.LuchaTanto();
+                await this.LuchaTanto();
             }
-                
+
             else
             {
                 DialogResult a = await this.AbrirTantoModal();
-                if (a == DialogResult.No) 
+                if (a == DialogResult.No)
                 {
                     Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
                     this.ActualizarPuntajes();
@@ -588,7 +596,7 @@ namespace Formularios
         {
             int tantoYo = this.yo.PuntajeEnvidoNumerico();
             int tantoRival = this.rival.PuntajeEnvidoNumerico();
-            tantoRival = 27;
+            tantoRival = 28;
             string ganador = string.Empty;
 
             if (tantoYo == tantoRival)

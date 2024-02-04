@@ -23,7 +23,6 @@ namespace Entidades
         {
             player.Puntaje += sumaPuntaje;
         }
-
         public static void AnalizarPuntaje(Jugador yo, Jugador rival, int sumaPuntaje)
         {
             if (yo.PuntosRondaActual == 2)
@@ -35,7 +34,6 @@ namespace Entidades
                 Puntaje.SumarPuntaje(rival, sumaPuntaje);
             }
         }
-
         public static string TrucoTexto(string situacion)
         {
             string retorno = "";
@@ -53,7 +51,6 @@ namespace Entidades
             }
             return retorno;
         }
-
         public static string EnvidoTexto(string situacion)
         {
             string retorno = "";
@@ -74,7 +71,6 @@ namespace Entidades
             }
             return retorno;
         }
-
         public static bool GaneYoEnvido(int puntajeYo, int puntajeEl, bool manoYo)
         {
             bool gane = false;
@@ -93,8 +89,16 @@ namespace Entidades
         }
         public static void SumarPuntajesTanto(string ganador, Jugador yo, Jugador rival, Ronda ronda)
         {
-            if (ganador == "yo") yo.Puntaje +=  ronda.SumaPuntajeTanto;
-            else rival.Puntaje += ronda.SumaPuntajeTanto;
+            if (ganador == "yo")
+            {
+                if(yo.Puntaje + ronda.SumaPuntajeTanto > 30) yo.Puntaje = 30;
+                else yo.Puntaje += ronda.SumaPuntajeTanto;
+            }
+            else
+            {
+                if (rival.Puntaje + ronda.SumaPuntajeTanto > 30) rival.Puntaje = 30;
+                else rival.Puntaje += ronda.SumaPuntajeTanto;
+            }   
         }
         public static void CalcularPuntajeNoQuiero(Ronda ronda, Jugador player)
         {
@@ -115,7 +119,11 @@ namespace Entidades
                     ronda.SumaPuntajeTanto = 7;
                     break;
             }
-            player.Puntaje += ronda.SumaPuntajeTanto;
+            
+            if (player.Puntaje + ronda.SumaPuntajeTanto > 30)
+                player.Puntaje = 30;
+            else
+                player.Puntaje += ronda.SumaPuntajeTanto;            
         }
     }
 }

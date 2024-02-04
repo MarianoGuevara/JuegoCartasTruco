@@ -230,7 +230,7 @@ namespace Entidades
         {
             string retorno;
             int tanto = rival.PuntajeEnvidoNumerico();
-            tanto = 27; //hardcodeado para pruebas
+            tanto = 28; //hardcodeado para pruebas
 
             if (tanto <= 25) retorno = "noQuiero";
             else if (tanto <= 27) retorno = "envido";
