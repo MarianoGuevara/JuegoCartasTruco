@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Entidades
         protected int puntosRondaActual;
         public bool cantoTruco;
         public bool cantoEnvido;
+        public bool cantoFalta;
 
         #region Propiedades
         public List<Carta> Cartas 
@@ -42,6 +44,7 @@ namespace Entidades
         #endregion
         public Jugador(Jugador? jugadorBis = null)
         {
+            this.cantoFalta = false;
             this.cantoEnvido = false;
             this.cantoTruco = false;
             this.puntaje = 0;

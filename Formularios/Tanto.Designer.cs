@@ -36,6 +36,7 @@
             // lblQuiero
             // 
             lblQuiero.Location = new Point(224, 49);
+            lblQuiero.Click += lblQuiero_Click;
             // 
             // lblNoQuiero
             // 

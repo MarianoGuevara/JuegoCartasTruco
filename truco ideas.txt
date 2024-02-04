@@ -1,13 +1,8 @@
 COSAS RARAS/A MEJORAR
--> no dice "quiero" y "retruco/vale cuatro" en la misma jugada, y yo tampoco puedo cantar quiero 
-   y retruco en la misma jugada
--> en 3ra a veces yo jugué y el podria cantarme algo pero no lo hace aunq gane
+-> falta envido error 
+-> los tiempos de los dialogos, cuando espera a cantar, etc, son muy largos
+
 
 COSAS A AGREGAR
--> Mentir en truco
--> Que yo y el rival cantemos envido, real y eso
+-> Cambiar mecanica truco; retruco y vale cuatro en misma ronda, mentira rival, etc
 -> cambiar a privados algunos atributos y etc
-
-
--combate tanto 
--que si está activado el envido o real, la suma de pts de la ronda sea acorde

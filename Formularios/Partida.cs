@@ -293,10 +293,10 @@ namespace Formularios
             this.ActualizarPuntajes();
             this.habilitado = true;
             this.ActualizarBotonTruco();
+            this.ActualizarBotonEnvido();
         }
         private void ActualizarPuntajes()
         {
-
             if (this.yo.Puntaje <= 15)
             {
                 this.pbPuntajeYo1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
@@ -339,11 +339,14 @@ namespace Formularios
             Carta cartaRival;
             bool mazoYo = false;
 
+            if ((this.rival.CartasJugadas <= 1 && this.yo.CartasJugadas <= 1) &&
+                (this.rondaActual.envido == false && this.rondaActual.realEnvido == false) && this.rondaActual.faltaEnvido == false) await this.RivalCantaTanto(this.rivalScreenshot);
+
             if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
                 mazoYo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
             }
-
+          
             if (mazoYo == false)
             {
                 int indice;
@@ -488,6 +491,12 @@ namespace Formularios
         #endregion
 
         #region Envido
+        private void ActualizarBotonEnvido()
+        {
+            if (this.yo.CartasJugadas >= 1 && this.rival.CartasJugadas >= 1) this.lblEnvido.Enabled = false;
+            else this.lblEnvido.Enabled = true;
+
+        }
         private string DeDialogResultATanto(DialogResult result)
         {
             string tanto = string.Empty;
@@ -514,39 +523,90 @@ namespace Formularios
             {
                 string aCantar = this.DeDialogResultATanto(t.DialogResult);
 
-                //MessageBox.Show($"{t.DialogResult}");
+                await this.RivalCantaTanto(this.rivalScreenshot);
 
-                await Task.Delay(2000);
+                //Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.yo);
+                //this.ActualizarPuntajes();
+                //string retorno = this.rondaActual.QueCantaTanto();
+                //await this.DialogoRival($"../../../../media/dialogos/{retorno}.jpg");
 
-                string retorno = this.rondaActual.QueCantaTanto();
-                await this.DialogoRival($"../../../../media/dialogos/{retorno}.jpg");
+                //MessageBox.Show($"{this.rondaActual.envido}");
+                //MessageBox.Show($"{this.rondaActual.envidoEnvido}");
+                //MessageBox.Show($"{this.rondaActual.realEnvido}");
+                //MessageBox.Show($"{this.rondaActual.faltaEnvido}");
 
-                MessageBox.Show($"{this.rondaActual.envido}");
-                MessageBox.Show($"{this.rondaActual.envidoEnvido}");
-                MessageBox.Show($"{this.rondaActual.realEnvido}");
-                MessageBox.Show($"{this.rondaActual.faltaEnvido}");
-
-                MessageBox.Show($"{this.rivalScreenshot.Cartas[0].ToString()} || {this.rivalScreenshot.Cartas[1].ToString()} || {this.rivalScreenshot.Cartas[2].ToString()}");
-                MessageBox.Show($"yo: {this.yo.PuntajeEnvidoNumerico()} || rival: {this.rivalScreenshot.PuntajeEnvidoNumerico()}");
+                //MessageBox.Show($"{this.rivalScreenshot.Cartas[0].ToString()} || {this.rivalScreenshot.Cartas[1].ToString()} || {this.rivalScreenshot.Cartas[2].ToString()}");
+                //MessageBox.Show($"yo: {this.yo.PuntajeEnvidoNumerico()} || rival: {this.rivalScreenshot.PuntajeEnvidoNumerico()}");
 
             }
+            else Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
+            this.ActualizarBotonEnvido();
         }
 
-        private void RivalCantaTanto()
+        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool replica =false)
         {
-            //Tanto t = new Tanto(this.rondaActual, this.yo);
-            //t.ShowDialog();
-            //if (t.DialogResult == DialogResult.Cancel)
-            //{
-            //    await this.DialogoRival($"../../../../media/dialogos/quiero.jpg");
-            //    this.lblEnvido.Text = Puntaje.TrucoTexto(this.rondaActual.EstadoEnvido);
-            //}
-            //else
-            //{
-            //    await this.DialogoRival($"../../../../media/dialogos/noQuiero.jpg");
-            //    this.yo.Puntaje += this.rondaActual.SumaPuntaje;
-            //    this.ActualizarPuntajes();
-            //}
+            string retorno = this.rondaActual.QueCantaTanto(rivalScreenshot);
+
+            await Task.Delay(2000);
+            await this.DialogoRival($"../../../../media/dialogos/{retorno}.jpg");
+
+            if (retorno == "noQuiero")
+            {
+                Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.yo);
+                this.ActualizarPuntajes();
+            }
+            else if (retorno == "quiero")
+            {
+                if (this.rondaActual.faltaEnvido == true) this.rondaActual.SumaPuntajeTanto = 10;
+                else await this.LuchaTanto();
+            }
+                
+            else
+            {
+                DialogResult a = await this.AbrirTantoModal();
+                if (a == DialogResult.No) 
+                {
+                    Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
+                    this.ActualizarPuntajes();
+                }
+                else if (a == DialogResult.OK) await this.LuchaTanto();
+                else await this.RivalCantaTanto(this.rivalScreenshot);
+            }
+        }
+        private async Task<DialogResult> AbrirTantoModal(bool abriYo = false)
+        {
+            await Task.Delay(500);
+
+            Tanto t = null;
+            if (abriYo == true) t = new Tanto(this.rondaActual, this.yo, true);
+            else t = new Tanto(this.rondaActual, this.yo);
+
+            t.ShowDialog();
+            return t.DialogResult;
+        }
+        private async Task LuchaTanto()
+        {
+            int tantoYo = this.yo.PuntajeEnvidoNumerico();
+            int tantoRival = this.rival.PuntajeEnvidoNumerico();
+            tantoRival = 27;
+            string ganador = string.Empty;
+
+            if (tantoYo == tantoRival)
+            {
+                if (this.manoYo) ganador = "yo";
+                else ganador = "rival";
+            }
+            else if (tantoYo > tantoRival) ganador = "yo";
+            else ganador = "rival";
+
+            if (this.rondaActual.SumaPuntajeTanto == 10) Puntaje.FaltaEnvido(this.rondaActual, this.yo, this.rival, ganador);
+            else Puntaje.SumarPuntajesTanto(ganador, this.yo, this.rival, this.rondaActual);
+
+            await Task.Delay(1500);
+            ResultadoTanto r = new ResultadoTanto(ganador, tantoYo, tantoRival);
+            r.ShowDialog();
+
+            this.ActualizarPuntajes();
         }
 
         #endregion

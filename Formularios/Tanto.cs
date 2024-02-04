@@ -20,44 +20,73 @@ namespace Formularios
         {
             InitializeComponent();
             this.abriYo = false;
-            base.apretoBoton = true;
+            base.apretoBoton = false;
             this.rondaActual = rondaActual;
             this.yo = yo;
 
             this.EnableBotonesTanto();
         }
-        public Tanto(Ronda rondaActual, Jugador yo, bool abroYo) : this(rondaActual, yo) 
+        public Tanto(Ronda rondaActual, Jugador yo, bool abroYo) : this(rondaActual, yo)
         {
             this.abriYo = true;
             base.lblQuiero.Enabled = false;
             base.lblNoQuiero.Enabled = false;
+            base.apretoBoton = true;
         }
         private void EnableBotonesTanto()
         {
             if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
-            //if (this.rondaActual.envido == true && this.yo.cantoEnvido == false) this.lblEnvido.Enabled = false;
             if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
-            if (this.rondaActual.realEnvido == true) this.lblReal.Enabled = false;
-            if (this.rondaActual.faltaEnvido == true) this.lblFalta.Enabled = false;
+            if (this.rondaActual.realEnvido == true)
+            {
+                this.lblEnvido.Enabled = false;
+                this.lblReal.Enabled = false;
+            }
+            if (this.rondaActual.faltaEnvido == true)
+            {
+                this.lblFalta.Enabled = false;
+                this.lblEnvido.Enabled = false;
+                this.lblReal.Enabled = false;
+            }
         }
 
         private void lblEnvido_Click(object sender, EventArgs e)
         {
             this.rondaActual.envido = true;
             if (this.abriYo) this.yo.cantoEnvido = true;
+
+            this.rondaActual.SumaPuntajeTanto += 2;
+            base.apretoBoton = true;
             this.DialogResult = DialogResult.Abort;
         }
 
         private void lblReal_Click(object sender, EventArgs e)
         {
+            if (this.rondaActual.envido) this.rondaActual.SumaPuntajeTanto += 3;
+            else this.rondaActual.SumaPuntajeTanto += 1;
+
+            base.apretoBoton = true;
             this.rondaActual.realEnvido = true;
             this.DialogResult = DialogResult.Retry;
         }
 
         private void lblFalta_Click(object sender, EventArgs e)
         {
+            if (this.rondaActual.envido) this.rondaActual.SumaPuntajeTanto += 3;
+            else this.rondaActual.SumaPuntajeTanto += 1;
+
             this.rondaActual.faltaEnvido = true;
+            base.apretoBoton = true;
             this.DialogResult = DialogResult.Yes;
+        }
+
+        private void lblQuiero_Click(object sender, EventArgs e)
+        {
+            if (this.rondaActual.faltaEnvido == true)
+            {
+                this.rondaActual.SumaPuntajeTanto = 10;
+                this.yo.cantoFalta = true;
+            }
         }
     }
 }

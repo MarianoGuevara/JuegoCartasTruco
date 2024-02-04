@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -82,5 +83,39 @@ namespace Entidades
             return gane;
         }
 
+        public static void FaltaEnvido(Ronda ronda, Jugador yo, JugadorIA rival, string ganador)
+        {
+            int suma;
+            if (ganador == "yo") suma = 30 - rival.Puntaje;
+            else suma = 30 - yo.Puntaje;
+            ronda.SumaPuntajeTanto = suma;
+            SumarPuntajesTanto(ganador, yo, rival, ronda);
+        }
+        public static void SumarPuntajesTanto(string ganador, Jugador yo, Jugador rival, Ronda ronda)
+        {
+            if (ganador == "yo") yo.Puntaje +=  ronda.SumaPuntajeTanto;
+            else rival.Puntaje += ronda.SumaPuntajeTanto;
+        }
+        public static void CalcularPuntajeNoQuiero(Ronda ronda, Jugador player)
+        {
+            switch (ronda.SumaPuntajeTanto)
+            {
+                case 2:
+                    ronda.SumaPuntajeTanto = 1;
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    ronda.SumaPuntajeTanto = 2;
+                    break;
+                case 7:
+                    ronda.SumaPuntajeTanto = 4;
+                    break;
+                case 9:
+                    ronda.SumaPuntajeTanto = 7;
+                    break;
+            }
+            player.Puntaje += ronda.SumaPuntajeTanto;
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace Entidades
         private JugadorIA rival;
 
         private int sumaPuntaje;
+        private int sumaPuntajeTanto;
 
         private string estadoTruco; // no-truco-retruco-valeCuatro
         private string estadoEnvido; // no-envido-envidoEnvido-realEnvido-faltaEnvido
@@ -27,9 +28,17 @@ namespace Entidades
         public bool envidoEnvido;
         public bool realEnvido;
         public bool faltaEnvido;
-
-        //public string turnoTanto;
-        public int SumaPuntaje { get { return this.sumaPuntaje; } }
+        public bool faltaAceptada;
+        public int SumaPuntaje
+        { 
+            get { return this.sumaPuntaje; } 
+            set { this.sumaPuntaje = value; }
+        }
+        public int SumaPuntajeTanto
+        {
+            get { return this.sumaPuntajeTanto; }
+            set { this.sumaPuntajeTanto = value; }
+        }
         public string EstadoTruco { get { return this.estadoTruco; } }
         public string EstadoEnvido { get { return this.estadoEnvido; } }
         public Ronda(Jugador yo, JugadorIA rival)
@@ -51,12 +60,15 @@ namespace Entidades
             this.realEnvido = false;
             this.faltaEnvido = false;
 
+            this.faltaAceptada = false;
+            this.yo.cantoFalta = false;
+
             this.yo.cantoTruco = false;
             this.rival.cantoTruco = false;
             this.yo.cantoEnvido = false;
             this.rival.cantoEnvido = false;
-
             this.sumaPuntaje = 1;
+            this.sumaPuntajeTanto = 0;
             this.estadoTruco = "no";
             this.estadoEnvido = "no";
         }
@@ -165,17 +177,17 @@ namespace Entidades
             else retorno = "quiero";
             return retorno;
         } // por algún motivo no me cambia el atributo real
-        public string QueCantaTanto()
+        public string QueCantaTanto(Jugador rivalScreenshot)
         {
             string retorno = "noQuiero";
-            string casoRival = this.RivalAceptaEnvido();
+            string casoRival = this.RivalAceptaEnvido(rivalScreenshot);
 
             switch (casoRival)
             {
                 case "envido":
-
                     if (this.envido == false && this.realEnvido == false && this.faltaEnvido == false)
                     {
+                        this.sumaPuntajeTanto += 2;
                         retorno = "envido";
                         this.envido = true;
                         this.rival.cantoEnvido = true;
@@ -191,6 +203,7 @@ namespace Entidades
                     //retorno = this.CasoTanto(this.realEnvido, "realEnvido");
                     if (this.realEnvido == false && this.faltaEnvido == false)
                     {
+                        this.sumaPuntajeTanto += 3;
                         retorno = "realEnvido";
                         this.realEnvido = true;
                     }
@@ -204,6 +217,7 @@ namespace Entidades
                     //retorno = this.CasoTanto(this.faltaEnvido, "faltaEnvido");
                     if (this.faltaEnvido == false)
                     {
+                        this.sumaPuntajeTanto += 3;
                         retorno = "faltaEnvido";
                         this.faltaEnvido = true;
                     }
@@ -212,11 +226,11 @@ namespace Entidades
             }
             return retorno;
         }
-        private string RivalAceptaEnvido()
+        private string RivalAceptaEnvido(Jugador rival)
         {
             string retorno;
-            int tanto = this.rival.PuntajeEnvidoNumerico();
-            tanto = 29; //hardcodeado para pruebas
+            int tanto = rival.PuntajeEnvidoNumerico();
+            tanto = 27; //hardcodeado para pruebas
 
             if (tanto <= 25) retorno = "noQuiero";
             else if (tanto <= 27) retorno = "envido";

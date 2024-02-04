@@ -21,3 +21,4 @@ C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formula
 C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.Properties.Resources.resources
 C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.QuieroNoQuiero.resources
 C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.Tanto.resources
+C:\Users\Mariano\Desktop\TrucoJuego\Formularios\obj\Debug\net6.0-windows\Formularios.ResultadoTanto.resources
