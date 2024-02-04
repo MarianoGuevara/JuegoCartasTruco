@@ -19,6 +19,7 @@ namespace Formularios
         public Tanto(Ronda rondaActual, Jugador yo)
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.abriYo = false;
             base.apretoBoton = false;
             this.rondaActual = rondaActual;
@@ -62,8 +63,9 @@ namespace Formularios
 
         private void lblReal_Click(object sender, EventArgs e)
         {
-            if (this.rondaActual.envido) this.rondaActual.SumaPuntajeTanto += 3;
-            else this.rondaActual.SumaPuntajeTanto += 1;
+            this.rondaActual.SumaPuntajeTanto += 3;
+            //if (this.rondaActual.envido) this.rondaActual.SumaPuntajeTanto += 3;
+            //else this.rondaActual.SumaPuntajeTanto += 1;
 
             base.apretoBoton = true;
             this.rondaActual.realEnvido = true;
@@ -72,8 +74,9 @@ namespace Formularios
 
         private void lblFalta_Click(object sender, EventArgs e)
         {
-            if (this.rondaActual.envido) this.rondaActual.SumaPuntajeTanto += 3;
-            else this.rondaActual.SumaPuntajeTanto += 1;
+            this.rondaActual.SumaPuntajeTanto += 3;
+            //if (this.rondaActual.envido) this.rondaActual.SumaPuntajeTanto += 3;
+            //else this.rondaActual.SumaPuntajeTanto += 1;
 
             this.rondaActual.faltaEnvido = true;
             base.apretoBoton = true;

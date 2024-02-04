@@ -24,6 +24,10 @@ namespace Entidades
         private string estadoTruco; // no-truco-retruco-valeCuatro
         private string estadoEnvido; // no-envido-envidoEnvido-realEnvido-faltaEnvido
 
+        public bool truco;
+        public bool retruco;
+        public bool valeCuatro;
+
         public bool envido;
         public bool envidoEnvido;
         public bool realEnvido;
@@ -39,7 +43,11 @@ namespace Entidades
             get { return this.sumaPuntajeTanto; }
             set { this.sumaPuntajeTanto = value; }
         }
-        public string EstadoTruco { get { return this.estadoTruco; } }
+        public string EstadoTruco 
+        {
+            get { return this.estadoTruco; }
+            set { this.estadoTruco = value; }
+        }
         public string EstadoEnvido { get { return this.estadoEnvido; } }
         public Ronda(Jugador yo, JugadorIA rival)
         {
@@ -48,6 +56,10 @@ namespace Entidades
             this.realEnvido = false;
             this.faltaEnvido = false;
 
+            this.truco = false;
+            this.retruco = false;
+            this. valeCuatro = false;
+
             this.yo = yo;
             this.rival = rival;
 
@@ -55,6 +67,10 @@ namespace Entidades
         }
         public void ResetRonda()
         {
+            this.truco = false;
+            this.retruco = false;
+            this.valeCuatro = false;
+
             this.envido = false;
             this.envidoEnvido = false;
             this.realEnvido = false;
@@ -85,64 +101,6 @@ namespace Entidades
             }
         }
         #region Truco
-        public bool TrucoBoton(bool cantoYo, bool rival=false, Carta carta = null, Carta cartaYo = null)
-        {
-            bool retorno = false;
-            switch (this.estadoTruco)
-            {
-                case "no":
-                    if (this.rival.AceptaTruco("truco", this.yo, this.rival, cantoYo, carta))
-                    {
-                        retorno = true;
-                        this.sumaPuntaje = 2;
-                        this.estadoTruco = "truco";
- 
-                        if (rival == false) this.yo.cantoTruco = true;
-                        else this.rival.cantoTruco = true;
-                    }
-                    break;
-                case "truco":
-                    if (this.rival.AceptaTruco("retruco", this.yo, this.rival, cantoYo, carta))
-                    {
-                        retorno = true;
-                        this.sumaPuntaje = 3;
-                        this.estadoTruco = "retruco";
-                    }
-                    break;
-                case "retruco":
-                    if (this.rival.AceptaTruco("valeCuatro", this.yo, this.rival, cantoYo, carta))
-                    {
-                        retorno = true;
-                        this.sumaPuntaje = 4;
-                        this.estadoTruco = "valeCuatro";
-                    }
-                    break;
-                case "valeCuatro":
-                    break;
-            }
-
-            if (rival == true)
-            {
-                retorno = this.TrucoFinal(retorno, this.rival, this.yo, carta, cartaYo);
-            }
-
-            return retorno;
-        }
-
-        public bool TrucoFinal(bool estado, JugadorIA rival, Jugador yo, Carta carta, Carta cartaYo)
-        {
-            bool retorno = estado;
-
-            if (rival.CartasJugadas == 2 && yo.CartasJugadas == 3)
-            {
-                int puntajeYo = Jugador.AsignarPuntajeCarta(cartaYo);
-                int puntajeRival = Jugador.AsignarPuntajeCarta(carta);
-
-                if (puntajeRival > puntajeYo) retorno = true;
-            }
-            return retorno;
-        }
-
         public bool PuedeCantar(Jugador player)
         {
             bool retorno = false;
@@ -166,17 +124,6 @@ namespace Entidades
         #endregion
 
         #region Envido
-        private string CasoTanto(bool tantoAVerificar, string stringAsignado)//this.envido envido
-        {
-            string retorno = string.Empty;
-            if (tantoAVerificar == false)
-            {
-                retorno = stringAsignado;
-                tantoAVerificar = true;
-            }
-            else retorno = "quiero";
-            return retorno;
-        } // por algún motivo no me cambia el atributo real
         public string QueCantaTanto(Jugador rivalScreenshot)
         {
             string retorno = "noQuiero";
@@ -197,10 +144,8 @@ namespace Entidades
                         if (this.realEnvido == true || this.faltaEnvido == true) retorno = "noQuiero";
                         else retorno = "quiero";
                     }
-                    //retorno = this.CasoTanto(this.envido, "envido");
                     break;
                 case "realEnvido":
-                    //retorno = this.CasoTanto(this.realEnvido, "realEnvido");
                     if (this.realEnvido == false && this.faltaEnvido == false)
                     {
                         this.sumaPuntajeTanto += 3;
@@ -214,7 +159,6 @@ namespace Entidades
                     }
                     break;
                 case "faltaEnvido":
-                    //retorno = this.CasoTanto(this.faltaEnvido, "faltaEnvido");
                     if (this.faltaEnvido == false)
                     {
                         this.sumaPuntajeTanto += 3;
@@ -230,7 +174,6 @@ namespace Entidades
         {
             string retorno;
             int tanto = rival.PuntajeEnvidoNumerico();
-            tanto = 28; //hardcodeado para pruebas
 
             if (tanto <= 25) retorno = "noQuiero";
             else if (tanto <= 27) retorno = "envido";
@@ -264,8 +207,6 @@ namespace Entidades
             }
             return retorno;
         }
-
-   
         #endregion
     } // fin clase
 } // fin namespace

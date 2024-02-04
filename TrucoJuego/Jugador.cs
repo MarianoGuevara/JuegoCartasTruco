@@ -313,6 +313,5 @@ namespace Entidades
             return acumuladorPuntaje;
         }
         #endregion
-
     }
 }

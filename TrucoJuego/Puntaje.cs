@@ -105,6 +105,7 @@ namespace Entidades
             switch (ronda.SumaPuntajeTanto)
             {
                 case 2:
+                case 3:
                     ronda.SumaPuntajeTanto = 1;
                     break;
                 case 4:
