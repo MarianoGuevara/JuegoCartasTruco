@@ -175,9 +175,9 @@ namespace Entidades
             string retorno;
             int tanto = rival.PuntajeEnvidoNumerico();
 
-            if (tanto <= 25) retorno = "noQuiero";
-            else if (tanto <= 27) retorno = "envido";
-            else if (tanto <= 29) retorno = "realEnvido";
+            if (tanto < 27) retorno = "noQuiero";
+            else if (tanto == 28 || tanto == 27) retorno = "envido";
+            else if (tanto == 29 || tanto == 30) retorno = "realEnvido";
             else retorno = "faltaEnvido";
 
             string mentira = this.MentiraTanto(retorno);
@@ -191,7 +191,7 @@ namespace Entidades
             Random r = new Random();
 
             int randomNum = r.Next(1,11); // del 1 al 10
-            if (randomNum <= 3) // si el random es 1, multiplica mucho la apuesta. Si es 2 o 3,la sube 1 nivel
+            if (randomNum <= 2) // si el random es 1, multiplica mucho la apuesta. Si es 2 o 3,la sube 1 nivel
             {
                 if (rivalSituacion == "noQuiero")
                 {

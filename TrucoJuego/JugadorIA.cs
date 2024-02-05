@@ -201,6 +201,26 @@ namespace Entidades
             }
             return retorno;
         }
+        private string MentiraTruco(string rivalSituacion, Ronda ronda) // cambia el retorno en algunos casos para mentir
+        {
+            string retorno = rivalSituacion;
+            Random r = new Random();
+
+            int randomNum = r.Next(1, 11); // del 1 al 10
+            if (randomNum <= 3) // si el random es 1, multiplica mucho la apuesta. Si es 2 o 3,la sube 1 nivel
+            {
+                if (rivalSituacion == "noQuiero")
+                {
+                    if (ronda.truco)
+                    {
+                        if (ronda.retruco) if (ronda.valeCuatro == false) retorno = "valeCuatro";
+                        else retorno = "retruco";
+                    }
+                    else retorno = "truco";
+                }    
+            }
+            return retorno;
+        }
         private string situacionAJugar(int puntaje, Jugador yo, JugadorIA rival)
         {
             string situacion = "noQuiero";
@@ -235,7 +255,7 @@ namespace Entidades
                 int indiceNoNulo = this.IndiceNoNulo();
                 cartaRival = rival.cartas[indiceNoNulo];
                 aCantar = this.SituacionUltimaCarta(cartaRival, cartaYo, ronda);
-                aCantar = this.MentiraTruco(aCantar);
+                aCantar = this.MentiraTruco(aCantar, ronda);
             }
             else
             {
@@ -249,7 +269,7 @@ namespace Entidades
                             rival.cantoTruco = true;
                             aCantar = "truco";
                             ronda.EstadoTruco = "truco";
-                            ronda.SumaPuntaje = 3;
+                            ronda.SumaPuntaje = 2;
                         }
                         break;
                     case "retruco":
@@ -271,7 +291,6 @@ namespace Entidades
                                 ronda.EstadoTruco = "retruco";
                                 ronda.SumaPuntaje = 3;
                             }
-
                         }
                         break;
                     case "valeCuatro":
@@ -320,17 +339,20 @@ namespace Entidades
                     this.cantoTruco = true;
                     ronda.truco = true;
                     retorno = "truco";
+                    ronda.SumaPuntaje = 2;
                 }
                     
                 else if(ronda.truco && this.cantoTruco==false && ronda.retruco==false)
                 {
                     ronda.retruco = true;
                     retorno = "retruco";
+                    ronda.SumaPuntaje = 3;
                 }
                 else if (ronda.truco && this.cantoTruco && ronda.retruco)
                 {
                     ronda.valeCuatro = true;
                     retorno = "valeCuatro";
+                    ronda.SumaPuntaje = 4;
                 }
             }
             return retorno;

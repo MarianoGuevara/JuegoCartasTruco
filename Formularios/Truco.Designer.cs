@@ -52,6 +52,8 @@
             lblTruco.TabIndex = 31;
             lblTruco.Text = "TRUCO";
             lblTruco.Click += lblTruco_Click;
+            lblTruco.MouseEnter += Partida_MouseEnter;
+            lblTruco.MouseLeave += Partida_MouseLeave;
             // 
             // lblRetruco
             // 
@@ -64,6 +66,8 @@
             lblRetruco.TabIndex = 32;
             lblRetruco.Text = "RETRUCO";
             lblRetruco.Click += lblRetruco_Click;
+            lblRetruco.MouseEnter += Partida_MouseEnter;
+            lblRetruco.MouseLeave += Partida_MouseLeave;
             // 
             // lblValeCuatro
             // 
@@ -76,6 +80,8 @@
             lblValeCuatro.TabIndex = 33;
             lblValeCuatro.Text = "VALE CUATRO";
             lblValeCuatro.Click += lblValeCuatro_Click;
+            lblValeCuatro.MouseEnter += Partida_MouseEnter;
+            lblValeCuatro.MouseLeave += Partida_MouseLeave;
             // 
             // Truco
             // 

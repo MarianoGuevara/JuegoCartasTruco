@@ -39,7 +39,7 @@ namespace Formularios
         }
 
         [DebuggerStepThrough]
-        protected void Partida_MouseEnter(object sender, EventArgs e)
+        public void Partida_MouseEnter(object sender, EventArgs e)
         {
             if (sender is PictureBox pb) this.AnimacionCartas(pb, true);
             else if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl, true);

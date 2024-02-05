@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -36,15 +37,15 @@ namespace Formularios
         private void EnableBotonesTruco()
         {
             if (this.rondaActual.truco) this.lblTruco.Enabled = false;
-            if (this.rondaActual.retruco || this.rondaActual.truco==false) this.lblRetruco.Enabled = false;
-            if (this.rondaActual.valeCuatro || (this.rondaActual.truco == false|| this.rondaActual.retruco == false)) this.lblValeCuatro.Enabled = false;
+            if (this.rondaActual.retruco || this.rondaActual.truco == false) this.lblRetruco.Enabled = false;
+            if (this.rondaActual.valeCuatro || (this.rondaActual.truco == false || this.rondaActual.retruco == false)) this.lblValeCuatro.Enabled = false;
 
             if (this.yo.cantoTruco)
             {
                 this.lblRetruco.Enabled = false;
                 if (this.rondaActual.valeCuatro == false) this.lblValeCuatro.Enabled = true;
             }
-                
+
         }
         private void lblTruco_Click(object sender, EventArgs e)
         {

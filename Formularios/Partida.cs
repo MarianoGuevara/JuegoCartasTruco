@@ -459,7 +459,7 @@ namespace Formularios
                 if (retorno == "noQuiero")
                 {
                     mazo = true;
-                    this.rondaActual.SumaPuntaje -= 1;
+                    if (this.rondaActual.SumaPuntaje > 1) this.rondaActual.SumaPuntaje -= 1;
                     this.yo.Puntaje += this.rondaActual.SumaPuntaje;
                     this.ActualizarPuntajes();
                     this.IniciarRonda();
@@ -474,7 +474,8 @@ namespace Formularios
                     if (t.DialogResult == DialogResult.No)
                     {
                         mazo = true;
-                        this.rondaActual.SumaPuntaje -= 1;
+
+                        if(this.rondaActual.SumaPuntaje>1) this.rondaActual.SumaPuntaje -= 1;
                         this.rival.Puntaje += this.rondaActual.SumaPuntaje;
                         this.ActualizarPuntajes();
                         this.IniciarRonda();

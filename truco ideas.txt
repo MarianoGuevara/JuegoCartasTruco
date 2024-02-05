@@ -1,6 +1,10 @@
 COSAS RARAS/A MEJORAR
--> le digo no quiero a real, 3 puntos para el???
--> por truco me da 3 puntos
+. Hay situaciones irregulares raras (que reparte y termina la ronda cuando no tendría que hacerlo)
+  Son irregulares (frente a la misma situacion a veces suceden y a veces no) y no son comunes, 
+  por lo que me cuesta identificar como solucionarlos
+
 
 COSAS A AGREGAR
--> cambiar a privados algunos atributos y etc
+-> sonidos y efectos; musica
+-> cambiar a privados algunos atributos y ordenar
+
