@@ -21,9 +21,9 @@ namespace Formularios
         private string ganadorActual;
         private bool manoYo;
         private bool parda;
-        private bool habilitado = true;
+        //private bool habilitado = true;
 
-        private string turnoTanto;
+        private string turno;
 
         private Ronda rondaActual;
 
@@ -50,7 +50,9 @@ namespace Formularios
 
             this.ganadorActual = string.Empty;
             this.manoYo = true;
-            this.turnoTanto = "yo";
+
+            if (this.manoYo) this.turno = "yo";
+            else this.turno= "rival";
 
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
@@ -133,10 +135,6 @@ namespace Formularios
             this.lblTruco.Enabled = true;
             this.lblTruco.Text = "TRUCO";
 
-            this.manoYo = !this.manoYo;
-            if (this.manoYo) this.turnoTanto = "yo";
-            else this.turnoTanto = "rival";
-
             this.yo.PuntosRondaActual = 0;
             this.rival.PuntosRondaActual = 0;
             this.yo.CartasJugadas = 0;
@@ -159,80 +157,119 @@ namespace Formularios
             this.EventoComenzarJuego.Invoke();
             this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia 
 
+            this.manoYo = !this.manoYo;
+            if (this.manoYo) this.turno = "yo";
+            else this.turno = "rival";
+            this.MiTurno();
+
             if (this.manoYo == false && rival.CartasJugadas == 0)
             {
+                //this.ModificarEstadoBotones(true);
                 await Task.Delay(2000);
+                //this.MiTurno();
                 this.cartaRival = await this.JuegaRival(this.cartaYo);
             }
         }
-
         #endregion
 
         #region clicks cartas
-        private bool HabilitarClick()
+        private void MiTurno()
         {
-            bool juego = false;
-
-            if (this.manoYo == false)
+            if (this.turno == "yo") this.ModificarEstadoBotones();
+            else
             {
-                if (this.rival.CartasJugadas == 0) juego = false;
-                else if (this.habilitado) juego = true;
-            }
-            else if (this.habilitado) juego = true;
-
-            return juego;
+                this.ModificarEstadoBotones(true);
+                //MessageBox.Show("desactivando");
+            } 
         }
+        //private bool HabilitarClick()
+        //{
+        //    bool juego = false;
+
+        //    if (this.manoYo == false)
+        //    {
+        //        if (this.rival.CartasJugadas == 0) juego = false;
+        //        else if (this.habilitado) juego = true;
+        //    }
+        //    else if (this.habilitado) juego = true;
+
+        //    return juego;
+        //}
         private void pbCartaPropia1_Click(object sender, EventArgs e)
         {
-            bool juego = this.HabilitarClick();
-            if (juego) this.LogicaJuego(this.pbCartaPropia1);
+            //bool juego = this.HabilitarClick();
+            //if (juego)
+            //{
+            //    this.turno = "rival";
+            //    this.LogicaJuego(this.pbCartaPropia1);
+            //}
+            this.turno = "rival";
+            this.LogicaJuego(this.pbCartaPropia1);
         }
         private void pbCartaPropia2_Click(object sender, EventArgs e)
         {
-            bool juego = this.HabilitarClick();
-            if (juego) this.LogicaJuego(this.pbCartaPropia2);
+            //bool juego = this.HabilitarClick();
+            //if (juego)
+            //{
+                this.turno = "rival";
+
+                this.LogicaJuego(this.pbCartaPropia2);
+            //}
         }
         private void pbCartaPropia3_Click(object sender, EventArgs e)
         {
-            bool juego = this.HabilitarClick();
-            if (juego) this.LogicaJuego(this.pbCartaPropia3);
+            //bool juego = this.HabilitarClick();
+            //if (juego)
+            //{
+                this.turno = "rival";
+                this.LogicaJuego(this.pbCartaPropia3);
+            //}
         }
         #endregion
 
         #region Jugar cartas
         public async void LogicaJuego(PictureBox cartaAJugar)
         {
-            this.habilitado = false;
+            //this.ModificarEstadoBotones(true);
+            this.MiTurno();
+            //this.habilitado = false;
 
             if (this.manoYo)
             {
                 if (this.ganadorActual == "gano" || yo.CartasJugadas == 0)
                 {
-                    this.cartaYo = this.JuegoYo(cartaAJugar);
+                    this.cartaYo = await this.JuegoYo(cartaAJugar);
                     await Task.Delay(2000);
                     this.cartaRival = await this.JuegaRival(this.cartaYo);
                 }
-                else this.cartaYo = this.JuegoYo(cartaAJugar);
+                else this.cartaYo = await this.JuegoYo(cartaAJugar);
             }
             else
             {
-                if (this.ganadorActual == "perdio" || this.yo.CartasJugadas == 0) this.cartaYo = this.JuegoYo(cartaAJugar);
+                if (this.ganadorActual == "perdio" || this.yo.CartasJugadas == 0) this.cartaYo = await this.JuegoYo(cartaAJugar);
                 else
                 {
-                    this.cartaYo = this.JuegoYo(cartaAJugar);
+                    this.cartaYo = await this.JuegoYo(cartaAJugar);
                     if (this.parda == false)
                     {
                         await Task.Delay(2000);
                         this.cartaRival = await this.JuegaRival(this.cartaYo);
                     }
-
                 }
             }
 
-            // Hasta aca tengo 2 cartas en mesa, haya jugado yo primero o el rival.
             this.ganadorActual = Jugador.CartaVsCarta(this.cartaYo, this.cartaRival);
-            this.rondaActual.DarPuntoPorMano(this.ganadorActual);
+            if (this.ganadorActual == "empato")
+            {
+                if (this.manoYo) this.turno = "yo";
+                else this.turno = "rival";
+            }
+            else if (this.ganadorActual == "gano") this.turno = "yo";
+            else this.turno = "rival";
+            this.MiTurno();
 
+            this.rondaActual.DarPuntoPorMano(this.ganadorActual);
+            
             if (this.ganadorActual == "empato")
             {
                 if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
@@ -243,7 +280,6 @@ namespace Formularios
 
                     await Task.Delay(2000);
                     this.IniciarRonda();
-
                 }
                 else this.parda = true;
             }
@@ -270,6 +306,7 @@ namespace Formularios
             {
                 if (this.yo.PuntosRondaActual == 2 || this.rival.PuntosRondaActual == 2)
                 {
+                    this.ModificarEstadoBotones(true);
                     Puntaje.AnalizarPuntaje(this.yo, this.rival, this.rondaActual.SumaPuntaje);
                     await Task.Delay(2000);
                     this.IniciarRonda();
@@ -284,6 +321,7 @@ namespace Formularios
 
                     if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
                     {
+                        this.ModificarEstadoBotones(true);
                         await Task.Delay(2000);
                         this.IniciarRonda();
                     }
@@ -291,7 +329,7 @@ namespace Formularios
             }
 
             this.ActualizarPuntajes();
-            this.habilitado = true;
+            //this.ModificarEstadoBotones();
             this.ActualizarBotonEnvido();
         }
         private void ActualizarPuntajes()
@@ -315,7 +353,7 @@ namespace Formularios
                 this.pbPuntajeRival1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
             }
         }
-        private Carta JuegoYo(PictureBox cartaAJugar)
+        private async Task<Carta> JuegoYo(PictureBox cartaAJugar)
         {
             Carta cartaYo;
             int indiceCoincidencia = -1;
@@ -339,6 +377,7 @@ namespace Formularios
             this.yo.CartasJugadas += 1;
             cartaYo = this.yo.Cartas[indiceCoincidencia];
             this.cartaYoActual = cartaYo;
+            this.turno = "rival";
 
             return cartaYo;
         }
@@ -380,11 +419,16 @@ namespace Formularios
 
                 this.rival.CartasJugadas += 1;
 
+                this.turno = "yo";
+                this.MiTurno();
                 return cartaRival;
             }
-            else return null;
+            else
+            {
+                this.MiTurno();
+                return null;
+            }
         }
-
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
         {
             if (carta is not null) pbPanio.Image = Image.FromFile(carta.ToString());
@@ -409,12 +453,18 @@ namespace Formularios
             this.lblEnvido.Enabled = true;
             this.lblTruco.Enabled = true;
             this.lblMazo.Enabled = true;
+            this.pbCartaPropia1.Enabled = true;
+            this.pbCartaPropia2.Enabled = true;
+            this.pbCartaPropia3.Enabled = true;
 
             if (desactivar)
             {
                 this.lblEnvido.Enabled = false;
                 this.lblTruco.Enabled = false;
                 this.lblMazo.Enabled = false;
+                this.pbCartaPropia1.Enabled = false;
+                this.pbCartaPropia2.Enabled = false;
+                this.pbCartaPropia3.Enabled = false;
             }
         }
         #endregion
@@ -422,28 +472,21 @@ namespace Formularios
         #region Truco
         private async void lblTruco_Click(object sender, EventArgs e)
         {
-            this.ModificarEstadoBotones(true);
+            Truco t = new Truco(this.rondaActual, this.yo, true);
+            t.ShowDialog();
 
-            bool juego = this.HabilitarClick();
-            if (juego)
-            {
-                Truco t = new Truco(this.rondaActual, this.yo, true);
-                t.ShowDialog();
+            #region DialogResult significados
+            /* 
+            OK -> Quiero
+            No-> No Quiero
+            Abort -> Truco
+            Retry -> Retruco
+            Yes -> Vale Cuatro
+            Cancel -> Volver
+            */
+            #endregion
 
-                #region DialogResult significados
-                /* 
-                OK -> Quiero
-                No-> No Quiero
-                Abort -> Truco
-                Retry -> Retruco
-                Yes -> Vale Cuatro
-                Cancel -> Volver
-                */
-                #endregion
-
-                if (t.DialogResult != DialogResult.Cancel) await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
-            }
-            this.ModificarEstadoBotones();
+            if (t.DialogResult != DialogResult.Cancel) await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
         }
         private async Task<bool> RivalTruco(Carta carta, Carta cartaYo, bool cantoYo=false)
         {
@@ -466,7 +509,7 @@ namespace Formularios
                 }
                 else if (retorno != "quiero" && retorno != "")
                 {
-                    await Task.Delay(1000);
+                    await Task.Delay(500);
 
                     Truco t = new Truco(this.rondaActual, this.yo);
                     t.ShowDialog();
@@ -495,7 +538,6 @@ namespace Formularios
         {
             if (this.yo.CartasJugadas >= 1 && this.rival.CartasJugadas >= 1) this.lblEnvido.Enabled = false;
             else this.lblEnvido.Enabled = true;
-
         }
         private string DeDialogResultATanto(DialogResult result)
         {
@@ -508,34 +550,30 @@ namespace Formularios
         }
         private async void lblEnvido_Click(object sender, EventArgs e)
         {
-            bool juego = this.HabilitarClick();
-            if (juego) 
+            Tanto t = new Tanto(this.rondaActual, this.yo, true);
+            t.ShowDialog();
+            await Task.Delay(1000);
+
+            #region DialogResult significados
+            /* 
+            OK -> Quiero
+            No-> No Quiero
+            Abort -> Envido
+            Retry -> Real envido
+            Yes -> Falta envido
+            Cancel -> Volver
+            */
+            #endregion
+
+            if (t.DialogResult != DialogResult.Cancel)
             {
-                this.ModificarEstadoBotones(true);
-                Tanto t = new Tanto(this.rondaActual, this.yo, true);
-                t.ShowDialog();
-                await Task.Delay(1000);
-                #region DialogResult significados
-                /* 
-                OK -> Quiero
-                No-> No Quiero
-                Abort -> Envido
-                Retry -> Real envido
-                Yes -> Falta envido
-                Cancel -> Volver
-                */
-                #endregion
+                string aCantar = this.DeDialogResultATanto(t.DialogResult);
 
-                if (t.DialogResult != DialogResult.Cancel)
-                {
-                    string aCantar = this.DeDialogResultATanto(t.DialogResult);
-
-                    await this.RivalCantaTanto(this.rivalScreenshot, true);
-                }
-                else Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
-                this.ActualizarBotonEnvido();
-                this.ModificarEstadoBotones();
+                await this.RivalCantaTanto(this.rivalScreenshot, true);
             }
+            else Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
+
+            this.ActualizarBotonEnvido();
         }
 
         private async Task RivalCantaTanto(Jugador rivalScreenshot, bool cantoYo = false)
@@ -605,16 +643,10 @@ namespace Formularios
         private async void lblMazo_Click(object sender, EventArgs e)
         {
             this.ModificarEstadoBotones(true);
-            bool juego = this.HabilitarClick();
-            if (juego)
-            {
-                this.lblMazo.Enabled = false;
-                await Task.Delay(1000);
-                this.rival.Puntaje += 1;
-                this.ActualizarPuntajes();
-                this.IniciarRonda();
-            }
-            this.ModificarEstadoBotones();
+            await Task.Delay(1000);
+            this.rival.Puntaje += 1;
+            this.ActualizarPuntajes();
+            this.IniciarRonda();
         }
     }
 }

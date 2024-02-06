@@ -1,10 +1,7 @@
 COSAS RARAS/A MEJORAR
-. Hay situaciones irregulares raras (que reparte y termina la ronda cuando no tendría que hacerlo)
-  Son irregulares (frente a la misma situacion a veces suceden y a veces no) y no son comunes, 
-  por lo que me cuesta identificar como solucionarlos
+-> atributo turno; metodo MiTurno
 
 
 COSAS A AGREGAR
 -> sonidos y efectos; musica
 -> cambiar a privados algunos atributos y ordenar
-
