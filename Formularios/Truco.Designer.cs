@@ -91,8 +91,7 @@
             Controls.Add(lblValeCuatro);
             Controls.Add(lblRetruco);
             Controls.Add(lblTruco);
-            MaximizeBox = true;
-            MinimizeBox = true;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Truco";
             Text = "Truco";
             Controls.SetChildIndex(lblQuiero, 0);

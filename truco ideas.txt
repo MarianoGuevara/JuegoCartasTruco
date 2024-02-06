@@ -1,6 +1,6 @@
 COSAS RARAS/A MEJORAR
--> atributo turno; metodo MiTurno
-
+-> Tiempos a veces mas largos y a veces más cortos; ver delays aplicados
+-> Siguen situaciones irregulares... Por ej: mano él. gana 1 gano 2 y reparte de nuevo, no se por qué
 
 COSAS A AGREGAR
 -> sonidos y efectos; musica

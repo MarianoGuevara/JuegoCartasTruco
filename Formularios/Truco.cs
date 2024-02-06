@@ -36,16 +36,24 @@ namespace Formularios
         }
         private void EnableBotonesTruco()
         {
-            if (this.rondaActual.truco) this.lblTruco.Enabled = false;
-            if (this.rondaActual.retruco || this.rondaActual.truco == false) this.lblRetruco.Enabled = false;
-            if (this.rondaActual.valeCuatro || (this.rondaActual.truco == false || this.rondaActual.retruco == false)) this.lblValeCuatro.Enabled = false;
-
-            if (this.yo.cantoTruco)
+            if (this.yo.miTurnoTruco)
             {
-                this.lblRetruco.Enabled = false;
-                if (this.rondaActual.valeCuatro == false) this.lblValeCuatro.Enabled = true;
-            }
+                if (this.rondaActual.truco) this.lblTruco.Enabled = false;
+                if (this.rondaActual.retruco || this.rondaActual.truco == false) this.lblRetruco.Enabled = false;
+                if (this.rondaActual.valeCuatro || (this.rondaActual.truco == false || this.rondaActual.retruco == false)) this.lblValeCuatro.Enabled = false;
 
+                if (this.yo.cantoTruco)
+                {
+                    this.lblRetruco.Enabled = false;
+                    if (this.rondaActual.valeCuatro == false) this.lblValeCuatro.Enabled = true;
+                }
+            }
+            else
+            {
+                this.lblTruco.Enabled = false;
+                this.lblRetruco.Enabled = false;
+                this.lblValeCuatro.Enabled = false;
+            }
         }
         private void lblTruco_Click(object sender, EventArgs e)
         {

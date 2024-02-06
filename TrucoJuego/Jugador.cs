@@ -19,6 +19,8 @@ namespace Entidades
         public bool cantoTruco;
         public bool cantoEnvido;
         public bool cantoFalta;
+        public bool miTurnoTruco;
+        public bool miTurnoTanto;
 
         #region Propiedades
         public List<Carta> Cartas 
@@ -44,6 +46,8 @@ namespace Entidades
         #endregion
         public Jugador(Jugador? jugadorBis = null)
         {
+            this.miTurnoTruco = true;
+            this.miTurnoTanto = true;
             this.cantoFalta = false;
             this.cantoEnvido = false;
             this.cantoTruco = false;

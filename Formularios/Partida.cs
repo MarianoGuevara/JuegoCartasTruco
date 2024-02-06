@@ -164,9 +164,7 @@ namespace Formularios
 
             if (this.manoYo == false && rival.CartasJugadas == 0)
             {
-                //this.ModificarEstadoBotones(true);
                 await Task.Delay(2000);
-                //this.MiTurno();
                 this.cartaRival = await this.JuegaRival(this.cartaYo);
             }
         }
@@ -176,63 +174,29 @@ namespace Formularios
         private void MiTurno()
         {
             if (this.turno == "yo") this.ModificarEstadoBotones();
-            else
-            {
-                this.ModificarEstadoBotones(true);
-                //MessageBox.Show("desactivando");
-            } 
+            else this.ModificarEstadoBotones(true);
         }
-        //private bool HabilitarClick()
-        //{
-        //    bool juego = false;
-
-        //    if (this.manoYo == false)
-        //    {
-        //        if (this.rival.CartasJugadas == 0) juego = false;
-        //        else if (this.habilitado) juego = true;
-        //    }
-        //    else if (this.habilitado) juego = true;
-
-        //    return juego;
-        //}
         private void pbCartaPropia1_Click(object sender, EventArgs e)
         {
-            //bool juego = this.HabilitarClick();
-            //if (juego)
-            //{
-            //    this.turno = "rival";
-            //    this.LogicaJuego(this.pbCartaPropia1);
-            //}
             this.turno = "rival";
             this.LogicaJuego(this.pbCartaPropia1);
         }
         private void pbCartaPropia2_Click(object sender, EventArgs e)
         {
-            //bool juego = this.HabilitarClick();
-            //if (juego)
-            //{
-                this.turno = "rival";
-
-                this.LogicaJuego(this.pbCartaPropia2);
-            //}
+            this.turno = "rival";
+            this.LogicaJuego(this.pbCartaPropia2);
         }
         private void pbCartaPropia3_Click(object sender, EventArgs e)
         {
-            //bool juego = this.HabilitarClick();
-            //if (juego)
-            //{
-                this.turno = "rival";
-                this.LogicaJuego(this.pbCartaPropia3);
-            //}
+            this.turno = "rival";
+            this.LogicaJuego(this.pbCartaPropia3);
         }
         #endregion
 
         #region Jugar cartas
         public async void LogicaJuego(PictureBox cartaAJugar)
         {
-            //this.ModificarEstadoBotones(true);
             this.MiTurno();
-            //this.habilitado = false;
 
             if (this.manoYo)
             {
@@ -274,7 +238,6 @@ namespace Formularios
             {
                 if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
                 {
-
                     if (this.rival.PuntosRondaActual > 0) Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
                     else Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje); ;
 
@@ -329,8 +292,7 @@ namespace Formularios
             }
 
             this.ActualizarPuntajes();
-            //this.ModificarEstadoBotones();
-            this.ActualizarBotonEnvido();
+            this.MiTurno();
         }
         private void ActualizarPuntajes()
         {
@@ -420,12 +382,14 @@ namespace Formularios
                 this.rival.CartasJugadas += 1;
 
                 this.turno = "yo";
-                this.MiTurno();
+                if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
+                else this.MiTurno();
                 return cartaRival;
             }
             else
             {
-                this.MiTurno();
+                if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
+                else this.MiTurno();
                 return null;
             }
         }
@@ -472,6 +436,7 @@ namespace Formularios
         #region Truco
         private async void lblTruco_Click(object sender, EventArgs e)
         {
+            this.ModificarEstadoBotones(true);
             Truco t = new Truco(this.rondaActual, this.yo, true);
             t.ShowDialog();
 
@@ -487,6 +452,7 @@ namespace Formularios
             #endregion
 
             if (t.DialogResult != DialogResult.Cancel) await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
+            this.MiTurno();
         }
         private async Task<bool> RivalTruco(Carta carta, Carta cartaYo, bool cantoYo=false)
         {
@@ -509,6 +475,7 @@ namespace Formularios
                 }
                 else if (retorno != "quiero" && retorno != "")
                 {
+                    this.yo.miTurnoTruco = true;
                     await Task.Delay(500);
 
                     Truco t = new Truco(this.rondaActual, this.yo);
@@ -525,20 +492,18 @@ namespace Formularios
                     }
                     else if (t.DialogResult != DialogResult.OK)
                     {
+                        this.yo.miTurnoTruco = false;
                         await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
                     }
+                    else this.yo.miTurnoTruco = true;
                 }
+                else this.yo.miTurnoTruco = false;
             }
             return mazo;
         }
         #endregion
 
         #region Envido
-        private void ActualizarBotonEnvido()
-        {
-            if (this.yo.CartasJugadas >= 1 && this.rival.CartasJugadas >= 1) this.lblEnvido.Enabled = false;
-            else this.lblEnvido.Enabled = true;
-        }
         private string DeDialogResultATanto(DialogResult result)
         {
             string tanto = string.Empty;
@@ -550,9 +515,9 @@ namespace Formularios
         }
         private async void lblEnvido_Click(object sender, EventArgs e)
         {
+            this.ModificarEstadoBotones(true);
             Tanto t = new Tanto(this.rondaActual, this.yo, true);
             t.ShowDialog();
-            await Task.Delay(1000);
 
             #region DialogResult significados
             /* 
@@ -567,23 +532,23 @@ namespace Formularios
 
             if (t.DialogResult != DialogResult.Cancel)
             {
+                this.yo.miTurnoTanto = false;
                 string aCantar = this.DeDialogResultATanto(t.DialogResult);
 
                 await this.RivalCantaTanto(this.rivalScreenshot, true);
             }
-            else Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
+            else if (t.DialogResult == DialogResult.No) Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
 
-            this.ActualizarBotonEnvido();
+            this.MiTurno();
         }
-
-        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool cantoYo = false)
+        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool cantoYo = false, bool delay=false)
         {
             string retorno = this.rondaActual.QueCantaTanto(rivalScreenshot);
 
             if ((retorno == "noQuiero" || retorno == "quiero") && cantoYo == false) { }
             else
             {
-                await Task.Delay(1000);
+                //await Task.Delay(1000);
                 await this.DialogoRival($"../../../../media/dialogos/{retorno}.jpg");
 
                 if (retorno == "noQuiero")
@@ -601,16 +566,22 @@ namespace Formularios
                 }
                 else
                 {
+                    this.yo.miTurnoTanto = true;
                     Tanto t = new Tanto(this.rondaActual, this.yo); ;
                     t.ShowDialog();
                     await Task.Delay(1000);                    
 
                     if (t.DialogResult == DialogResult.No)
                     {
+                        this.yo.miTurnoTanto = false;
                         Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
                         this.ActualizarPuntajes();
                     }
-                    else if (t.DialogResult == DialogResult.OK) await this.LuchaTanto();
+                    else if (t.DialogResult == DialogResult.OK)
+                    {
+                        this.yo.miTurnoTanto = false;
+                        await this.LuchaTanto();
+                    }
                     else await this.RivalCantaTanto(this.rivalScreenshot, true);
                 }
             }

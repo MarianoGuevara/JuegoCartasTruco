@@ -87,6 +87,9 @@ namespace Entidades
             this.sumaPuntajeTanto = 0;
             this.estadoTruco = "no";
             this.estadoEnvido = "no";
+
+            this.yo.miTurnoTruco = true;
+            this.yo.miTurnoTanto = true;
         }
         public void DarPuntoPorMano(string ganadorActual)
         {

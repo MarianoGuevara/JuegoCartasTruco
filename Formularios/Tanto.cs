@@ -36,14 +36,23 @@ namespace Formularios
         }
         private void EnableBotonesTanto()
         {
-            if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
-            if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
-            if (this.rondaActual.realEnvido == true)
+            if (this.yo.miTurnoTanto)
             {
-                this.lblEnvido.Enabled = false;
-                this.lblReal.Enabled = false;
+                if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
+                if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
+                if (this.rondaActual.realEnvido == true)
+                {
+                    this.lblEnvido.Enabled = false;
+                    this.lblReal.Enabled = false;
+                }
+                if (this.rondaActual.faltaEnvido == true)
+                {
+                    this.lblFalta.Enabled = false;
+                    this.lblEnvido.Enabled = false;
+                    this.lblReal.Enabled = false;
+                }
             }
-            if (this.rondaActual.faltaEnvido == true)
+            else
             {
                 this.lblFalta.Enabled = false;
                 this.lblEnvido.Enabled = false;

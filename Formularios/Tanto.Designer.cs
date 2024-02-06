@@ -92,6 +92,7 @@
             Controls.Add(lblFalta);
             Controls.Add(lblReal);
             Controls.Add(lblEnvido);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Tanto";
             Text = "Tanto";
             Controls.SetChildIndex(lblQuiero, 0);
