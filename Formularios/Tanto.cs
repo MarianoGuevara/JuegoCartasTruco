@@ -15,8 +15,9 @@ namespace Formularios
     {
         private Ronda rondaActual;
         private Jugador yo;
+        private Jugador rival;
         private bool abriYo;
-        public Tanto(Ronda rondaActual, Jugador yo)
+        public Tanto(Ronda rondaActual, Jugador yo, Jugador rival)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -24,10 +25,11 @@ namespace Formularios
             base.apretoBoton = false;
             this.rondaActual = rondaActual;
             this.yo = yo;
+            this.rival = rival;
 
             this.EnableBotonesTanto();
         }
-        public Tanto(Ronda rondaActual, Jugador yo, bool abroYo) : this(rondaActual, yo)
+        public Tanto(Ronda rondaActual, Jugador yo, Jugador rival, bool abroYo) : this(rondaActual, yo, rival)
         {
             this.abriYo = true;
             base.lblQuiero.Enabled = false;
@@ -36,16 +38,25 @@ namespace Formularios
         }
         private void EnableBotonesTanto()
         {
-            if (this.yo.miTurnoTanto)
+            if (this.yo.PuntosRondaActual == 0 && this.rival.PuntosRondaActual==0)
             {
-                if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
-                if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
-                if (this.rondaActual.realEnvido == true)
+                if (this.yo.miTurnoTanto)
                 {
-                    this.lblEnvido.Enabled = false;
-                    this.lblReal.Enabled = false;
+                    if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
+                    if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
+                    if (this.rondaActual.realEnvido == true)
+                    {
+                        this.lblEnvido.Enabled = false;
+                        this.lblReal.Enabled = false;
+                    }
+                    if (this.rondaActual.faltaEnvido == true)
+                    {
+                        this.lblFalta.Enabled = false;
+                        this.lblEnvido.Enabled = false;
+                        this.lblReal.Enabled = false;
+                    }
                 }
-                if (this.rondaActual.faltaEnvido == true)
+                else
                 {
                     this.lblFalta.Enabled = false;
                     this.lblEnvido.Enabled = false;

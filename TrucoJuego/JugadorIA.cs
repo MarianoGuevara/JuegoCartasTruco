@@ -228,10 +228,10 @@ namespace Entidades
             switch (this.cartasJugadas)
             {
                 case 0:
-                    situacion = this.ValorMinimo(puntaje, 23, 26, 29, yo, rival);
+                    situacion = this.ValorMinimo(puntaje, 25, 27, 30, yo, rival);
                     break;
                 case 1:
-                    situacion = this.ValorMinimo(puntaje, 18, 21, 24, yo, rival);
+                    situacion = this.ValorMinimo(puntaje, 20, 22, 24, yo, rival);
                     break;
                 case 2:
                     situacion = this.ValorMinimo(puntaje, 9, 10, 11, yo, rival);
