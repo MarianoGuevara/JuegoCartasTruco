@@ -351,8 +351,8 @@ namespace Formularios
                     indice = this.rival.JugarInteligente(null);
                 }
 
-                /*cartaRival = this.rivalScreenshot.Cartas[indice];*/ // pq si le pongo solo rival, se pone null tmb pq es lo mismo en memoria
-                cartaRival = this.rival.Cartas[indice];
+                cartaRival = this.rivalScreenshot.Cartas[indice]; // pq si le pongo solo rival, se pone null tmb pq es lo mismo en memoria
+                //cartaRival = this.rival.Cartas[indice];
                 this.rival.Cartas[indice] = null; // lo hago nulo porque tiene que jugar inteligente
                                                   // y eso lo hace viendo su lista de cartas, entonces 
                                                   // la tengo que poner nula una vez que la usé
@@ -437,7 +437,7 @@ namespace Formularios
             if (t.DialogResult != DialogResult.Cancel) await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
             this.MiTurno();
         }
-        private async Task<bool> RivalTruco(Carta carta, Carta cartaYo, bool cantoYo=false)
+        private async Task<bool> RivalTruco(Carta carta, Carta cartaYo, bool cantoYo=false, bool iniciarRonda=false)
         {
             bool mazo = false;
             string retorno = this.rival.QueCantaTruco(this.rondaActual, this.yo, this.rival, carta,cartaYo);
@@ -445,6 +445,7 @@ namespace Formularios
             if ((retorno == "noQuiero" || retorno == "quiero") && cantoYo == false) { }
             else
             {
+                this.ModificarEstadoBotones(true);
                 await this.DialogoRival($"../../../../media/dialogos/{retorno}.jpg");
 
                 if (retorno == "noQuiero")
@@ -452,7 +453,6 @@ namespace Formularios
                     mazo = true;
                     if (this.rondaActual.SumaPuntaje > 1) this.rondaActual.SumaPuntaje -= 1;
                     this.yo.Puntaje += this.rondaActual.SumaPuntaje;
-                    this.ActualizarPuntajes();
                     await this.IniciarRonda();
                 }
                 else if (retorno != "quiero" && retorno != "")
@@ -469,11 +469,11 @@ namespace Formularios
 
                         if(this.rondaActual.SumaPuntaje>1) this.rondaActual.SumaPuntaje -= 1;
                         this.rival.Puntaje += this.rondaActual.SumaPuntaje;
-                        this.ActualizarPuntajes();
                         await this.IniciarRonda();
                     }
                     else if (t.DialogResult != DialogResult.OK)
                     {
+                        this.MiTurno();
                         this.yo.miTurnoTruco = false;
                         await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
                     }

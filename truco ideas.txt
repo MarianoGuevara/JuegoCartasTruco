@@ -5,3 +5,6 @@ COSAS RARAS/A MEJORAR
 COSAS A AGREGAR
 -> sonidos y efectos; musica
 -> cambiar a privados algunos atributos y ordenar
+
+
+gana 1 -> truco -> no quiero 
