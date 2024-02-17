@@ -50,7 +50,7 @@ namespace Formularios
 
             this.ganadorActual = string.Empty;
             this.manoYo = true;
-
+            
             if (this.manoYo) this.turno = "yo";
             else this.turno= "rival";
 
@@ -172,18 +172,27 @@ namespace Formularios
         }
         private void pbCartaPropia1_Click(object sender, EventArgs e)
         {
-            this.turno = "rival";
-            this.LogicaJuego(this.pbCartaPropia1);
+            if (this.pbCartaPropia1.Tag != null)
+            {
+                this.turno = "rival";
+                this.LogicaJuego(this.pbCartaPropia1);
+            }
         }
         private void pbCartaPropia2_Click(object sender, EventArgs e)
         {
-            this.turno = "rival";
-            this.LogicaJuego(this.pbCartaPropia2);
+            if (this.pbCartaPropia2.Tag != null)
+            {
+                this.turno = "rival";
+                this.LogicaJuego(this.pbCartaPropia2);
+            }
         }
         private void pbCartaPropia3_Click(object sender, EventArgs e)
         {
-            this.turno = "rival";
-            this.LogicaJuego(this.pbCartaPropia3);
+            if (this.pbCartaPropia3.Tag != null)
+            {
+                this.turno = "rival";
+                this.LogicaJuego(this.pbCartaPropia3);
+            }
         }
         #endregion
 

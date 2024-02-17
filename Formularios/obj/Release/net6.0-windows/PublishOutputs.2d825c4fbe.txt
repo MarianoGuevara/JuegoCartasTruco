@@ -1,0 +1,7 @@
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Truco.exe
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Truco.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Truco.deps.json
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Truco.runtimeconfig.json
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Truco.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Entidades.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\bin\Release\net6.0-windows\app.publish\Entidades.pdb

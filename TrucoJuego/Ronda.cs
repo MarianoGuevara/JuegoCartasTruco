@@ -83,6 +83,7 @@ namespace Entidades
             this.rival.cantoTruco = false;
             this.yo.cantoEnvido = false;
             this.rival.cantoEnvido = false;
+
             this.sumaPuntaje = 1;
             this.sumaPuntajeTanto = 0;
             this.estadoTruco = "no";

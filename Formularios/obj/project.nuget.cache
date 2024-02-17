@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "xT2Nq0q9OF3zr3pUbCf1/SKi4qWurakuf5pe0wyxHofDqC91R0v+n1gBeM9XGUksV5mq58O6tC0KE4uQBJo3FQ==",
+  "dgSpecHash": "gCKif8t3YrAwiUlan2Cq8OzrG36h097LVDaKzT0C9pKbT5HwsXfNjKikc5bggNHIh96qnuH93ib4dM3TGlRQwQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mariano\\Desktop\\TrucoJuego\\Formularios\\Formularios.csproj",
+  "projectFilePath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Formularios.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.26\\microsoft.windowsdesktop.app.ref.6.0.26.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.26\\microsoft.netcore.app.ref.6.0.26.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.26\\microsoft.aspnetcore.app.ref.6.0.26.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.26\\microsoft.netcore.app.host.win-x64.6.0.26.nupkg.sha512"
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.27\\microsoft.netcore.app.host.win-x64.6.0.27.nupkg.sha512"
   ],
   "logs": []
 }

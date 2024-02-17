@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mariano\\Desktop\\TrucoJuego\\Pruebas\\Pruebas.csproj",
+      "projectUniqueName": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Pruebas\\Pruebas.csproj",
       "projectName": "Pruebas",
-      "projectPath": "C:\\Users\\Mariano\\Desktop\\TrucoJuego\\Pruebas\\Pruebas.csproj",
+      "projectPath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Pruebas\\Pruebas.csproj",
       "packagesPath": "C:\\Users\\Mariano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mariano\\Desktop\\TrucoJuego\\Pruebas\\obj\\",
+      "outputPath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Pruebas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Mariano\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Mariano\\Desktop\\TrucoJuego\\TrucoJuego\\Entidades.csproj": {
-              "projectPath": "C:\\Users\\Mariano\\Desktop\\TrucoJuego\\TrucoJuego\\Entidades.csproj"
+            "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\Entidades.csproj": {
+              "projectPath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\Entidades.csproj"
             }
           }
         }
@@ -82,19 +82,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.26, 6.0.26]"
+            "version": "[6.0.27, 6.0.27]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.26, 6.0.26]"
+            "version": "[6.0.27, 6.0.27]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.26, 6.0.26]"
+            "version": "[6.0.27, 6.0.27]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.26, 6.0.26]"
+            "version": "[6.0.27, 6.0.27]"
           }
         ],
         "frameworkReferences": {
@@ -102,7 +102,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.406\\RuntimeIdentifierGraph.json"
       }
     }
   }

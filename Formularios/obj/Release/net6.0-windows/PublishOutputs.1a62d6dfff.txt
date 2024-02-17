@@ -1,0 +1,7 @@
+C:\Users\Mariano\Desktop\Jurgo\Truco.exe
+C:\Users\Mariano\Desktop\Jurgo\Truco.dll
+C:\Users\Mariano\Desktop\Jurgo\Truco.deps.json
+C:\Users\Mariano\Desktop\Jurgo\Truco.runtimeconfig.json
+C:\Users\Mariano\Desktop\Jurgo\Truco.pdb
+C:\Users\Mariano\Desktop\Jurgo\Entidades.dll
+C:\Users\Mariano\Desktop\Jurgo\Entidades.pdb

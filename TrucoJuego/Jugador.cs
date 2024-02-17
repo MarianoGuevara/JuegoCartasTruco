@@ -52,8 +52,7 @@ namespace Entidades
             this.cantoEnvido = false;
             this.cantoTruco = false;
             this.puntaje = 0;
-            if (jugadorBis is null) this.ComenzarJugador();
-            else this.ComenzarJugador(jugadorBis);
+            this.cartas = new List<Carta>();
         }
 
         public void ComenzarJugador()
