@@ -24,6 +24,7 @@ namespace Formularios
         //private bool habilitado = true;
 
         private string turno;
+        private bool mazo;
 
         private Ronda rondaActual;
 
@@ -34,6 +35,7 @@ namespace Formularios
         public Partida()
         {
             InitializeComponent();
+            this.mazo = false;
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
@@ -160,6 +162,7 @@ namespace Formularios
             else this.turno = "rival";
             this.MiTurno();
 
+            this.mazo = false;
             if (this.manoYo == false && rival.CartasJugadas == 0) this.cartaRival = await this.JuegaRival(this.cartaYo);
         }
         #endregion
@@ -220,65 +223,68 @@ namespace Formularios
                 }
             }
 
-            this.ganadorActual = Jugador.CartaVsCarta(this.cartaYo, this.cartaRival);
-            if (this.ganadorActual == "empato")
+            if (!this.mazo)
             {
-                if (this.manoYo) this.turno = "yo";
+                this.ganadorActual = Jugador.CartaVsCarta(this.cartaYo, this.cartaRival);
+                if (this.ganadorActual == "empato")
+                {
+                    if (this.manoYo) this.turno = "yo";
+                    else this.turno = "rival";
+                }
+                else if (this.ganadorActual == "gano") this.turno = "yo";
                 else this.turno = "rival";
-            }
-            else if (this.ganadorActual == "gano") this.turno = "yo";
-            else this.turno = "rival";
-            this.MiTurno();
+                this.MiTurno();
 
-            this.rondaActual.DarPuntoPorMano(this.ganadorActual);
-            
-            if (this.ganadorActual == "empato")
-            {
-                if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
+                this.rondaActual.DarPuntoPorMano(this.ganadorActual);
+
+                if (this.ganadorActual == "empato")
                 {
-                    if (this.rival.PuntosRondaActual > 0) Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
-                    else Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje); ;
+                    if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
+                    {
+                        if (this.rival.PuntosRondaActual > 0) Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
+                        else Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje); ;
 
-                    await this.IniciarRonda();
-                }
-                else this.parda = true;
-            }
-
-            if (this.parda)
-            {
-                if (this.ganadorActual == "gano") Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje);
-                else if (this.ganadorActual == "perdio") Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
-
-                if (this.ganadorActual != "empato")
-                {
-                    this.parda = false;
-                    await this.IniciarRonda();
+                        await this.IniciarRonda();
+                    }
+                    else this.parda = true;
                 }
 
-                if (this.manoYo == false)
+                if (this.parda)
                 {
-                    this.cartaRival = await this.JuegaRival(this.cartaYo);
-                }
-            }
-            else
-            {
-                if (this.yo.PuntosRondaActual == 2 || this.rival.PuntosRondaActual == 2)
-                {
-                    this.ModificarEstadoBotones(true);
-                    Puntaje.AnalizarPuntaje(this.yo, this.rival, this.rondaActual.SumaPuntaje);
-                    await this.IniciarRonda();
-                }
-                else
-                {
-                    if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3)
+                    if (this.ganadorActual == "gano") Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje);
+                    else if (this.ganadorActual == "perdio") Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
+
+                    if (this.ganadorActual != "empato")
+                    {
+                        this.parda = false;
+                        await this.IniciarRonda();
+                    }
+
+                    if (this.manoYo == false)
                     {
                         this.cartaRival = await this.JuegaRival(this.cartaYo);
                     }
-
-                    if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
+                }
+                else
+                {
+                    if (this.yo.PuntosRondaActual == 2 || this.rival.PuntosRondaActual == 2)
                     {
                         this.ModificarEstadoBotones(true);
+                        Puntaje.AnalizarPuntaje(this.yo, this.rival, this.rondaActual.SumaPuntaje);
                         await this.IniciarRonda();
+                    }
+                    else
+                    {
+                        if (this.ganadorActual == "perdio" && this.rival.CartasJugadas != 3)
+                        {
+                            this.cartaRival = await this.JuegaRival(this.cartaYo);
+                        }
+
+                        if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
+                        {
+                            this.ModificarEstadoBotones(true);
+                            await this.IniciarRonda();
+                        }
                     }
                 }
             }
@@ -349,6 +355,7 @@ namespace Formularios
                 mazo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
             }
             await Task.Delay(2000);
+            this.mazo = mazo;
             if (mazo == false)
             {
                 int indice;
@@ -557,7 +564,7 @@ namespace Formularios
                 else
                 {
                     this.yo.miTurnoTanto = true;
-                    Tanto t = new Tanto(this.rondaActual, this.yo, this.rival); ;
+                    Tanto t = new Tanto(this.rondaActual, this.yo, this.rival);
                     t.ShowDialog();
 
                     if (t.DialogResult == DialogResult.No)

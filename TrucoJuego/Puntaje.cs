@@ -121,7 +121,7 @@ namespace Entidades
                     break;
             }
             
-            if (player.Puntaje + ronda.SumaPuntajeTanto > 30)
+            if ((player.Puntaje + ronda.SumaPuntajeTanto) > 30)
                 player.Puntaje = 30;
             else
                 player.Puntaje += ronda.SumaPuntajeTanto;            
