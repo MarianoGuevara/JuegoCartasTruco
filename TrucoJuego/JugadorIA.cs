@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TrucoJuego;
 
@@ -250,13 +251,20 @@ namespace Entidades
             aCantar = this.situacionAJugar(puntajeFinal, yo, rival);
             aCantar = this.MentiraTruco(aCantar);
 
-            if (yo.CartasJugadas == 3 && rival.cartasJugadas == 2)
+            if (yo.CartasJugadas == 3 && rival.cartasJugadas == 2 && cartaYo != null)
             {
                 int indiceNoNulo = this.IndiceNoNulo();
                 cartaRival = rival.cartas[indiceNoNulo];
                 aCantar = this.SituacionUltimaCarta(cartaRival, cartaYo, ronda);
                 aCantar = this.MentiraTruco(aCantar, ronda);
             }
+
+            if (!ronda.truco && cartaYo != null &&
+                Regex.Match(cartaYo.CartaActual, "4").ToString() != string.Empty)
+            {
+                aCantar = "noQuiero";
+            }
+
             else
             {
                 //aCantar = "truco"; //hardcodeado para pruebas

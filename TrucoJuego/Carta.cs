@@ -8,13 +8,15 @@ namespace TrucoJuego
         private string cartaActual;
 
         #region Propiedades
-        public string CartaActual { get { return this.cartaActual; } }
+        public string CartaActual 
+        { 
+            get { return this.cartaActual; } 
+            set { this.cartaActual = value;}
+        }
         #endregion
-
         static Carta()
         {
             Carta.listaImagenes = new List<string>();
-            //listaImagenes.Add("../../../../media/cartas/REVERSO.png");
             listaImagenes.Add("../../../../media/cartas/1 BASTO.png");
             listaImagenes.Add("../../../../media/cartas/1 ESPADA.png");
             listaImagenes.Add("../../../../media/cartas/1 COPA.png");

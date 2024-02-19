@@ -351,7 +351,8 @@ namespace Formularios
 
             if (((this.rival.CartasJugadas == 1 && this.yo.CartasJugadas == 0) || 
                 (this.rival.CartasJugadas == 0 && (this.yo.CartasJugadas == 1 || this.yo.CartasJugadas == 0))) &&
-                (this.rondaActual.envido == false && this.rondaActual.realEnvido == false) && this.rondaActual.faltaEnvido == false) await this.RivalCantaTanto(this.rivalScreenshot);
+                (this.rondaActual.envido == false && this.rondaActual.realEnvido == false) && this.rondaActual.faltaEnvido == false &&
+                (!this.rondaActual.truco && !this.rondaActual.retruco && !this.rondaActual.valeCuatro)) await this.RivalCantaTanto(this.rivalScreenshot);
 
             if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
             {
@@ -461,6 +462,10 @@ namespace Formularios
             bool mazo = false;
             string retorno = this.rival.QueCantaTruco(this.rondaActual, this.yo, this.rival, carta,cartaYo);
 
+            if (this.yo.Puntaje == 29 && retorno == "noQuiero") retorno = "quiero";
+            else if (this.yo.Puntaje == 28 && this.rondaActual.truco && retorno == "noQuiero") retorno = "quiero";
+            else if (this.yo.Puntaje == 27 && (this.rondaActual.truco && this.rondaActual.retruco) && retorno == "noQuiero") retorno = "quiero";
+
             if ((retorno == "noQuiero" || retorno == "quiero") && cantoYo == false) { }
             else
             {
@@ -542,7 +547,7 @@ namespace Formularios
 
             this.MiTurno();
         }
-        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool cantoYo = false, bool delay=false)
+        private async Task RivalCantaTanto(Jugador rivalScreenshot, bool cantoYo = false)
         {
             string retorno = this.rondaActual.QueCantaTanto(rivalScreenshot);
 
@@ -562,7 +567,7 @@ namespace Formularios
                 else if (retorno == "quiero")
                 {
                     if (this.rondaActual.faltaEnvido == true) this.rondaActual.SumaPuntajeTanto = 10;
-                    await this.LuchaTanto();
+                    await this.LuchaTanto(true);
                 }
                 else
                 {
@@ -585,7 +590,7 @@ namespace Formularios
                 }
             }
         }
-        private async Task LuchaTanto()
+        private async Task LuchaTanto(bool cantoYo=false)
         {
             int tantoYo = this.yo.PuntajeEnvidoNumerico();
             int tantoRival = this.rival.PuntajeEnvidoNumerico();
@@ -603,10 +608,19 @@ namespace Formularios
             if (this.rondaActual.SumaPuntajeTanto == 10) Puntaje.FaltaEnvido(this.rondaActual, this.yo, this.rival, ganador);
             else Puntaje.SumarPuntajesTanto(ganador, this.yo, this.rival, this.rondaActual);
 
-            await Task.Delay(1500);
-            ResultadoTanto r = new ResultadoTanto(ganador, tantoYo, tantoRival);
-            r.ShowDialog();
-            await Task.Delay(1000);
+
+            if (cantoYo && ganador == "yo")
+            {
+                await this.DialogoRival("../../../../media/dialogos/sonBuenas.jpg");
+            }
+            else
+            {
+                await Task.Delay(1500);
+                ResultadoTanto r = new ResultadoTanto(ganador, tantoYo, tantoRival);
+                r.ShowDialog();
+                await Task.Delay(1000);
+            }
+            
             this.ActualizarPuntajes();
         }
         #endregion

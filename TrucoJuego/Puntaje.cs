@@ -110,8 +110,10 @@ namespace Entidades
                     break;
                 case 4:
                 case 5:
-                case 6:
                     ronda.SumaPuntajeTanto = 2;
+                    break;
+                case 6:
+                    ronda.SumaPuntajeTanto = 3;
                     break;
                 case 7:
                     ronda.SumaPuntajeTanto = 4;

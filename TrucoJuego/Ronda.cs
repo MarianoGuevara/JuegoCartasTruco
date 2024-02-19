@@ -133,6 +133,8 @@ namespace Entidades
             string retorno = "noQuiero";
             string casoRival = this.RivalAceptaEnvido(rivalScreenshot);
 
+            if (this.yo.Puntaje == 29 && casoRival == "noQuiero") casoRival = "quiero";
+
             switch (casoRival)
             {
                 case "envido":
