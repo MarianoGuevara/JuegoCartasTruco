@@ -16,8 +16,9 @@ namespace Formularios
         private Ronda rondaActual;
         private Jugador yo;
         private Jugador rival;
+        private bool manoYo;
         private bool abriYo;
-        public Tanto(Ronda rondaActual, Jugador yo, Jugador rival)
+        public Tanto(Ronda rondaActual, Jugador yo, Jugador rival, bool manoYo)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -26,10 +27,11 @@ namespace Formularios
             this.rondaActual = rondaActual;
             this.yo = yo;
             this.rival = rival;
+            this.manoYo = manoYo;
 
             this.EnableBotonesTanto();
         }
-        public Tanto(Ronda rondaActual, Jugador yo, Jugador rival, bool abroYo) : this(rondaActual, yo, rival)
+        public Tanto(Ronda rondaActual, Jugador yo, Jugador rival, bool abroYo, bool manoYo) : this(rondaActual, yo, rival, manoYo)
         {
             this.abriYo = true;
             base.lblQuiero.Enabled = false;
@@ -38,25 +40,39 @@ namespace Formularios
         }
         private void EnableBotonesTanto()
         {
-            if (this.yo.PuntosRondaActual == 0 && this.rival.PuntosRondaActual==0)
+            if (this.manoYo) 
             {
-                if (this.yo.miTurnoTanto)
-                {
-                    if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
-                    if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
-                    if (this.rondaActual.realEnvido == true)
-                    {
-                        this.lblEnvido.Enabled = false;
-                        this.lblReal.Enabled = false;
-                    }
-                    if (this.rondaActual.faltaEnvido == true)
-                    {
-                        this.lblFalta.Enabled = false;
-                        this.lblEnvido.Enabled = false;
-                        this.lblReal.Enabled = false;
-                    }
-                }
+                if (this.yo.CartasJugadas == 0 && this.rival.CartasJugadas == 0) this.ModificarBotonesTanto();
                 else
+                {
+                    this.lblFalta.Enabled = false;
+                    this.lblEnvido.Enabled = false;
+                    this.lblReal.Enabled = false;
+                }
+            }
+            else
+            {
+                if (this.yo.CartasJugadas == 0 && this.rival.CartasJugadas <= 1) this.ModificarBotonesTanto();
+                else
+                {
+                    this.lblFalta.Enabled = false;
+                    this.lblEnvido.Enabled = false;
+                    this.lblReal.Enabled = false;
+                }
+            }
+        }
+        private void ModificarBotonesTanto()
+        {
+            if (this.yo.miTurnoTanto)
+            {
+                if (this.yo.cantoEnvido == true) this.lblEnvido.Enabled = false;
+                if (this.rondaActual.envidoEnvido == true) this.lblEnvido.Enabled = false;
+                if (this.rondaActual.realEnvido == true)
+                {
+                    this.lblEnvido.Enabled = false;
+                    this.lblReal.Enabled = false;
+                }
+                if (this.rondaActual.faltaEnvido == true)
                 {
                     this.lblFalta.Enabled = false;
                     this.lblEnvido.Enabled = false;
@@ -70,7 +86,6 @@ namespace Formularios
                 this.lblReal.Enabled = false;
             }
         }
-
         private void lblEnvido_Click(object sender, EventArgs e)
         {
             this.rondaActual.envido = true;

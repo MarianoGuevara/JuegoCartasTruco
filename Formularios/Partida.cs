@@ -225,7 +225,10 @@ namespace Formularios
 
             if (!this.mazo)
             {
+                this.mazo = !this.mazo;
+
                 this.ganadorActual = Jugador.CartaVsCarta(this.cartaYo, this.cartaRival);
+
                 if (this.ganadorActual == "empato")
                 {
                     if (this.manoYo) this.turno = "yo";
@@ -389,7 +392,7 @@ namespace Formularios
             {
                 if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
                 else this.MiTurno();
-                return null;
+                return this.cartaRival;
             }
         }
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
@@ -514,7 +517,7 @@ namespace Formularios
         private async void lblEnvido_Click(object sender, EventArgs e)
         {
             this.ModificarEstadoBotones(true);
-            Tanto t = new Tanto(this.rondaActual, this.yo, this.rival, true);
+            Tanto t = new Tanto(this.rondaActual, this.yo, this.rival, true, this.manoYo);
             t.ShowDialog();
 
             #region DialogResult significados
@@ -564,7 +567,7 @@ namespace Formularios
                 else
                 {
                     this.yo.miTurnoTanto = true;
-                    Tanto t = new Tanto(this.rondaActual, this.yo, this.rival);
+                    Tanto t = new Tanto(this.rondaActual, this.yo, this.rival, this.manoYo);
                     t.ShowDialog();
 
                     if (t.DialogResult == DialogResult.No)

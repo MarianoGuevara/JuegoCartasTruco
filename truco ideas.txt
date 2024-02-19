@@ -1,5 +1,6 @@
 COSAS RARAS/A MEJORAR
 -> Siguen situaciones irregulares... Por ej: mano él. gana 1 gano 2 y reparte de nuevo, no se por qué
+-> 
 
 COSAS A AGREGAR
 -> sonidos y efectos; musica
