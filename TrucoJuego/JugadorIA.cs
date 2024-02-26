@@ -232,7 +232,7 @@ namespace Entidades
                     situacion = this.ValorMinimo(puntaje, 25, 27, 30, yo, rival);
                     break;
                 case 1:
-                    situacion = this.ValorMinimo(puntaje, 20, 22, 24, yo, rival);
+                    situacion = this.ValorMinimo(puntaje, 19, 21, 23, yo, rival);
                     break;
                 case 2:
                     situacion = this.ValorMinimo(puntaje, 9, 10, 11, yo, rival);
@@ -264,10 +264,10 @@ namespace Entidades
             {
                 aCantar = "noQuiero";
             }
-
             else
             {
                 //aCantar = "truco"; //hardcodeado para pruebas
+
                 switch (aCantar)
                 {
                     case "truco":

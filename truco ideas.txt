@@ -1,10 +1,8 @@
 COSAS RARAS/A MEJORAR
--> Siguen situaciones irregulares... Por ej: mano él. gana 1 gano 2 y reparte de nuevo, no se por qué
--> 
+-> no juega bien la parda; se guarda mejor carta
 
 COSAS A AGREGAR
 -> sonidos y efectos; musica
--> cambiar a privados algunos atributos y ordenar
 
 
  

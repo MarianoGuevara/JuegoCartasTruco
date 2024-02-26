@@ -110,6 +110,17 @@ namespace Formularios
         {
             this.rival.ComenzarJugador(this.yo);
 
+            // hardcodear cartas que me tocan
+            //Carta carta = new Carta();
+            //carta.CartaActual = "../../../../media/cartas/7 BASTO.png";
+            //Carta carta2 = new Carta();
+            //carta2.CartaActual = "../../../../media/cartas/6 BASTO.png";
+            //Carta carta3 = new Carta();
+            //carta3.CartaActual = "../../../../media/cartas/12 BASTO.png";
+            //this.rival.Cartas[0] = carta;
+            //this.rival.Cartas[1] = carta2;
+            //this.rival.Cartas[2] = carta3;
+
             this.pbCartaRival1.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
             this.pbCartaRival2.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
             this.pbCartaRival3.Image = Image.FromFile("../../../../media/cartas/REVERSO.png");
@@ -117,6 +128,17 @@ namespace Formularios
         private void RepartirCartasYo()
         {
             this.yo.ComenzarJugador();
+
+            // hardcodear cartas que me tocan
+            //Carta carta = new Carta(); 
+            //carta.CartaActual = "../../../../media/cartas/7 BASTO.png";
+            //Carta carta2 = new Carta();
+            //carta2.CartaActual = "../../../../media/cartas/6 BASTO.png";
+            //Carta carta3 = new Carta();
+            //carta3.CartaActual = "../../../../media/cartas/12 BASTO.png";
+            //this.yo.Cartas[0] = carta;
+            //this.yo.Cartas[1] = carta2;
+            //this.yo.Cartas[2] = carta3;
 
             this.pbCartaPropia1.Image = Image.FromFile(yo.Cartas[0].ToString());
             this.pbCartaPropia1.Tag = yo.Cartas[0].ToString();
@@ -340,7 +362,9 @@ namespace Formularios
             this.yo.CartasJugadas += 1;
             cartaYo = this.yo.Cartas[indiceCoincidencia];
             this.cartaYoActual = cartaYo;
-            this.turno = "rival";
+
+            if (this.mazo && this.yo.CartasJugadas == 1 && !this.manoYo) this.turno = "yo";
+            else this.turno = "rival";
 
             return cartaYo;
         }
@@ -358,8 +382,10 @@ namespace Formularios
             {
                 mazo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
             }
+
             await Task.Delay(2000);
             this.mazo = mazo;
+
             if (mazo == false)
             {
                 int indice;
@@ -510,15 +536,6 @@ namespace Formularios
         #endregion
 
         #region Envido
-        private string DeDialogResultATanto(DialogResult result)
-        {
-            string tanto = string.Empty;
-            if (result == DialogResult.Abort) tanto = "envido";
-            else if (result == DialogResult.Retry) tanto = "realEnvido";
-            else if (result == DialogResult.Yes) tanto = "faltaEnvido";
-
-            return tanto;
-        }
         private async void lblEnvido_Click(object sender, EventArgs e)
         {
             this.ModificarEstadoBotones(true);
@@ -539,8 +556,6 @@ namespace Formularios
             if (t.DialogResult != DialogResult.Cancel)
             {
                 this.yo.miTurnoTanto = false;
-                string aCantar = this.DeDialogResultATanto(t.DialogResult);
-
                 await this.RivalCantaTanto(this.rivalScreenshot, true);
             }
             else if (t.DialogResult == DialogResult.No) Puntaje.CalcularPuntajeNoQuiero(this.rondaActual, this.rival);
@@ -593,7 +608,7 @@ namespace Formularios
         private async Task LuchaTanto(bool cantoYo=false)
         {
             int tantoYo = this.yo.PuntajeEnvidoNumerico();
-            int tantoRival = this.rival.PuntajeEnvidoNumerico();
+            int tantoRival = this.rivalScreenshot.PuntajeEnvidoNumerico();
 
             string ganador;
 
@@ -626,9 +641,7 @@ namespace Formularios
         #endregion
         private async void lblMazo_Click(object sender, EventArgs e)
         {
-            if (!this.rondaActual.envido && !this.rondaActual.realEnvido && !this.rondaActual.faltaEnvido) this.rival.Puntaje += 2;
-            else this.rival.Puntaje += 1;
-
+            this.rival.Puntaje += this.rondaActual.SumaPuntosMazo();
             this.ModificarEstadoBotones(true);
             await this.IniciarRonda();
         }

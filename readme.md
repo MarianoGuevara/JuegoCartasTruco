@@ -10,11 +10,12 @@ La app, desarrollada en c# .net 6, sirve para que cualquier jugador juegue de ma
 
 ---
 
-###### Se destaca y agradece a 2 colaboradores de tipo "tester":
+##### Se destaca y agradece a 2 colaboradores de tipo "tester":
 
 -Franco Copati
 
+-Francisco Balián
+
 -Franco Quiró
 
-Probaron la app y encontraron fallas que escapan a 
-la simple vista.
+#### Probaron la app y encontraron fallas que escapan a la simple vista.

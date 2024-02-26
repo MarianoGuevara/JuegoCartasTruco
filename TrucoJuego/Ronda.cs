@@ -125,6 +125,22 @@ namespace Entidades
             }
             return retorno;
         }
+
+        public int SumaPuntosMazo()
+        {
+            int sumaPuntos;
+            if (this.valeCuatro) sumaPuntos = 4;
+            else if (this.retruco) sumaPuntos = 3;
+            else if (this.truco) sumaPuntos = 2;
+            else
+            {
+                if (!this.envido && !this.realEnvido && !this.faltaEnvido) sumaPuntos = 2;
+                else sumaPuntos = 1;
+            }
+                
+            return sumaPuntos;
+        }
+
         #endregion
 
         #region Envido
@@ -132,6 +148,8 @@ namespace Entidades
         {
             string retorno = "noQuiero";
             string casoRival = this.RivalAceptaEnvido(rivalScreenshot);
+
+            //casoRival = "noQuiero"; // hardcodear tanto
 
             if (this.yo.Puntaje == 29 && casoRival == "noQuiero") casoRival = "quiero";
 

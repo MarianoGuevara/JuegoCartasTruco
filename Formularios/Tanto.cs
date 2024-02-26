@@ -40,7 +40,13 @@ namespace Formularios
         }
         private void EnableBotonesTanto()
         {
-            if (this.manoYo) 
+            if (this.rondaActual.truco || this.rondaActual.retruco || this.rondaActual.valeCuatro)
+            {
+                this.lblFalta.Enabled = false;
+                this.lblEnvido.Enabled = false;
+                this.lblReal.Enabled = false;
+            }
+            else if (this.manoYo) 
             {
                 if (this.yo.CartasJugadas == 0 && this.rival.CartasJugadas == 0) this.ModificarBotonesTanto();
                 else

@@ -2,7 +2,7 @@ using Entidades;
 using System.Text.RegularExpressions;
 using TrucoJuego;
 
-namespace a
+namespace PruebasUnitarias
 {
     [TestClass]
     public class UnitTest1
