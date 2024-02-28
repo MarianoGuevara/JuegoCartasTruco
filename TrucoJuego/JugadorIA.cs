@@ -164,10 +164,7 @@ namespace Entidades
                 if (i != -1) puntajeFinal += i;
             }
 
-            if (puntajeFinal == 0)
-            {
-                puntajeFinal = Jugador.AsignarPuntajeCarta(carta3);
-            }
+            if (puntajeFinal == 0) puntajeFinal = Jugador.AsignarPuntajeCarta(carta3);
 
             return puntajeFinal;
         }

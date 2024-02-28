@@ -33,6 +33,8 @@ namespace Entidades
         public bool realEnvido;
         public bool faltaEnvido;
         public bool faltaAceptada;
+
+        public bool ganePrimeraYo; 
         public int SumaPuntaje
         { 
             get { return this.sumaPuntaje; } 
@@ -91,12 +93,15 @@ namespace Entidades
 
             this.yo.miTurnoTruco = true;
             this.yo.miTurnoTanto = true;
+
+            this.ganePrimeraYo = false;
         }
         public void DarPuntoPorMano(string ganadorActual)
         {
             switch (ganadorActual)
             {
                 case "gano":
+                    if (this.yo.CartasJugadas == 1 && this.rival.CartasJugadas == 1) this.ganePrimeraYo = true;
                     this.yo.PuntosRondaActual += 1;
                     break;
                 case "perdio":

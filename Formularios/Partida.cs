@@ -21,7 +21,6 @@ namespace Formularios
         private string ganadorActual;
         private bool manoYo;
         private bool parda;
-        //private bool habilitado = true;
 
         private string turno;
         private bool mazo;
@@ -112,11 +111,11 @@ namespace Formularios
 
             // hardcodear cartas que me tocan
             //Carta carta = new Carta();
-            //carta.CartaActual = "../../../../media/cartas/7 BASTO.png";
+            //carta.CartaActual = "../../../../media/cartas/6 BASTO.png";
             //Carta carta2 = new Carta();
-            //carta2.CartaActual = "../../../../media/cartas/6 BASTO.png";
+            //carta2.CartaActual = "../../../../media/cartas/1 ORO.png";
             //Carta carta3 = new Carta();
-            //carta3.CartaActual = "../../../../media/cartas/12 BASTO.png";
+            //carta3.CartaActual = "../../../../media/cartas/2 COPA.png";
             //this.rival.Cartas[0] = carta;
             //this.rival.Cartas[1] = carta2;
             //this.rival.Cartas[2] = carta3;
@@ -130,12 +129,12 @@ namespace Formularios
             this.yo.ComenzarJugador();
 
             // hardcodear cartas que me tocan
-            //Carta carta = new Carta(); 
-            //carta.CartaActual = "../../../../media/cartas/7 BASTO.png";
+            //Carta carta = new Carta();
+            //carta.CartaActual = "../../../../media/cartas/6 BASTO.png";
             //Carta carta2 = new Carta();
-            //carta2.CartaActual = "../../../../media/cartas/6 BASTO.png";
+            //carta2.CartaActual = "../../../../media/cartas/1 ORO.png";
             //Carta carta3 = new Carta();
-            //carta3.CartaActual = "../../../../media/cartas/12 BASTO.png";
+            //carta3.CartaActual = "../../../../media/cartas/2 COPA.png";
             //this.yo.Cartas[0] = carta;
             //this.yo.Cartas[1] = carta2;
             //this.yo.Cartas[2] = carta3;
@@ -153,6 +152,8 @@ namespace Formularios
         {
             await Task.Delay(2000);
             this.ActualizarPuntajes();
+
+            this.parda = false;
 
             this.yo.cantoTruco = false;
             this.rondaActual.ResetRonda();
@@ -234,6 +235,8 @@ namespace Formularios
                     this.cartaRival = await this.JuegaRival(this.cartaYo);
                 }
                 else this.cartaYo = await this.JuegoYo(cartaAJugar);
+
+                if (this.parda) this.cartaRival = await this.JuegaRival(this.cartaYo);
             }
             else
             {
@@ -245,7 +248,7 @@ namespace Formularios
                 }
             }
 
-            if (!this.mazo)
+            if (!this.mazo || this.parda)
             {
                 this.mazo = !this.mazo;
 
@@ -266,9 +269,18 @@ namespace Formularios
                 {
                     if (this.yo.PuntosRondaActual > 0 || this.rival.PuntosRondaActual > 0)
                     {
-                        if (this.rival.PuntosRondaActual > 0) Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
-                        else Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje); ;
+                        this.ModificarEstadoBotones(true);
 
+                        if (this.rival.PuntosRondaActual > 0 && this.yo.PuntosRondaActual == 0) Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
+                        else if (this.yo.PuntosRondaActual > 0 && this.rival.PuntosRondaActual == 0) Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje);
+                        else if (this.rondaActual.ganePrimeraYo) Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje);
+
+                        await this.IniciarRonda();
+                    }
+                    else if (this.yo.CartasJugadas == 3 && this.rival.CartasJugadas == 3)
+                    {
+                        this.ModificarEstadoBotones(true);
+                        this.PardaTotal();
                         await this.IniciarRonda();
                     }
                     else this.parda = true;
@@ -281,7 +293,7 @@ namespace Formularios
 
                     if (this.ganadorActual != "empato")
                     {
-                        this.parda = false;
+                        this.ModificarEstadoBotones(true);
                         await this.IniciarRonda();
                     }
 
@@ -316,6 +328,11 @@ namespace Formularios
 
             this.ActualizarPuntajes();
             this.MiTurno();
+        }
+        private void PardaTotal()
+        {
+            if (this.manoYo) Puntaje.SumarPuntaje(this.yo, this.rondaActual.SumaPuntaje);
+            else Puntaje.SumarPuntaje(this.rival, this.rondaActual.SumaPuntaje);
         }
         private void ActualizarPuntajes()
         {
@@ -635,7 +652,6 @@ namespace Formularios
                 r.ShowDialog();
                 await Task.Delay(1000);
             }
-            
             this.ActualizarPuntajes();
         }
         #endregion
