@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "miXtENU66zlsZci3c1AHxZ1eVL/O7eupdPHBV48qV7ejwmE1/gJpr4AYodmwGIz7UBNbzQCH/J1erW3dZtuouA==",
+  "dgSpecHash": "6uetfZ61NidstyNRDmop8UzPwat/KsOyQDkJyK0xs1Pl+8GscPpboSrBE0l0J6d521inStCSlfNgIjswpvmYuQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\Entidades.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

@@ -54,6 +54,7 @@
             panelPanio = new Panel();
             pbPuntajeYo2 = new PictureBox();
             pbPuntajeRival2 = new PictureBox();
+            pbVolumen = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).BeginInit();
@@ -72,6 +73,7 @@
             panelPanio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPuntajeYo2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbVolumen).BeginInit();
             SuspendLayout();
             // 
             // pbCartaPropia1
@@ -98,7 +100,7 @@
             // lblInfoRival
             // 
             lblInfoRival.AutoSize = true;
-            lblInfoRival.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblInfoRival.Font = new Font("Century Gothic", 12F);
             lblInfoRival.ForeColor = Color.LightGray;
             lblInfoRival.Location = new Point(917, 18);
             lblInfoRival.Name = "lblInfoRival";
@@ -151,7 +153,7 @@
             // lblInfoYo
             // 
             lblInfoYo.AutoSize = true;
-            lblInfoYo.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblInfoYo.Font = new Font("Century Gothic", 12F);
             lblInfoYo.ForeColor = Color.LightGray;
             lblInfoYo.Location = new Point(946, 720);
             lblInfoYo.Name = "lblInfoYo";
@@ -162,7 +164,7 @@
             // lblPuntajeVisual
             // 
             lblPuntajeVisual.AutoSize = true;
-            lblPuntajeVisual.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblPuntajeVisual.Font = new Font("Century Gothic", 12F);
             lblPuntajeVisual.ForeColor = Color.LightGray;
             lblPuntajeVisual.Location = new Point(1007, 353);
             lblPuntajeVisual.Name = "lblPuntajeVisual";
@@ -173,18 +175,20 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.Font = new Font("Century Gothic", 12F);
             label2.ForeColor = Color.LightGray;
-            label2.Location = new Point(37, 18);
+            label2.Location = new Point(37, 29);
             label2.Name = "label2";
             label2.Size = new Size(74, 30);
             label2.TabIndex = 14;
             label2.Text = "SALIR";
+            label2.MouseEnter += Partida_MouseEnter;
+            label2.MouseLeave += Partida_MouseLeave;
             // 
             // lblTruco
             // 
             lblTruco.AutoSize = true;
-            lblTruco.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblTruco.Font = new Font("Century Gothic", 12F);
             lblTruco.ForeColor = Color.LightGray;
             lblTruco.Location = new Point(117, 720);
             lblTruco.Name = "lblTruco";
@@ -228,7 +232,7 @@
             // lblEnvido
             // 
             lblEnvido.AutoSize = true;
-            lblEnvido.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblEnvido.Font = new Font("Century Gothic", 12F);
             lblEnvido.ForeColor = Color.LightGray;
             lblEnvido.Location = new Point(376, 720);
             lblEnvido.Name = "lblEnvido";
@@ -242,7 +246,7 @@
             // lblMazo
             // 
             lblMazo.AutoSize = true;
-            lblMazo.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblMazo.Font = new Font("Century Gothic", 12F);
             lblMazo.ForeColor = Color.LightGray;
             lblMazo.Location = new Point(651, 720);
             lblMazo.Name = "lblMazo";
@@ -348,12 +352,24 @@
             pbPuntajeRival2.TabIndex = 30;
             pbPuntajeRival2.TabStop = false;
             // 
+            // pbVolumen
+            // 
+            pbVolumen.Image = (Image)resources.GetObject("pbVolumen.Image");
+            pbVolumen.Location = new Point(134, 18);
+            pbVolumen.Name = "pbVolumen";
+            pbVolumen.Size = new Size(79, 47);
+            pbVolumen.SizeMode = PictureBoxSizeMode.Zoom;
+            pbVolumen.TabIndex = 31;
+            pbVolumen.TabStop = false;
+            pbVolumen.Click += pbVolumen_Click;
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
             ClientSize = new Size(1278, 785);
+            Controls.Add(pbVolumen);
             Controls.Add(pbPuntajeRival2);
             Controls.Add(pbPuntajeYo2);
             Controls.Add(lblMazo);
@@ -379,6 +395,8 @@
             Name = "Partida";
             ShowIcon = false;
             Text = "Partida Truco";
+            FormClosing += Partida_FormClosing;
+            Load += Partida_Load;
             MouseEnter += Partida_MouseEnter;
             MouseLeave += Partida_MouseLeave;
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).EndInit();
@@ -399,6 +417,7 @@
             panelPanio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbPuntajeYo2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbVolumen).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -429,5 +448,6 @@
         private Panel panelPanio;
         private PictureBox pbPuntajeYo2;
         private PictureBox pbPuntajeRival2;
+        private PictureBox pbVolumen;
     }
 }

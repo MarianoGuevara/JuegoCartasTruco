@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "TyAQJIhf4vjqIvDOjhPKnOmFSaIyxftIDfMTUx1IfRfx+WtNCqYweaJXN8MlPh5YGyF4g6oG5BUeN94rpiosTw==",
+  "dgSpecHash": "+jeAL0ekIRtpEMNTUanvvS3DFR3q+rq0rGOb3CnBOPMlaNCKY2WZFt8my1Wn3q1Gqo+AkMM1b2CIv6copSDhjg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\a\\PruebasUnitarias.csproj",
   "expectedPackageFiles": [
@@ -30,10 +30,7 @@
     "C:\\Users\\Mariano\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\Mariano\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\Mariano\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
-    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
+    "C:\\Users\\Mariano\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

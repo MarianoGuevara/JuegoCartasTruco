@@ -1,17 +1,23 @@
 using Entidades;
 using System.Diagnostics;
 using System.Drawing.Printing;
+using System.Media;
 using System.Reflection.Emit;
 using System.Windows.Forms;
 using TrucoJuego;
 
 namespace Formularios
 {
+    public delegate void DelegadoMusicaFondo();
     public delegate void DelegadoComenzarJuego();
     public delegate void DelegadoComenzarJuegoDos();
     public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
+        private SoundPlayer efectoCarta;
+        private SoundPlayer efectoCambioRonda;
+        private bool banderaMusicaActivada;
+
         private Jugador yo;
         private JugadorIA rival;
         private Jugador rivalScreenshot;
@@ -41,7 +47,10 @@ namespace Formularios
             this.StartPosition = FormStartPosition.CenterScreen;
             this.ShowIcon = false;
             this.Text = "Partida Truco";
-            this.parda = false;
+
+            this.efectoCarta = new SoundPlayer("../../../../media/sounds/tirarCarta.wav");
+            this.efectoCambioRonda = new SoundPlayer("../../../../media/sounds/coin_roundReset.wav");
+            this.banderaMusicaActivada = true;
 
             this.yo = new Jugador();
             this.rival = new JugadorIA(this.yo);
@@ -49,11 +58,12 @@ namespace Formularios
 
             this.rondaActual = new Ronda(this.yo, this.rival);
 
+            this.parda = false;
             this.ganadorActual = string.Empty;
             this.manoYo = true;
-            
+
             if (this.manoYo) this.turno = "yo";
-            else this.turno= "rival";
+            else this.turno = "rival";
 
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasYo);
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
@@ -150,6 +160,8 @@ namespace Formularios
         }
         private async Task IniciarRonda()
         {
+            this.SonarEfecto(this.efectoCambioRonda);
+
             await Task.Delay(2000);
             this.ActualizarPuntajes();
 
@@ -390,7 +402,7 @@ namespace Formularios
             Carta cartaRival;
             bool mazo = false;
 
-            if (((this.rival.CartasJugadas == 1 && this.yo.CartasJugadas == 0) || 
+            if (((this.rival.CartasJugadas == 1 && this.yo.CartasJugadas == 0) ||
                 (this.rival.CartasJugadas == 0 && (this.yo.CartasJugadas == 1 || this.yo.CartasJugadas == 0))) &&
                 (this.rondaActual.envido == false && this.rondaActual.realEnvido == false) && this.rondaActual.faltaEnvido == false &&
                 (!this.rondaActual.truco && !this.rondaActual.retruco && !this.rondaActual.valeCuatro)) await this.RivalCantaTanto(this.rivalScreenshot);
@@ -441,6 +453,8 @@ namespace Formularios
         }
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
         {
+            this.SonarEfecto(this.efectoCarta);
+            
             if (carta is not null) pbPanio.Image = Image.FromFile(carta.ToString());
             else pbPanio.Image = Image.FromFile(pb.Tag.ToString());
 
@@ -500,10 +514,10 @@ namespace Formularios
             if (t.DialogResult != DialogResult.Cancel) await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual, true);
             this.MiTurno();
         }
-        private async Task<bool> RivalTruco(Carta carta, Carta cartaYo, bool cantoYo=false, bool iniciarRonda=false)
+        private async Task<bool> RivalTruco(Carta carta, Carta cartaYo, bool cantoYo = false, bool iniciarRonda = false)
         {
             bool mazo = false;
-            string retorno = this.rival.QueCantaTruco(this.rondaActual, this.yo, this.rival, carta,cartaYo);
+            string retorno = this.rival.QueCantaTruco(this.rondaActual, this.yo, this.rival, carta, cartaYo);
 
             if (this.yo.Puntaje == 29 && retorno == "noQuiero") retorno = "quiero";
             else if (this.yo.Puntaje == 28 && this.rondaActual.truco && retorno == "noQuiero") retorno = "quiero";
@@ -534,7 +548,7 @@ namespace Formularios
                     {
                         mazo = true;
 
-                        if(this.rondaActual.SumaPuntaje>1) this.rondaActual.SumaPuntaje -= 1;
+                        if (this.rondaActual.SumaPuntaje > 1) this.rondaActual.SumaPuntaje -= 1;
                         this.rival.Puntaje += this.rondaActual.SumaPuntaje;
                         await this.IniciarRonda();
                     }
@@ -622,7 +636,7 @@ namespace Formularios
                 }
             }
         }
-        private async Task LuchaTanto(bool cantoYo=false)
+        private async Task LuchaTanto(bool cantoYo = false)
         {
             int tantoYo = this.yo.PuntajeEnvidoNumerico();
             int tantoRival = this.rivalScreenshot.PuntajeEnvidoNumerico();
@@ -655,11 +669,27 @@ namespace Formularios
             this.ActualizarPuntajes();
         }
         #endregion
+        #region LOAD, CLOSING y mazo; sonido efecto
+        private void SonarEfecto(SoundPlayer efecto) { if (this.banderaMusicaActivada) efecto.Play(); }
+        private void Partida_FormClosing(object sender, FormClosingEventArgs e)
+        {
+        }
+        private void Partida_Load(object sender, EventArgs e)
+        {
+        }
         private async void lblMazo_Click(object sender, EventArgs e)
         {
             this.rival.Puntaje += this.rondaActual.SumaPuntosMazo();
             this.ModificarEstadoBotones(true);
             await this.IniciarRonda();
+        }
+        #endregion
+
+        private void pbVolumen_Click(object sender, EventArgs e)
+        {
+            this.banderaMusicaActivada = !this.banderaMusicaActivada;
+            if (this.banderaMusicaActivada) this.pbVolumen.Image = Image.FromFile("../../../../media/soundON.png");
+            else this.pbVolumen.Image = Image.FromFile("../../../../media/soundOFF.png");
         }
     }
 }

@@ -98,9 +98,10 @@ C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.Ge
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.AssemblyInfoInputs.cache
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.AssemblyInfo.cs
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.csproj.CoreCompileInputs.cache
-C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.csproj.CopyComplete
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.dll
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\refint\PruebasUnitarias.dll
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.pdb
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.genruntimeconfig.cache
 C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\ref\PruebasUnitarias.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasUnitarias.sourcelink.json
+C:\Users\Mariano\Desktop\JuegoCartasTruco\a\obj\Debug\net6.0\PruebasU.A9D5A5C4.Up2Date

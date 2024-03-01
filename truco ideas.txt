@@ -5,4 +5,13 @@ COSAS A AGREGAR
 -> sonidos y efectos; musica
 
 
+ menu
  
+  JUGAR
+    . COMO JUGAR
+    . JUGAR PARTIDA
+  PERFIL
+    . Cambiar nombre y foto de perfil
+  HISTORIAL DE PARTIDAS
+    . Aparecería una patalla con info: Contra quien & Resultado
+  SALIR
