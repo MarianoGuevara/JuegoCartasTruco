@@ -38,7 +38,7 @@
             pbCartaPropia2 = new PictureBox();
             lblInfoYo = new Label();
             lblPuntajeVisual = new Label();
-            label2 = new Label();
+            lblSalir = new Label();
             lblTruco = new Label();
             pbPuntajeYo1 = new PictureBox();
             pbPuntajeRival1 = new PictureBox();
@@ -172,18 +172,19 @@
             lblPuntajeVisual.TabIndex = 13;
             lblPuntajeVisual.Text = "Puntaje";
             // 
-            // label2
+            // lblSalir
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Century Gothic", 12F);
-            label2.ForeColor = Color.LightGray;
-            label2.Location = new Point(37, 29);
-            label2.Name = "label2";
-            label2.Size = new Size(74, 30);
-            label2.TabIndex = 14;
-            label2.Text = "SALIR";
-            label2.MouseEnter += Partida_MouseEnter;
-            label2.MouseLeave += Partida_MouseLeave;
+            lblSalir.AutoSize = true;
+            lblSalir.Font = new Font("Century Gothic", 12F);
+            lblSalir.ForeColor = Color.LightGray;
+            lblSalir.Location = new Point(37, 29);
+            lblSalir.Name = "lblSalir";
+            lblSalir.Size = new Size(74, 30);
+            lblSalir.TabIndex = 14;
+            lblSalir.Text = "SALIR";
+            lblSalir.Click += lblSalir_Click;
+            lblSalir.MouseEnter += Partida_MouseEnter;
+            lblSalir.MouseLeave += Partida_MouseLeave;
             // 
             // lblTruco
             // 
@@ -378,7 +379,7 @@
             Controls.Add(pbPuntajeRival1);
             Controls.Add(pbPuntajeYo1);
             Controls.Add(lblTruco);
-            Controls.Add(label2);
+            Controls.Add(lblSalir);
             Controls.Add(lblPuntajeVisual);
             Controls.Add(pbCartaPropia1);
             Controls.Add(pbCartaRival1);
@@ -432,7 +433,7 @@
         private PictureBox pbCartaPropia2;
         private Label lblInfoYo;
         private Label lblPuntajeVisual;
-        private Label label2;
+        private Label lblSalir;
         private Label lblTruco;
         private PictureBox pbPuntajeYo1;
         private PictureBox pbPuntajeRival1;

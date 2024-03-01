@@ -454,7 +454,7 @@ namespace Formularios
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
         {
             this.SonarEfecto(this.efectoCarta);
-            
+
             if (carta is not null) pbPanio.Image = Image.FromFile(carta.ToString());
             else pbPanio.Image = Image.FromFile(pb.Tag.ToString());
 
@@ -669,6 +669,7 @@ namespace Formularios
             this.ActualizarPuntajes();
         }
         #endregion
+
         #region LOAD, CLOSING y mazo; sonido efecto
         private void SonarEfecto(SoundPlayer efecto) { if (this.banderaMusicaActivada) efecto.Play(); }
         private void Partida_FormClosing(object sender, FormClosingEventArgs e)
@@ -683,13 +684,16 @@ namespace Formularios
             this.ModificarEstadoBotones(true);
             await this.IniciarRonda();
         }
-        #endregion
-
         private void pbVolumen_Click(object sender, EventArgs e)
         {
             this.banderaMusicaActivada = !this.banderaMusicaActivada;
             if (this.banderaMusicaActivada) this.pbVolumen.Image = Image.FromFile("../../../../media/soundON.png");
             else this.pbVolumen.Image = Image.FromFile("../../../../media/soundOFF.png");
         }
+        private void lblSalir_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

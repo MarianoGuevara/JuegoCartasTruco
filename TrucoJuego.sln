@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "TrucoJuego\Ent
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Formularios", "Formularios\Formularios.csproj", "{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitarias", "a\PruebasUnitarias.csproj", "{109FE7C5-221B-44CC-888C-778D64476E7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebasUnitariasTruco", "PruebasUnitariasTruco\PruebasUnitariasTruco.csproj", "{3E7D8ECE-4747-446F-952A-79EB9F676AEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{109FE7C5-221B-44CC-888C-778D64476E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{109FE7C5-221B-44CC-888C-778D64476E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{109FE7C5-221B-44CC-888C-778D64476E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{109FE7C5-221B-44CC-888C-778D64476E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7D8ECE-4747-446F-952A-79EB9F676AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7D8ECE-4747-446F-952A-79EB9F676AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7D8ECE-4747-446F-952A-79EB9F676AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7D8ECE-4747-446F-952A-79EB9F676AEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
