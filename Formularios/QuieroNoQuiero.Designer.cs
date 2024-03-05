@@ -35,7 +35,7 @@
             // lblQuiero
             // 
             lblQuiero.AutoSize = true;
-            lblQuiero.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblQuiero.Font = new Font("Century Gothic", 12F);
             lblQuiero.ForeColor = Color.LightGray;
             lblQuiero.Location = new Point(119, 103);
             lblQuiero.Name = "lblQuiero";
@@ -49,9 +49,9 @@
             // lblNoQuiero
             // 
             lblNoQuiero.AutoSize = true;
-            lblNoQuiero.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNoQuiero.Font = new Font("Century Gothic", 12F);
             lblNoQuiero.ForeColor = Color.LightGray;
-            lblNoQuiero.Location = new Point(316, 103);
+            lblNoQuiero.Location = new Point(326, 103);
             lblNoQuiero.Name = "lblNoQuiero";
             lblNoQuiero.Size = new Size(151, 30);
             lblNoQuiero.TabIndex = 29;

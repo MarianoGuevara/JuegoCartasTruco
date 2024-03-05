@@ -4,7 +4,13 @@
     <_LastSelectedProfileId>C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Menu.cs">
+    <Compile Update="CerrarMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="MenuPadre.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Partida.cs">

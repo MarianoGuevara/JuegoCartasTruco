@@ -143,7 +143,8 @@ C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\F
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Interop.WMPLib.dll
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Interop.MediaPlayer.dll
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.csproj.ResolveComReference.cache
-C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.Menu.resources
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.MenuMain.resources
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.MenuPadre.resources
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.Partida.resources
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.Properties.Resources.resources
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.QuieroNoQuiero.resources
@@ -162,3 +163,4 @@ C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\r
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Truco.pdb
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.genruntimeconfig.cache
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\ref\Truco.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.CerrarMenu.resources

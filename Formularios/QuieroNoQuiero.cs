@@ -39,7 +39,7 @@ namespace Formularios
         }
 
         [DebuggerStepThrough]
-        public void Partida_MouseEnter(object sender, EventArgs e)
+        protected void Partida_MouseEnter(object sender, EventArgs e)
         {
             if (sender is PictureBox pb) this.AnimacionCartas(pb, true);
             else if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl, true);
@@ -73,14 +73,12 @@ namespace Formularios
             this.apretoBoton = true;
             this.DialogResult = DialogResult.OK;
         }
-
         private void lblNoQuiero_Click(object sender, EventArgs e)
         {
             this.apretoBoton = true;
             this.DialogResult = DialogResult.No;
         }
-
-        private void QuieroNoQuiero_FormClosing(object sender, FormClosingEventArgs e)
+        protected void QuieroNoQuiero_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (this.apretoBoton == false) e.Cancel = true;
         }

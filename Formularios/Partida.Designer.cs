@@ -55,6 +55,7 @@
             pbPuntajeYo2 = new PictureBox();
             pbPuntajeRival2 = new PictureBox();
             pbVolumen = new PictureBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).BeginInit();
@@ -74,6 +75,7 @@
             ((System.ComponentModel.ISupportInitialize)pbPuntajeYo2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbVolumen).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pbCartaPropia1
@@ -175,9 +177,9 @@
             // lblSalir
             // 
             lblSalir.AutoSize = true;
-            lblSalir.Font = new Font("Century Gothic", 12F);
+            lblSalir.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSalir.ForeColor = Color.LightGray;
-            lblSalir.Location = new Point(37, 29);
+            lblSalir.Location = new Point(349, 18);
             lblSalir.Name = "lblSalir";
             lblSalir.Size = new Size(74, 30);
             lblSalir.TabIndex = 14;
@@ -356,7 +358,7 @@
             // pbVolumen
             // 
             pbVolumen.Image = (Image)resources.GetObject("pbVolumen.Image");
-            pbVolumen.Location = new Point(134, 18);
+            pbVolumen.Location = new Point(200, 18);
             pbVolumen.Name = "pbVolumen";
             pbVolumen.Size = new Size(79, 47);
             pbVolumen.SizeMode = PictureBoxSizeMode.Zoom;
@@ -364,12 +366,23 @@
             pbVolumen.TabStop = false;
             pbVolumen.Click += pbVolumen_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(36, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(105, 60);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 32;
+            pictureBox1.TabStop = false;
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
             ClientSize = new Size(1278, 785);
+            Controls.Add(pictureBox1);
             Controls.Add(pbVolumen);
             Controls.Add(pbPuntajeRival2);
             Controls.Add(pbPuntajeYo2);
@@ -419,6 +432,7 @@
             ((System.ComponentModel.ISupportInitialize)pbPuntajeYo2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbVolumen).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -450,5 +464,6 @@
         private PictureBox pbPuntajeYo2;
         private PictureBox pbPuntajeRival2;
         private PictureBox pbVolumen;
+        private PictureBox pictureBox1;
     }
 }

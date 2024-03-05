@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Truco")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24555c6ddaf55f3da1da3905477e11045bd03d7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9154b77a638e9b27f8432954875401e2cf85c11b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Truco")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Truco")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

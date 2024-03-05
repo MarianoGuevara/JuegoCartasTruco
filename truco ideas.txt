@@ -1,17 +1,16 @@
 COSAS RARAS/A MEJORAR
 -> no juega bien la parda; se guarda mejor carta
+-> cuando aprete salir BORRAR el objeto partida actual. (o = null o alguna otra no sé)
 
 COSAS A AGREGAR
--> sonidos y efectos; musica
-
-
+-> estructura menu fuera de partida
  menu
  
   JUGAR
-    . COMO JUGAR
-    . JUGAR PARTIDA
+    . JUGAR PARTIDA (generar rivales aleatorios)
   PERFIL
-    . Cambiar nombre y foto de perfil
+    . Cambiar nombre y foto de perfil // (poder crear rivales) OPENFILEDIALOG
+    . btn COMO JUGAR
   HISTORIAL DE PARTIDAS
     . Aparecería una patalla con info: Contra quien & Resultado
   SALIR

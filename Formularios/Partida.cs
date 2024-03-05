@@ -14,6 +14,7 @@ namespace Formularios
     public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
+        MenuMain menuMain;
         private SoundPlayer efectoCarta;
         private SoundPlayer efectoCambioRonda;
         private bool banderaMusicaActivada;
@@ -37,8 +38,11 @@ namespace Formularios
         private Carta cartaRival;
         private Carta cartaRivalActual;
         private Carta cartaYoActual;
-        public Partida()
+        public Partida(MenuMain menu)
         {
+            this.menuMain = menu;
+            this.menuMain.Hide();
+
             InitializeComponent();
             this.mazo = false;
 
@@ -672,8 +676,13 @@ namespace Formularios
 
         #region LOAD, CLOSING y mazo; sonido efecto
         private void SonarEfecto(SoundPlayer efecto) { if (this.banderaMusicaActivada) efecto.Play(); }
+        private void lblSalir_Click(object sender, EventArgs e) { this.DialogResult = DialogResult.No; }
         private void Partida_FormClosing(object sender, FormClosingEventArgs e)
         {
+            CerrarMenu c = new CerrarMenu("Salir de la partida no guarda progreso ¿Quiere salir igualmente?", "SI", "NO");
+            c.ShowDialog();
+            if (c.DialogResult == DialogResult.No) { e.Cancel = true; }
+            else { this.menuMain.Show(); }
         }
         private void Partida_Load(object sender, EventArgs e)
         {
@@ -689,10 +698,6 @@ namespace Formularios
             this.banderaMusicaActivada = !this.banderaMusicaActivada;
             if (this.banderaMusicaActivada) this.pbVolumen.Image = Image.FromFile("../../../../media/soundON.png");
             else this.pbVolumen.Image = Image.FromFile("../../../../media/soundOFF.png");
-        }
-        private void lblSalir_Click(object sender, EventArgs e)
-        {
-
         }
         #endregion
     }
