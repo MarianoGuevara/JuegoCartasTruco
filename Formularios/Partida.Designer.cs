@@ -56,6 +56,8 @@
             pbPuntajeRival2 = new PictureBox();
             pbVolumen = new PictureBox();
             pictureBox1 = new PictureBox();
+            pbFotoYo = new PictureBox();
+            pbFotoRival = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).BeginInit();
@@ -76,6 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbVolumen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFotoYo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbFotoRival).BeginInit();
             SuspendLayout();
             // 
             // pbCartaPropia1
@@ -104,11 +108,11 @@
             lblInfoRival.AutoSize = true;
             lblInfoRival.Font = new Font("Century Gothic", 12F);
             lblInfoRival.ForeColor = Color.LightGray;
-            lblInfoRival.Location = new Point(917, 18);
+            lblInfoRival.Location = new Point(890, 18);
             lblInfoRival.Name = "lblInfoRival";
-            lblInfoRival.Size = new Size(319, 30);
+            lblInfoRival.Size = new Size(273, 30);
             lblInfoRival.TabIndex = 4;
-            lblInfoRival.Text = "RIVAL: [Nombre, Apellido]";
+            lblInfoRival.Text = "12345678901234567890";
             // 
             // pbCartaRival2
             // 
@@ -157,11 +161,11 @@
             lblInfoYo.AutoSize = true;
             lblInfoYo.Font = new Font("Century Gothic", 12F);
             lblInfoYo.ForeColor = Color.LightGray;
-            lblInfoYo.Location = new Point(946, 720);
+            lblInfoYo.Location = new Point(890, 720);
             lblInfoYo.Name = "lblInfoYo";
-            lblInfoYo.Size = new Size(290, 30);
+            lblInfoYo.Size = new Size(273, 30);
             lblInfoYo.TabIndex = 9;
-            lblInfoYo.Text = "YO: [Nombre, Apellido]";
+            lblInfoYo.Text = "12345678901234567890";
             // 
             // lblPuntajeVisual
             // 
@@ -376,12 +380,32 @@
             pictureBox1.TabIndex = 32;
             pictureBox1.TabStop = false;
             // 
+            // pbFotoYo
+            // 
+            pbFotoYo.Location = new Point(1193, 699);
+            pbFotoYo.Name = "pbFotoYo";
+            pbFotoYo.Size = new Size(58, 60);
+            pbFotoYo.SizeMode = PictureBoxSizeMode.Zoom;
+            pbFotoYo.TabIndex = 33;
+            pbFotoYo.TabStop = false;
+            // 
+            // pbFotoRival
+            // 
+            pbFotoRival.Location = new Point(1193, 12);
+            pbFotoRival.Name = "pbFotoRival";
+            pbFotoRival.Size = new Size(58, 60);
+            pbFotoRival.SizeMode = PictureBoxSizeMode.Zoom;
+            pbFotoRival.TabIndex = 34;
+            pbFotoRival.TabStop = false;
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
             ClientSize = new Size(1278, 785);
+            Controls.Add(pbFotoRival);
+            Controls.Add(pbFotoYo);
             Controls.Add(pictureBox1);
             Controls.Add(pbVolumen);
             Controls.Add(pbPuntajeRival2);
@@ -433,6 +457,8 @@
             ((System.ComponentModel.ISupportInitialize)pbPuntajeRival2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbVolumen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFotoYo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbFotoRival).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -465,5 +491,7 @@
         private PictureBox pbPuntajeRival2;
         private PictureBox pbVolumen;
         private PictureBox pictureBox1;
+        private PictureBox pbFotoYo;
+        private PictureBox pbFotoRival;
     }
 }

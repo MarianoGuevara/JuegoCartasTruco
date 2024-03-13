@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|c:\\users\\mariano\\desktop\\juegocartastruco\\formularios\\menumain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{122DB67B-F15C-426F-8BD0-8B93D581E950}|TrucoJuego\\Entidades.csproj|c:\\users\\mariano\\desktop\\juegocartastruco\\trucojuego\\persona.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{122DB67B-F15C-426F-8BD0-8B93D581E950}|TrucoJuego\\Entidades.csproj|solutionrelative:trucojuego\\persona.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\menumain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|solutionrelative:formularios\\menumain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|solutionrelative:formularios\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{122DB67B-F15C-426F-8BD0-8B93D581E950}|TrucoJuego\\Entidades.csproj|c:\\users\\mariano\\desktop\\juegocartastruco\\trucojuego\\serializadorajson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{122DB67B-F15C-426F-8BD0-8B93D581E950}|TrucoJuego\\Entidades.csproj|solutionrelative:trucojuego\\serializadorajson.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -13,18 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\menumain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|solutionrelative:formularios\\menumain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|solutionrelative:formularios\\partida.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\cerrarmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|solutionrelative:formularios\\cerrarmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\formularios\\cerrarmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{4A3D05B5-A85E-4C28-9919-FA46FA89FE8F}|Formularios\\Formularios.csproj|solutionrelative:formularios\\cerrarmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,78 +34,83 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CerrarMenu.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\CerrarMenu.cs",
-              "RelativeDocumentMoniker": "Formularios\\CerrarMenu.cs",
-              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\CerrarMenu.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Formularios\\CerrarMenu.cs [Dise\u00F1o]",
+              "DocumentIndex": 0,
+              "Title": "Persona.cs",
+              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\Persona.cs",
+              "RelativeDocumentMoniker": "TrucoJuego\\Persona.cs",
+              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\Persona.cs",
+              "RelativeToolTip": "TrucoJuego\\Persona.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAkwC4AAABJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-05T22:11:40.204Z"
+              "WhenOpened": "2024-03-13T22:00:25.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Partida.cs",
+              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Partida.cs",
+              "RelativeDocumentMoniker": "Formularios\\Partida.cs",
+              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Partida.cs",
+              "RelativeToolTip": "Formularios\\Partida.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAAADIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-29T19:12:46.765Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CerrarMenu.cs",
-              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\CerrarMenu.cs",
-              "RelativeDocumentMoniker": "Formularios\\CerrarMenu.cs",
-              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\CerrarMenu.cs",
-              "RelativeToolTip": "Formularios\\CerrarMenu.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAQwBMAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-05T22:11:22.122Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Partida.cs [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Partida.cs",
               "RelativeDocumentMoniker": "Formularios\\Partida.cs",
               "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Partida.cs [Dise\u00F1o]",
               "RelativeToolTip": "Formularios\\Partida.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-05T22:10:21.537Z"
+              "WhenOpened": "2024-03-05T22:10:21.537Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MenuMain.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\MenuMain.cs",
-              "RelativeDocumentMoniker": "Formularios\\MenuMain.cs",
-              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\MenuMain.cs [Design]",
-              "RelativeToolTip": "Formularios\\MenuMain.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-05T21:47:47.381Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MenuMain.cs",
               "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\MenuMain.cs",
               "RelativeDocumentMoniker": "Formularios\\MenuMain.cs",
               "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\MenuMain.cs",
               "RelativeToolTip": "Formularios\\MenuMain.cs",
-              "ViewState": "AQIAAB8AAAAAAAAAAAAkwCwAAABoAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAAAD8AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-05T20:54:56.347Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Partida.cs",
-              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Partida.cs",
-              "RelativeDocumentMoniker": "Formularios\\Partida.cs",
-              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\Partida.cs",
-              "RelativeToolTip": "Formularios\\Partida.cs",
-              "ViewState": "AQIAAPIBAAAAAAAAAAAQwKkCAABJAAAA",
+              "DocumentIndex": 5,
+              "Title": "MenuMain.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\MenuMain.cs",
+              "RelativeDocumentMoniker": "Formularios\\MenuMain.cs",
+              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\Formularios\\MenuMain.cs [Dise\u00F1o]",
+              "RelativeToolTip": "Formularios\\MenuMain.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-29T19:12:46.765Z"
+              "WhenOpened": "2024-03-05T21:47:47.381Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SerializadoraJson.cs",
+              "DocumentMoniker": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\SerializadoraJson.cs",
+              "RelativeDocumentMoniker": "TrucoJuego\\SerializadoraJson.cs",
+              "ToolTip": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\SerializadoraJson.cs",
+              "RelativeToolTip": "TrucoJuego\\SerializadoraJson.cs",
+              "ViewState": "AQIAABIAAAAAAAAAAAAYwCIAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-13T21:22:12.038Z",
+              "EditorCaption": ""
             }
           ]
         }

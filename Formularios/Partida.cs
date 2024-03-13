@@ -14,6 +14,9 @@ namespace Formularios
     public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
+        private Persona perfilYo;
+        private Persona perfilRival;
+
         MenuMain menuMain;
         private SoundPlayer efectoCarta;
         private SoundPlayer efectoCambioRonda;
@@ -38,12 +41,19 @@ namespace Formularios
         private Carta cartaRival;
         private Carta cartaRivalActual;
         private Carta cartaYoActual;
-        public Partida(MenuMain menu)
+        public Partida(MenuMain menu, Persona perfilYo)
         {
+            InitializeComponent();
+
+            this.perfilYo = perfilYo;
+            this.perfilRival = new Persona("", "");
+            this.perfilRival.PersonaRandom();
+
+            this.AsignarNombreYFotoPerfil();
+
             this.menuMain = menu;
             this.menuMain.Hide();
 
-            InitializeComponent();
             this.mazo = false;
 
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -76,6 +86,16 @@ namespace Formularios
         }
 
         #region Animaciones
+
+        private void AsignarNombreYFotoPerfil()
+        {
+            this.lblInfoYo.Text = this.perfilYo.Nombre;
+            this.pbFotoYo.Image = Image.FromFile(this.perfilYo.ImagenDireccion);
+
+            this.lblInfoRival.Text = this.perfilRival.Nombre;
+            this.pbFotoRival.Image = Image.FromFile(this.perfilRival.ImagenDireccion);
+        }
+
         [DebuggerStepThrough]
         private void AnimacionCartas(PictureBox pb, bool hover = true)
         {

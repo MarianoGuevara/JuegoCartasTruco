@@ -3,7 +3,6 @@ COSAS RARAS/A MEJORAR
 -> cuando aprete salir BORRAR el objeto partida actual. (o = null o alguna otra no sé)
 
 COSAS A AGREGAR
--> estructura menu fuera de partida
  menu
  
   JUGAR

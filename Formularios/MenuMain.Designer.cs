@@ -116,6 +116,7 @@
             Name = "MenuMain";
             Text = "MenuMain";
             FormClosing += MenuMain_FormClosing;
+            Load += MenuMain_Load;
             Controls.SetChildIndex(pbLogo, 0);
             Controls.SetChildIndex(pbVolumen, 0);
             Controls.SetChildIndex(lblJugar, 0);
