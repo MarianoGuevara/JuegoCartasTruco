@@ -26,6 +26,7 @@ namespace Formularios
 
             this.MusicaActivada = true;
             this.MusicaFondo = new SoundPlayer("../../../../media/sounds/maharanjan_partida.wav");
+            this.pbVolumen.Image = Image.FromFile("../../../../media/soundON.png");
         }
 
         #region Animaciones
@@ -40,25 +41,44 @@ namespace Formularios
 
             lbl.Location = new Point(x, y);
         }
-
         [DebuggerStepThrough]
-        private void AsignarHover(System.Windows.Forms.Label label, bool hover = false)
+        private void AsignarHover(System.Windows.Forms.Label label, float originalSize, bool hover = false)
         {
+            float aumentedSize = (float)(originalSize + 1);
+
             if (hover)
             {
                 this.AnimacionCartas(label);
                 FontFamily f = new FontFamily("Century Gothic");
-                label.Font = new Font(f, 21F, FontStyle.Bold);
+                label.Font = new Font(f, aumentedSize, FontStyle.Bold);
             }
             else
             {
                 this.AnimacionCartas(label, false);
                 FontFamily f = new FontFamily("Century Gothic");
-                label.Font = new Font(f, 20F, FontStyle.Regular);
+                label.Font = new Font(f, originalSize, FontStyle.Regular);
             }
         }
-        protected void Menu_MouseEnter(object sender, EventArgs e) { if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl, true); }
-        protected void Menu_MouseLeave(object sender, EventArgs e) { if (sender is System.Windows.Forms.Label lbl) AsignarHover(lbl, false); }
+        [DebuggerStepThrough]
+        protected void Menu_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender is System.Windows.Forms.Label lbl)
+            {
+                //MessageBox.Show(lbl.Name);
+                if (lbl.Name == "lblCambioImagen") AsignarHover(lbl, 11F, true);
+                else AsignarHover(lbl, 20F, true);
+            }
+        }
+        [DebuggerStepThrough]
+        protected void Menu_MouseLeave(object sender, EventArgs e) 
+        { 
+            if (sender is System.Windows.Forms.Label lbl)
+            {
+                if (lbl.Name == "lblCambioImagen") AsignarHover(lbl, 11F, false);
+                else AsignarHover(lbl, 20F, false);
+            }
+
+        }
         #endregion
         private void pbVolumen_Click(object sender, EventArgs e)
         {

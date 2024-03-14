@@ -4,6 +4,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,9 @@ namespace Formularios
 
             base.MusicaFondo.PlayLooping();
         }
+        [DebuggerStepThrough]
         private void MenuMain_MouseEnter(object sender, EventArgs e) { base.Menu_MouseEnter(sender, e); }
+        [DebuggerStepThrough]
         private void MenuMain_MouseLeave(object sender, EventArgs e) { base.Menu_MouseLeave(sender, e); }
 
         private void lblJugar_Click(object sender, EventArgs e)
@@ -35,7 +38,9 @@ namespace Formularios
         }
         private void lblPerfil_Click(object sender, EventArgs e)
         {
-
+            MenuPerfil perfil = new MenuPerfil(this.yoPersona);
+            perfil.ShowDialog();
+            //base.path
         }
         private void lblTutorial_Click(object sender, EventArgs e)
         {

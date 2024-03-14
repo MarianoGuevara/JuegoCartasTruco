@@ -83,6 +83,8 @@ namespace Formularios
             this.EventoComenzarJuego += new DelegadoComenzarJuego(RepartirCartasRival);
             this.EventoComenzarJuego.Invoke();
             this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia aca pq se reemplaza la lista d cartas en el invoke
+
+            //this.yo.Puntaje = 29;
         }
 
         #region Animaciones
@@ -498,6 +500,7 @@ namespace Formularios
         }
         private void ModificarEstadoBotones(bool desactivar = false)
         {
+            this.lblSalir.Enabled = true;
             this.lblEnvido.Enabled = true;
             this.lblTruco.Enabled = true;
             this.lblMazo.Enabled = true;
@@ -507,6 +510,7 @@ namespace Formularios
 
             if (desactivar)
             {
+                this.lblSalir.Enabled = false;
                 this.lblEnvido.Enabled = false;
                 this.lblTruco.Enabled = false;
                 this.lblMazo.Enabled = false;

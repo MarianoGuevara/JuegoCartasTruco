@@ -13,6 +13,9 @@
     <Compile Update="MenuPadre.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MenuPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Partida.cs">
       <SubType>Form</SubType>
     </Compile>

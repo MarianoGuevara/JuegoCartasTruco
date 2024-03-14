@@ -58,6 +58,8 @@
             pictureBox1 = new PictureBox();
             pbFotoYo = new PictureBox();
             pbFotoRival = new PictureBox();
+            label1 = new Label();
+            label3 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).BeginInit();
@@ -84,7 +86,7 @@
             // 
             // pbCartaPropia1
             // 
-            pbCartaPropia1.Location = new Point(880, 547);
+            pbCartaPropia1.Location = new Point(890, 547);
             pbCartaPropia1.Name = "pbCartaPropia1";
             pbCartaPropia1.Size = new Size(97, 136);
             pbCartaPropia1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -96,7 +98,7 @@
             // 
             // pbCartaRival1
             // 
-            pbCartaRival1.Location = new Point(890, 78);
+            pbCartaRival1.Location = new Point(890, 116);
             pbCartaRival1.Name = "pbCartaRival1";
             pbCartaRival1.Size = new Size(97, 136);
             pbCartaRival1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -108,15 +110,15 @@
             lblInfoRival.AutoSize = true;
             lblInfoRival.Font = new Font("Century Gothic", 12F);
             lblInfoRival.ForeColor = Color.LightGray;
-            lblInfoRival.Location = new Point(890, 18);
+            lblInfoRival.Location = new Point(1056, 40);
             lblInfoRival.Name = "lblInfoRival";
-            lblInfoRival.Size = new Size(273, 30);
+            lblInfoRival.Size = new Size(180, 30);
             lblInfoRival.TabIndex = 4;
-            lblInfoRival.Text = "12345678901234567890";
+            lblInfoRival.Text = "[nombre rival]";
             // 
             // pbCartaRival2
             // 
-            pbCartaRival2.Location = new Point(1007, 78);
+            pbCartaRival2.Location = new Point(1007, 116);
             pbCartaRival2.Name = "pbCartaRival2";
             pbCartaRival2.Size = new Size(104, 136);
             pbCartaRival2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -125,7 +127,7 @@
             // 
             // pbCartaRival3
             // 
-            pbCartaRival3.Location = new Point(1139, 78);
+            pbCartaRival3.Location = new Point(1139, 116);
             pbCartaRival3.Name = "pbCartaRival3";
             pbCartaRival3.Size = new Size(97, 136);
             pbCartaRival3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -146,7 +148,7 @@
             // 
             // pbCartaPropia2
             // 
-            pbCartaPropia2.Location = new Point(1007, 547);
+            pbCartaPropia2.Location = new Point(1005, 547);
             pbCartaPropia2.Name = "pbCartaPropia2";
             pbCartaPropia2.Size = new Size(104, 136);
             pbCartaPropia2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -161,18 +163,18 @@
             lblInfoYo.AutoSize = true;
             lblInfoYo.Font = new Font("Century Gothic", 12F);
             lblInfoYo.ForeColor = Color.LightGray;
-            lblInfoYo.Location = new Point(890, 720);
+            lblInfoYo.Location = new Point(1021, 720);
             lblInfoYo.Name = "lblInfoYo";
-            lblInfoYo.Size = new Size(273, 30);
+            lblInfoYo.Size = new Size(159, 30);
             lblInfoYo.TabIndex = 9;
-            lblInfoYo.Text = "12345678901234567890";
+            lblInfoYo.Text = "[yo nombre]";
             // 
             // lblPuntajeVisual
             // 
             lblPuntajeVisual.AutoSize = true;
             lblPuntajeVisual.Font = new Font("Century Gothic", 12F);
             lblPuntajeVisual.ForeColor = Color.LightGray;
-            lblPuntajeVisual.Location = new Point(1007, 353);
+            lblPuntajeVisual.Location = new Point(1007, 383);
             lblPuntajeVisual.Name = "lblPuntajeVisual";
             lblPuntajeVisual.Size = new Size(102, 30);
             lblPuntajeVisual.TabIndex = 13;
@@ -183,7 +185,7 @@
             lblSalir.AutoSize = true;
             lblSalir.Font = new Font("Century Gothic", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSalir.ForeColor = Color.LightGray;
-            lblSalir.Location = new Point(349, 18);
+            lblSalir.Location = new Point(762, 720);
             lblSalir.Name = "lblSalir";
             lblSalir.Size = new Size(74, 30);
             lblSalir.TabIndex = 14;
@@ -197,7 +199,7 @@
             lblTruco.AutoSize = true;
             lblTruco.Font = new Font("Century Gothic", 12F);
             lblTruco.ForeColor = Color.LightGray;
-            lblTruco.Location = new Point(117, 720);
+            lblTruco.Location = new Point(65, 720);
             lblTruco.Name = "lblTruco";
             lblTruco.Size = new Size(96, 30);
             lblTruco.TabIndex = 15;
@@ -209,7 +211,7 @@
             // pbPuntajeYo1
             // 
             pbPuntajeYo1.BackColor = Color.FromArgb(45, 50, 59);
-            pbPuntajeYo1.Location = new Point(890, 399);
+            pbPuntajeYo1.Location = new Point(890, 440);
             pbPuntajeYo1.Name = "pbPuntajeYo1";
             pbPuntajeYo1.Size = new Size(346, 74);
             pbPuntajeYo1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -219,7 +221,7 @@
             // pbPuntajeRival1
             // 
             pbPuntajeRival1.BackColor = Color.FromArgb(45, 50, 59);
-            pbPuntajeRival1.Location = new Point(890, 262);
+            pbPuntajeRival1.Location = new Point(890, 285);
             pbPuntajeRival1.Name = "pbPuntajeRival1";
             pbPuntajeRival1.Size = new Size(346, 74);
             pbPuntajeRival1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -229,7 +231,7 @@
             // pbDialogoRival
             // 
             pbDialogoRival.BackColor = Color.FromArgb(45, 50, 59);
-            pbDialogoRival.Location = new Point(570, 3);
+            pbDialogoRival.Location = new Point(570, 12);
             pbDialogoRival.Name = "pbDialogoRival";
             pbDialogoRival.Size = new Size(304, 75);
             pbDialogoRival.SizeMode = PictureBoxSizeMode.Zoom;
@@ -241,7 +243,7 @@
             lblEnvido.AutoSize = true;
             lblEnvido.Font = new Font("Century Gothic", 12F);
             lblEnvido.ForeColor = Color.LightGray;
-            lblEnvido.Location = new Point(376, 720);
+            lblEnvido.Location = new Point(293, 720);
             lblEnvido.Name = "lblEnvido";
             lblEnvido.Size = new Size(91, 30);
             lblEnvido.TabIndex = 27;
@@ -255,7 +257,7 @@
             lblMazo.AutoSize = true;
             lblMazo.Font = new Font("Century Gothic", 12F);
             lblMazo.ForeColor = Color.LightGray;
-            lblMazo.Location = new Point(651, 720);
+            lblMazo.Location = new Point(545, 720);
             lblMazo.Name = "lblMazo";
             lblMazo.Size = new Size(86, 30);
             lblMazo.TabIndex = 28;
@@ -267,9 +269,9 @@
             // pbCartaPropiaPanio1
             // 
             pbCartaPropiaPanio1.BackColor = Color.FromArgb(48, 98, 41);
-            pbCartaPropiaPanio1.Location = new Point(122, 397);
+            pbCartaPropiaPanio1.Location = new Point(135, 375);
             pbCartaPropiaPanio1.Name = "pbCartaPropiaPanio1";
-            pbCartaPropiaPanio1.Size = new Size(97, 136);
+            pbCartaPropiaPanio1.Size = new Size(84, 123);
             pbCartaPropiaPanio1.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaPropiaPanio1.TabIndex = 15;
             pbCartaPropiaPanio1.TabStop = false;
@@ -277,9 +279,9 @@
             // pbCartaPropiaPanio2
             // 
             pbCartaPropiaPanio2.BackColor = Color.FromArgb(48, 98, 41);
-            pbCartaPropiaPanio2.Location = new Point(364, 397);
+            pbCartaPropiaPanio2.Location = new Point(364, 375);
             pbCartaPropiaPanio2.Name = "pbCartaPropiaPanio2";
-            pbCartaPropiaPanio2.Size = new Size(97, 136);
+            pbCartaPropiaPanio2.Size = new Size(87, 123);
             pbCartaPropiaPanio2.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaPropiaPanio2.TabIndex = 16;
             pbCartaPropiaPanio2.TabStop = false;
@@ -287,9 +289,9 @@
             // pbCartaPropiaPanio3
             // 
             pbCartaPropiaPanio3.BackColor = Color.FromArgb(48, 98, 41);
-            pbCartaPropiaPanio3.Location = new Point(610, 397);
+            pbCartaPropiaPanio3.Location = new Point(595, 375);
             pbCartaPropiaPanio3.Name = "pbCartaPropiaPanio3";
-            pbCartaPropiaPanio3.Size = new Size(97, 136);
+            pbCartaPropiaPanio3.Size = new Size(83, 123);
             pbCartaPropiaPanio3.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaPropiaPanio3.TabIndex = 17;
             pbCartaPropiaPanio3.TabStop = false;
@@ -297,9 +299,9 @@
             // pbCartaRivalPanio1
             // 
             pbCartaRivalPanio1.BackColor = Color.FromArgb(48, 98, 41);
-            pbCartaRivalPanio1.Location = new Point(122, 62);
+            pbCartaRivalPanio1.Location = new Point(135, 62);
             pbCartaRivalPanio1.Name = "pbCartaRivalPanio1";
-            pbCartaRivalPanio1.Size = new Size(97, 136);
+            pbCartaRivalPanio1.Size = new Size(84, 125);
             pbCartaRivalPanio1.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaRivalPanio1.TabIndex = 18;
             pbCartaRivalPanio1.TabStop = false;
@@ -309,7 +311,7 @@
             pbCartaRivalPanio2.BackColor = Color.FromArgb(48, 98, 41);
             pbCartaRivalPanio2.Location = new Point(364, 62);
             pbCartaRivalPanio2.Name = "pbCartaRivalPanio2";
-            pbCartaRivalPanio2.Size = new Size(97, 136);
+            pbCartaRivalPanio2.Size = new Size(87, 125);
             pbCartaRivalPanio2.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaRivalPanio2.TabIndex = 19;
             pbCartaRivalPanio2.TabStop = false;
@@ -317,9 +319,9 @@
             // pbCartaRivalPanio3
             // 
             pbCartaRivalPanio3.BackColor = Color.FromArgb(48, 98, 41);
-            pbCartaRivalPanio3.Location = new Point(610, 62);
+            pbCartaRivalPanio3.Location = new Point(595, 62);
             pbCartaRivalPanio3.Name = "pbCartaRivalPanio3";
-            pbCartaRivalPanio3.Size = new Size(97, 136);
+            pbCartaRivalPanio3.Size = new Size(83, 125);
             pbCartaRivalPanio3.SizeMode = PictureBoxSizeMode.Zoom;
             pbCartaRivalPanio3.TabIndex = 20;
             pbCartaRivalPanio3.TabStop = false;
@@ -334,15 +336,15 @@
             panelPanio.Controls.Add(pbCartaPropiaPanio3);
             panelPanio.Controls.Add(pbCartaPropiaPanio2);
             panelPanio.Controls.Add(pbCartaPropiaPanio1);
-            panelPanio.Location = new Point(12, 78);
+            panelPanio.Location = new Point(27, 116);
             panelPanio.Name = "panelPanio";
-            panelPanio.Size = new Size(862, 605);
+            panelPanio.Size = new Size(847, 567);
             panelPanio.TabIndex = 3;
             // 
             // pbPuntajeYo2
             // 
             pbPuntajeYo2.BackColor = Color.FromArgb(45, 50, 59);
-            pbPuntajeYo2.Location = new Point(890, 399);
+            pbPuntajeYo2.Location = new Point(890, 440);
             pbPuntajeYo2.Name = "pbPuntajeYo2";
             pbPuntajeYo2.Size = new Size(180, 74);
             pbPuntajeYo2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -352,7 +354,7 @@
             // pbPuntajeRival2
             // 
             pbPuntajeRival2.BackColor = Color.FromArgb(45, 50, 59);
-            pbPuntajeRival2.Location = new Point(890, 262);
+            pbPuntajeRival2.Location = new Point(890, 285);
             pbPuntajeRival2.Name = "pbPuntajeRival2";
             pbPuntajeRival2.Size = new Size(180, 74);
             pbPuntajeRival2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -362,7 +364,7 @@
             // pbVolumen
             // 
             pbVolumen.Image = (Image)resources.GetObject("pbVolumen.Image");
-            pbVolumen.Location = new Point(200, 18);
+            pbVolumen.Location = new Point(215, 40);
             pbVolumen.Name = "pbVolumen";
             pbVolumen.Size = new Size(79, 47);
             pbVolumen.SizeMode = PictureBoxSizeMode.Zoom;
@@ -373,16 +375,16 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(36, 12);
+            pictureBox1.Location = new Point(52, 25);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(105, 60);
+            pictureBox1.Size = new Size(141, 85);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 32;
             pictureBox1.TabStop = false;
             // 
             // pbFotoYo
             // 
-            pbFotoYo.Location = new Point(1193, 699);
+            pbFotoYo.Location = new Point(907, 707);
             pbFotoYo.Name = "pbFotoYo";
             pbFotoYo.Size = new Size(58, 60);
             pbFotoYo.SizeMode = PictureBoxSizeMode.Zoom;
@@ -391,12 +393,34 @@
             // 
             // pbFotoRival
             // 
-            pbFotoRival.Location = new Point(1193, 12);
+            pbFotoRival.Location = new Point(907, 31);
             pbFotoRival.Name = "pbFotoRival";
             pbFotoRival.Size = new Size(58, 60);
             pbFotoRival.SizeMode = PictureBoxSizeMode.Zoom;
             pbFotoRival.TabIndex = 34;
             pbFotoRival.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 12F);
+            label1.ForeColor = Color.LightGray;
+            label1.Location = new Point(971, 40);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 30);
+            label1.TabIndex = 35;
+            label1.Text = "RIVAL:";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Century Gothic", 12F);
+            label3.ForeColor = Color.LightGray;
+            label3.Location = new Point(971, 720);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 30);
+            label3.TabIndex = 37;
+            label3.Text = "YO:";
             // 
             // Partida
             // 
@@ -404,6 +428,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
             ClientSize = new Size(1278, 785);
+            Controls.Add(label3);
+            Controls.Add(label1);
             Controls.Add(pbFotoRival);
             Controls.Add(pbFotoYo);
             Controls.Add(pictureBox1);
@@ -493,5 +519,7 @@
         private PictureBox pictureBox1;
         private PictureBox pbFotoYo;
         private PictureBox pbFotoRival;
+        private Label label1;
+        private Label label3;
     }
 }
