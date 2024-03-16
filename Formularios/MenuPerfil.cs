@@ -4,21 +4,22 @@ using System.Diagnostics;
 
 namespace Formularios
 {
-    public partial class MenuPerfil : MenuPadre
+    public partial class MenuPerfil : MenuAbstract
     {
         private Persona yo;
         private Image imagenInicial;
-        private string nombreInicial;
-
+        public string nombreInicial;
+        public string direccionImagen;
         public MenuPerfil(Persona yo)
         {
             InitializeComponent();
-            base.pbVolumen.Enabled = false;
             this.yo = yo;
+
             this.txtNombre.Text = yo.Nombre;
             this.pbPerfil.Image = Image.FromFile(yo.ImagenDireccion);
             this.nombreInicial = yo.Nombre;
             this.imagenInicial = Image.FromFile(yo.ImagenDireccion);
+            this.direccionImagen = yo.ImagenDireccion;
 
             this.txtNombre.MaxLength = 13;
         }
@@ -28,7 +29,23 @@ namespace Formularios
         private void MenuPerfil_MouseEnter(object sender, EventArgs e) { base.Menu_MouseEnter(sender, e); }
         private void MenuPerfil_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if (!this.SonImagenesIguales(this.pbPerfil.Image, Image.FromFile(this.yo.ImagenDireccion))
+                || this.txtNombre.Text != this.yo.Nombre)
+            {
+                if (this.txtNombre.Text.Length < 4)
+                {
+                    MessageBox.Show("El nombre debe ser de mínimo 4 caracteres", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    e.Cancel = true;
+                }
+                else
+                {
+                    CerrarMenu c = new CerrarMenu("Desea guardar los cambios hechos en el perfil? Piensalo bien...", "SI", "NO");
+                    c.ShowDialog();
+                    this.nombreInicial = this.txtNombre.Text;
+                    this.DialogResult = c.DialogResult;
+                }
+            }
+            else this.DialogResult = DialogResult.Cancel;
         }
         // metodo de chat gpt la verdad
         private bool SonImagenesIguales(Image imagen1, Image imagen2)
@@ -60,22 +77,13 @@ namespace Formularios
             ofd.Filter = "Archivos de imagen JPG|*.jpg";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                string rutaArchivo = ofd.FileName;
-                this.pbPerfil.Image = Image.FromFile(rutaArchivo);
+                this.direccionImagen = ofd.FileName;
+                this.pbPerfil.Image = Image.FromFile(ofd.FileName);
             }
         }
-
         private void lblVolver_Click(object sender, EventArgs e)
         {
-            if (!this.SonImagenesIguales(this.pbPerfil.Image, Image.FromFile(this.yo.ImagenDireccion))
-                || this.txtNombre.Text != this.yo.Nombre)
-            {
-                CerrarMenu c = new CerrarMenu("Desea guardar los cambios hechos en el perfil? Piensalo bien...", "SI", "NO");
-                c.ShowDialog();
-                this.DialogResult = DialogResult.OK;
-            }
-            else this.DialogResult = DialogResult.Cancel;
-
+            this.Close();
         }
     }
 }

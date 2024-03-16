@@ -34,20 +34,14 @@
             pbPerfil = new PictureBox();
             txtNombre = new TextBox();
             lblCambioImagen = new Label();
-            ((System.ComponentModel.ISupportInitialize)pbVolumen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPerfil).BeginInit();
             SuspendLayout();
             // 
-            // pbVolumen
-            // 
-            pbVolumen.Location = new Point(199, 719);
-            pbVolumen.Size = new Size(80, 54);
-            // 
             // pbLogo
             // 
             pbLogo.Image = (Image)resources.GetObject("pbLogo.Image");
-            pbLogo.Location = new Point(32, 33);
+            pbLogo.Location = new Point(20, 33);
             pbLogo.Size = new Size(418, 229);
             // 
             // lblVolver
@@ -55,7 +49,7 @@
             lblVolver.AutoSize = true;
             lblVolver.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblVolver.ForeColor = Color.LightGray;
-            lblVolver.Location = new Point(152, 636);
+            lblVolver.Location = new Point(142, 548);
             lblVolver.Name = "lblVolver";
             lblVolver.Size = new Size(174, 49);
             lblVolver.TabIndex = 22;
@@ -69,7 +63,7 @@
             lblHistorial.AutoSize = true;
             lblHistorial.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblHistorial.ForeColor = Color.LightGray;
-            lblHistorial.Location = new Point(92, 572);
+            lblHistorial.Location = new Point(82, 483);
             lblHistorial.Name = "lblHistorial";
             lblHistorial.Size = new Size(294, 49);
             lblHistorial.TabIndex = 23;
@@ -79,7 +73,7 @@
             // 
             // pbPerfil
             // 
-            pbPerfil.Location = new Point(35, 354);
+            pbPerfil.Location = new Point(30, 285);
             pbPerfil.Name = "pbPerfil";
             pbPerfil.Size = new Size(138, 110);
             pbPerfil.SizeMode = PictureBoxSizeMode.Zoom;
@@ -91,7 +85,7 @@
             txtNombre.BackColor = Color.FromArgb(45, 50, 59);
             txtNombre.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             txtNombre.ForeColor = Color.LightGray;
-            txtNombre.Location = new Point(199, 382);
+            txtNombre.Location = new Point(185, 317);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(251, 57);
             txtNombre.TabIndex = 20;
@@ -101,7 +95,7 @@
             lblCambioImagen.AutoSize = true;
             lblCambioImagen.Font = new Font("Century Gothic", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblCambioImagen.ForeColor = Color.LightGray;
-            lblCambioImagen.Location = new Point(45, 480);
+            lblCambioImagen.Location = new Point(40, 398);
             lblCambioImagen.Name = "lblCambioImagen";
             lblCambioImagen.Size = new Size(119, 25);
             lblCambioImagen.TabIndex = 25;
@@ -114,8 +108,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = null;
-            ClientSize = new Size(478, 796);
+            ClientSize = new Size(459, 641);
             Controls.Add(lblCambioImagen);
             Controls.Add(txtNombre);
             Controls.Add(pbPerfil);
@@ -127,13 +120,11 @@
             MouseEnter += MenuPerfil_MouseEnter;
             MouseLeave += MenuPerfil_MouseLeave;
             Controls.SetChildIndex(pbLogo, 0);
-            Controls.SetChildIndex(pbVolumen, 0);
             Controls.SetChildIndex(lblVolver, 0);
             Controls.SetChildIndex(lblHistorial, 0);
             Controls.SetChildIndex(pbPerfil, 0);
             Controls.SetChildIndex(txtNombre, 0);
             Controls.SetChildIndex(lblCambioImagen, 0);
-            ((System.ComponentModel.ISupportInitialize)pbVolumen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPerfil).EndInit();
             ResumeLayout(false);

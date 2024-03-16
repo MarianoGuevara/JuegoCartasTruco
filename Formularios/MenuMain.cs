@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Formularios
 {
-    public partial class MenuMain : MenuPadre
+    public partial class MenuMain : MenuAbstract
     {
         Persona yoPersona;
         public MenuMain()
@@ -21,8 +21,6 @@ namespace Formularios
             InitializeComponent();
             this.Text = "Menu";
             this.ShowIcon = false;
-
-            base.MusicaFondo.PlayLooping();
         }
         [DebuggerStepThrough]
         private void MenuMain_MouseEnter(object sender, EventArgs e) { base.Menu_MouseEnter(sender, e); }
@@ -31,21 +29,20 @@ namespace Formularios
 
         private void lblJugar_Click(object sender, EventArgs e)
         {
-            base.MusicaFondo.Stop();
             Partida p = new Partida(this, this.yoPersona);
             p.ShowDialog();
-            base.MusicaFondo.PlayLooping();
         }
         private void lblPerfil_Click(object sender, EventArgs e)
         {
             MenuPerfil perfil = new MenuPerfil(this.yoPersona);
             perfil.ShowDialog();
-            //base.path
+            if (perfil.DialogResult == DialogResult.OK)
+            {
+                this.yoPersona.Nombre = perfil.nombreInicial;
+                this.yoPersona.ImagenDireccion = perfil.direccionImagen;
+            }
         }
-        private void lblTutorial_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Tutorial aún no disponible en la app, vea las otras opciones.");
-        }
+        private void lblTutorial_Click(object sender, EventArgs e) { MessageBox.Show("Tutorial aún no disponible en la app, vea las otras opciones.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         private void lblSalir_Click(object sender, EventArgs e) { this.Close(); }
         private void MenuMain_FormClosing(object sender, FormClosingEventArgs e)
         {

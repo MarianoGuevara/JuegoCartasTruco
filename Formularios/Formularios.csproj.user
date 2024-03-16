@@ -7,6 +7,9 @@
     <Compile Update="CerrarMenu.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MenuAbstract.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MenuMain.cs">
       <SubType>Form</SubType>
     </Compile>

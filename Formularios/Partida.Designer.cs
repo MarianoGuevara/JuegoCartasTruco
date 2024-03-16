@@ -364,7 +364,7 @@
             // pbVolumen
             // 
             pbVolumen.Image = (Image)resources.GetObject("pbVolumen.Image");
-            pbVolumen.Location = new Point(215, 40);
+            pbVolumen.Location = new Point(238, 40);
             pbVolumen.Name = "pbVolumen";
             pbVolumen.Size = new Size(79, 47);
             pbVolumen.SizeMode = PictureBoxSizeMode.Zoom;
@@ -375,7 +375,7 @@
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(52, 25);
+            pictureBox1.Location = new Point(65, 25);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(141, 85);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;

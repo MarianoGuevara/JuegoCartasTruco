@@ -33,18 +33,13 @@
             lblPerfil = new Label();
             lblTutorial = new Label();
             lblSalir = new Label();
-            ((System.ComponentModel.ISupportInitialize)pbVolumen).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
             SuspendLayout();
-            // 
-            // pbVolumen
-            // 
-            pbVolumen.Location = new Point(204, 709);
             // 
             // pbLogo
             // 
             pbLogo.Image = (Image)resources.GetObject("pbLogo.Image");
-            pbLogo.Location = new Point(46, 47);
+            pbLogo.Location = new Point(37, 47);
             pbLogo.Size = new Size(385, 221);
             // 
             // lblJugar
@@ -52,7 +47,7 @@
             lblJugar.AutoSize = true;
             lblJugar.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblJugar.ForeColor = Color.LightGray;
-            lblJugar.Location = new Point(161, 386);
+            lblJugar.Location = new Point(152, 324);
             lblJugar.Name = "lblJugar";
             lblJugar.Size = new Size(154, 49);
             lblJugar.TabIndex = 21;
@@ -66,7 +61,7 @@
             lblPerfil.AutoSize = true;
             lblPerfil.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblPerfil.ForeColor = Color.LightGray;
-            lblPerfil.Location = new Point(169, 454);
+            lblPerfil.Location = new Point(160, 387);
             lblPerfil.Name = "lblPerfil";
             lblPerfil.Size = new Size(139, 49);
             lblPerfil.TabIndex = 22;
@@ -80,7 +75,7 @@
             lblTutorial.AutoSize = true;
             lblTutorial.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTutorial.ForeColor = Color.LightGray;
-            lblTutorial.Location = new Point(62, 518);
+            lblTutorial.Location = new Point(53, 445);
             lblTutorial.Name = "lblTutorial";
             lblTutorial.Size = new Size(353, 49);
             lblTutorial.TabIndex = 23;
@@ -94,7 +89,7 @@
             lblSalir.AutoSize = true;
             lblSalir.Font = new Font("Century Gothic", 20F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblSalir.ForeColor = Color.LightGray;
-            lblSalir.Location = new Point(177, 580);
+            lblSalir.Location = new Point(168, 510);
             lblSalir.Name = "lblSalir";
             lblSalir.Size = new Size(122, 49);
             lblSalir.TabIndex = 24;
@@ -108,7 +103,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(476, 794);
+            ClientSize = new Size(459, 641);
             Controls.Add(lblSalir);
             Controls.Add(lblTutorial);
             Controls.Add(lblPerfil);
@@ -118,12 +113,10 @@
             FormClosing += MenuMain_FormClosing;
             Load += MenuMain_Load;
             Controls.SetChildIndex(pbLogo, 0);
-            Controls.SetChildIndex(pbVolumen, 0);
             Controls.SetChildIndex(lblJugar, 0);
             Controls.SetChildIndex(lblPerfil, 0);
             Controls.SetChildIndex(lblTutorial, 0);
             Controls.SetChildIndex(lblSalir, 0);
-            ((System.ComponentModel.ISupportInitialize)pbVolumen).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();

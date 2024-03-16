@@ -80,7 +80,7 @@
         }
 
         #endregion
-        protected PictureBox pbVolumen;
         protected PictureBox pbLogo;
+        protected PictureBox pbVolumen;
     }
 }
