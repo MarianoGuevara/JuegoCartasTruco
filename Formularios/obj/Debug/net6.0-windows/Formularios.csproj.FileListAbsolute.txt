@@ -166,3 +166,4 @@ C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\T
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.genruntimeconfig.cache
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\ref\Truco.dll
 C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.MenuAbstract.resources
+C:\Users\Mariano\Desktop\JuegoCartasTruco\Formularios\obj\Debug\net6.0-windows\Formularios.Historial.resources

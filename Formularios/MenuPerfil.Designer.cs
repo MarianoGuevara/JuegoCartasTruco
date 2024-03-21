@@ -68,6 +68,7 @@
             lblHistorial.Size = new Size(294, 49);
             lblHistorial.TabIndex = 23;
             lblHistorial.Text = "VER HISTORIAL";
+            lblHistorial.Click += lblHistorial_Click;
             lblHistorial.MouseEnter += MenuPerfil_MouseEnter;
             lblHistorial.MouseLeave += MenuPerfil_MouseLeave;
             // 

@@ -53,7 +53,7 @@ namespace Formularios
             {
                 //this.yoPersona = new Persona("mariano", "../../../../media/perfiles/default.jpg");
 
-                bool serializacion = SerializadoraJson<Persona>.SerializarJson(this.yoPersona, "../../../../persona.json");
+                bool serializacion = Serializadora<Persona>.SerializarJson(this.yoPersona, "../../../../persona.json");
                 if (!serializacion) { MessageBox.Show("Ha ocurrido un error con la serializacion de su perfil. Comuniquese con el desarrollador. Mail: marianoguevara2005@gmail.com"); }
             }
         }
@@ -61,7 +61,7 @@ namespace Formularios
         {
             try
             {
-                this.yoPersona = SerializadoraJson<Persona>.DeserializarJson("../../../../persona.json");
+                this.yoPersona = Serializadora<Persona>.DeserializarJson("../../../../persona.json");
             }
             catch
             { 

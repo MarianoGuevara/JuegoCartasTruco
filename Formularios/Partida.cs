@@ -14,6 +14,7 @@ namespace Formularios
     public delegate void DelegadoJuegoRival(PictureBox pb, PictureBox pbPanio);
     public partial class Partida : Form
     {
+        private bool estaCerrandose;
         private Persona perfilYo;
         private Persona perfilRival;
 
@@ -44,7 +45,7 @@ namespace Formularios
         public Partida(MenuMain menu, Persona perfilYo)
         {
             InitializeComponent();
-
+            this.estaCerrandose = false;
             this.perfilYo = perfilYo;
             this.perfilRival = new Persona("", "");
             this.perfilRival.PersonaRandom();
@@ -84,7 +85,7 @@ namespace Formularios
             this.EventoComenzarJuego.Invoke();
             this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia aca pq se reemplaza la lista d cartas en el invoke
 
-            //this.yo.Puntaje = 29;
+            this.yo.Puntaje = 29;
         }
 
         #region Animaciones
@@ -190,41 +191,43 @@ namespace Formularios
 
             await Task.Delay(2000);
             this.ActualizarPuntajes();
+            if (this.estaCerrandose == false)
+            {
+                this.parda = false;
 
-            this.parda = false;
+                this.yo.cantoTruco = false;
+                this.rondaActual.ResetRonda();
 
-            this.yo.cantoTruco = false;
-            this.rondaActual.ResetRonda();
+                this.yo.PuntosRondaActual = 0;
+                this.rival.PuntosRondaActual = 0;
+                this.yo.CartasJugadas = 0;
+                this.rival.CartasJugadas = 0;
 
-            this.yo.PuntosRondaActual = 0;
-            this.rival.PuntosRondaActual = 0;
-            this.yo.CartasJugadas = 0;
-            this.rival.CartasJugadas = 0;
+                pbCartaPropia1.Enabled = true;
+                pbCartaPropia2.Enabled = true;
+                pbCartaPropia3.Enabled = true;
 
-            pbCartaPropia1.Enabled = true;
-            pbCartaPropia2.Enabled = true;
-            pbCartaPropia3.Enabled = true;
+                this.pbCartaPropiaPanio1.Image = null;
+                this.pbCartaPropiaPanio2.Image = null;
+                this.pbCartaPropiaPanio3.Image = null;
 
-            this.pbCartaPropiaPanio1.Image = null;
-            this.pbCartaPropiaPanio2.Image = null;
-            this.pbCartaPropiaPanio3.Image = null;
+                this.pbCartaRivalPanio1.Image = null;
+                this.pbCartaRivalPanio2.Image = null;
+                this.pbCartaRivalPanio3.Image = null;
 
-            this.pbCartaRivalPanio1.Image = null;
-            this.pbCartaRivalPanio2.Image = null;
-            this.pbCartaRivalPanio3.Image = null;
+                this.ganadorActual = string.Empty;
 
-            this.ganadorActual = string.Empty;
+                this.EventoComenzarJuego.Invoke();
+                this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia 
 
-            this.EventoComenzarJuego.Invoke();
-            this.rivalScreenshot.Cartas = new List<Carta>(this.rival.Cartas); // copia 
+                this.manoYo = !this.manoYo;
+                if (this.manoYo) this.turno = "yo";
+                else this.turno = "rival";
+                this.MiTurno();
 
-            this.manoYo = !this.manoYo;
-            if (this.manoYo) this.turno = "yo";
-            else this.turno = "rival";
-            this.MiTurno();
-
-            this.mazo = false;
-            if (this.manoYo == false && rival.CartasJugadas == 0) this.cartaRival = await this.JuegaRival(this.cartaYo);
+                this.mazo = false;
+                if (this.manoYo == false && rival.CartasJugadas == 0) this.cartaRival = await this.JuegaRival(this.cartaYo);
+            }
         }
         #endregion
 
@@ -365,7 +368,10 @@ namespace Formularios
             }
 
             this.ActualizarPuntajes();
-            this.MiTurno();
+            if (this.estaCerrandose == false)
+            {
+                this.MiTurno();
+            }
         }
         private void PardaTotal()
         {
@@ -374,23 +380,40 @@ namespace Formularios
         }
         private void ActualizarPuntajes()
         {
-            if (this.yo.Puntaje <= 15)
+            if (this.yo.Puntaje >= 30)
             {
-                this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+                ResultadoTanto r = new ResultadoTanto("yo", 30, this.rival.Puntaje, false);
+                r.ShowDialog();
+                this.estaCerrandose = true;
+                this.DialogResult = DialogResult.OK;
+            }
+            else if (this.rival.Puntaje >= 30)
+            {
+                ResultadoTanto r = new ResultadoTanto("rival", this.yo.Puntaje, this.rival.Puntaje, false);
+                r.ShowDialog();
+                this.estaCerrandose = true;
+                this.DialogResult = DialogResult.OK;
             }
             else
             {
-                this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(15));
-                this.pbPuntajeYo1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
-            }
-            if (this.rival.Puntaje <= 15)
-            {
-                this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
-            }
-            else
-            {
-                this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(15));
-                this.pbPuntajeRival1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+                if (this.yo.Puntaje <= 15)
+                {
+                    this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+                }
+                else
+                {
+                    this.pbPuntajeYo2.Image = Image.FromFile(Puntaje.ImagenPuntaje(15));
+                    this.pbPuntajeYo1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.yo.Puntaje));
+                }
+                if (this.rival.Puntaje <= 15)
+                {
+                    this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+                }
+                else
+                {
+                    this.pbPuntajeRival2.Image = Image.FromFile(Puntaje.ImagenPuntaje(15));
+                    this.pbPuntajeRival1.Image = Image.FromFile(Puntaje.ImagenPuntaje(this.rival.Puntaje));
+                }
             }
         }
         private async Task<Carta> JuegoYo(PictureBox cartaAJugar)
@@ -425,57 +448,61 @@ namespace Formularios
         }
         private async Task<Carta> JuegaRival(Carta cartaYo)
         {
-            Carta cartaRival;
-            bool mazo = false;
-
-            if (((this.rival.CartasJugadas == 1 && this.yo.CartasJugadas == 0) ||
-                (this.rival.CartasJugadas == 0 && (this.yo.CartasJugadas == 1 || this.yo.CartasJugadas == 0))) &&
-                (this.rondaActual.envido == false && this.rondaActual.realEnvido == false) && this.rondaActual.faltaEnvido == false &&
-                (!this.rondaActual.truco && !this.rondaActual.retruco && !this.rondaActual.valeCuatro)) await this.RivalCantaTanto(this.rivalScreenshot);
-
-            if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
+            if (this.estaCerrandose == false)
             {
-                mazo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
-            }
+                Carta cartaRival;
+                bool mazo = false;
 
-            await Task.Delay(2000);
-            this.mazo = mazo;
+                if (((this.rival.CartasJugadas == 1 && this.yo.CartasJugadas == 0) ||
+                    (this.rival.CartasJugadas == 0 && (this.yo.CartasJugadas == 1 || this.yo.CartasJugadas == 0))) &&
+                    (this.rondaActual.envido == false && this.rondaActual.realEnvido == false) && this.rondaActual.faltaEnvido == false &&
+                    (!this.rondaActual.truco && !this.rondaActual.retruco && !this.rondaActual.valeCuatro)) await this.RivalCantaTanto(this.rivalScreenshot);
 
-            if (mazo == false)
-            {
-                int indice;
-                indice = this.rival.IndicePanio(this.yo);
-
-                if (indice != -1) indice = this.rival.JugarInteligente(cartaYo);
-                else
+                if (rival.CartasJugadas != 0 && this.rondaActual.PuedeCantar(this.rival))
                 {
-                    indice = this.rival.JugarInteligente(null);
+                    mazo = await this.RivalTruco(this.cartaRivalActual, this.cartaYoActual);
                 }
 
-                cartaRival = this.rivalScreenshot.Cartas[indice]; // pq si le pongo solo rival, se pone null tmb pq es lo mismo en memoria
-                //cartaRival = this.rival.Cartas[indice];
-                this.rival.Cartas[indice] = null; // lo hago nulo porque tiene que jugar inteligente
-                                                  // y eso lo hace viendo su lista de cartas, entonces 
-                                                  // la tengo que poner nula una vez que la usé
-                this.cartaRivalActual = this.rivalScreenshot.Cartas[indice];
+                await Task.Delay(2000);
+                this.mazo = mazo;
 
-                if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
-                else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
-                else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3, cartaRival);
+                if (mazo == false)
+                {
+                    int indice;
+                    indice = this.rival.IndicePanio(this.yo);
 
-                this.rival.CartasJugadas += 1;
+                    if (indice != -1) indice = this.rival.JugarInteligente(cartaYo);
+                    else
+                    {
+                        indice = this.rival.JugarInteligente(null);
+                    }
 
-                this.turno = "yo";
-                if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
-                else this.MiTurno();
-                return cartaRival;
+                    cartaRival = this.rivalScreenshot.Cartas[indice]; // pq si le pongo solo rival, se pone null tmb pq es lo mismo en memoria
+                    //cartaRival = this.rival.Cartas[indice];
+                    this.rival.Cartas[indice] = null; // lo hago nulo porque tiene que jugar inteligente
+                                                      // y eso lo hace viendo su lista de cartas, entonces 
+                                                      // la tengo que poner nula una vez que la usé
+                    this.cartaRivalActual = this.rivalScreenshot.Cartas[indice];
+
+                    if (rival.CartasJugadas == 0) this.ModificarEstadoCartaJugada(this.pbCartaRival1, this.pbCartaRivalPanio1, cartaRival);
+                    else if (rival.CartasJugadas == 1) this.ModificarEstadoCartaJugada(this.pbCartaRival2, this.pbCartaRivalPanio2, cartaRival);
+                    else if (rival.CartasJugadas == 2) this.ModificarEstadoCartaJugada(this.pbCartaRival3, this.pbCartaRivalPanio3, cartaRival);
+
+                    this.rival.CartasJugadas += 1;
+
+                    this.turno = "yo";
+                    if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
+                    else this.MiTurno();
+                    return cartaRival;
+                }
+                else
+                {
+                    if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
+                    else this.MiTurno();
+                    return this.cartaRival;
+                }
             }
-            else
-            {
-                if (this.rival.CartasJugadas == 3 && this.yo.CartasJugadas == 3) this.ModificarEstadoBotones(true);
-                else this.MiTurno();
-                return this.cartaRival;
-            }
+            return this.cartaRival;
         }
         private void ModificarEstadoCartaJugada(PictureBox pb, PictureBox pbPanio, Carta carta = null)
         {
@@ -701,12 +728,38 @@ namespace Formularios
         #region LOAD, CLOSING y mazo; sonido efecto
         private void SonarEfecto(SoundPlayer efecto) { if (this.banderaMusicaActivada) efecto.Play(); }
         private void lblSalir_Click(object sender, EventArgs e) { this.DialogResult = DialogResult.No; }
+        private string MensajeSerializacionPartida()
+        {
+            string resultado = "INCONCLUSO";
+            if (this.DialogResult != DialogResult.No)
+            {
+                if (this.yo.Puntaje >= 30) resultado = "GANADOR";
+                else resultado = "PERDEDOR";
+            }
+            return $"{resultado} || {this.perfilYo.Nombre}: {this.yo.Puntaje} - {this.rival.Puntaje} :{this.perfilRival.Nombre}";
+        }
         private void Partida_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CerrarMenu c = new CerrarMenu("Salir de la partida no guarda progreso ¿Quiere salir igualmente?", "SI", "NO");
-            c.ShowDialog();
-            if (c.DialogResult == DialogResult.No) { e.Cancel = true; }
-            else { this.menuMain.Show(); }
+            string serializacion = string.Empty;
+            serializacion = this.MensajeSerializacionPartida();
+            if (this.DialogResult == DialogResult.No || this.DialogResult == DialogResult.Cancel)
+            { 
+                CerrarMenu c = new CerrarMenu("Salir de la partida mancha tu historial ¿Quiere salir igualmente?", "SI", "NO");
+                c.ShowDialog();
+                if (c.DialogResult == DialogResult.No) { e.Cancel = true; }
+                else 
+                {
+                    Serializadora<string>.SerializarStr(serializacion, "../../../../historial.txt");
+                    this.estaCerrandose = true;
+                    this.menuMain.Show();
+                }
+            }
+            else
+            {
+                Serializadora<string>.SerializarStr(serializacion, "../../../../historial.txt");
+                this.estaCerrandose = true;
+                this.menuMain.Show();
+            }
         }
         private void Partida_Load(object sender, EventArgs e)
         {
