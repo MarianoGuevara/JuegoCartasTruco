@@ -1,0 +1,5 @@
+PERDEDOR ---> YO:   0-0  :RIVAL [fushiguro]
+INCONCLUSO ---> YO:   0-0  :RIVAL [tanaka]
+INCONCLUSO ---> YO:   0-0  :RIVAL [fushiguro]
+INCONCLUSO ---> YO:   0-0  :RIVAL [tanjiro]
+INCONCLUSO ---> YO:   0-0  :RIVAL [kotaro]

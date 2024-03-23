@@ -60,6 +60,7 @@
             pbFotoRival = new PictureBox();
             label1 = new Label();
             label3 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbCartaPropia1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbCartaRival2).BeginInit();
@@ -364,7 +365,7 @@
             // pbVolumen
             // 
             pbVolumen.Image = (Image)resources.GetObject("pbVolumen.Image");
-            pbVolumen.Location = new Point(238, 40);
+            pbVolumen.Location = new Point(225, 40);
             pbVolumen.Name = "pbVolumen";
             pbVolumen.Size = new Size(79, 47);
             pbVolumen.SizeMode = PictureBoxSizeMode.Zoom;
@@ -422,12 +423,24 @@
             label3.TabIndex = 37;
             label3.Text = "YO:";
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century Gothic", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.LightGray;
+            label2.Location = new Point(321, 47);
+            label2.Name = "label2";
+            label2.Size = new Size(169, 23);
+            label2.TabIndex = 38;
+            label2.Text = "Truco version 1.0";
+            // 
             // Partida
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(45, 50, 59);
             ClientSize = new Size(1278, 785);
+            Controls.Add(label2);
             Controls.Add(label3);
             Controls.Add(label1);
             Controls.Add(pbFotoRival);
@@ -521,5 +534,6 @@
         private PictureBox pbFotoRival;
         private Label label1;
         private Label label3;
+        private Label label2;
     }
 }

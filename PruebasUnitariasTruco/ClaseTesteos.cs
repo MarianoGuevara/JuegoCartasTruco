@@ -14,7 +14,7 @@ namespace PruebasUnitariasTruco
             a.ComenzarJugador();
             Carta carta = new Carta();
 
-            carta.CartaActual = "../../../../media/cartas/4 BASTO.png";
+            carta.CartaActual = "media/cartas/4 BASTO.png";
             a.Cartas[0] = carta;
 
             Assert.IsTrue(Regex.Match(a.Cartas[0].CartaActual, "4").ToString() != string.Empty);
@@ -26,7 +26,7 @@ namespace PruebasUnitariasTruco
             a.ComenzarJugador();
             Carta carta = new Carta();
 
-            carta.CartaActual = "../../../../media/cartas/1 BASTO.png";
+            carta.CartaActual = "media/cartas/1 BASTO.png";
             a.Cartas[0] = carta;
 
             Assert.IsTrue(Regex.Match(a.Cartas[0].CartaActual, "4").ToString() == string.Empty);

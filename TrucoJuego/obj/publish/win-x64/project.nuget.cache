@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "MFRBM9zbLUeDfppsZe+ef3pFQ5kvRACaO7WZ8crvvmkPIRqzSz/f1AvQxOFUic83XlZRlkr9ceD6O/VXPMCS2w==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Mariano\\Desktop\\JuegoCartasTruco\\TrucoJuego\\Entidades.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.net.illink.analyzers\\7.0.100-1.23211.1\\microsoft.net.illink.analyzers.7.0.100-1.23211.1.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.net.illink.tasks\\7.0.100-1.23211.1\\microsoft.net.illink.tasks.7.0.100-1.23211.1.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\6.0.27\\microsoft.netcore.app.runtime.win-x64.6.0.27.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\6.0.27\\microsoft.windowsdesktop.app.runtime.win-x64.6.0.27.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\6.0.27\\microsoft.aspnetcore.app.runtime.win-x64.6.0.27.nupkg.sha512",
+    "C:\\Users\\Mariano\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.27\\microsoft.netcore.app.crossgen2.win-x64.6.0.27.nupkg.sha512"
+  ],
+  "logs": []
+}

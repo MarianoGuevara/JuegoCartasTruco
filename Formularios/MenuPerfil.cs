@@ -88,7 +88,7 @@ namespace Formularios
 
         private void lblHistorial_Click(object sender, EventArgs e)
         {
-            string deserializado = Serializadora<string>.DeserializarStr("../../../../historial.txt");
+            string deserializado = Serializadora<string>.DeserializarStr("historial.txt");
             Historial h = new Historial(deserializado);
             h.ShowDialog();
         }

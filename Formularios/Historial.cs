@@ -18,6 +18,7 @@ namespace Formularios
         {
             InitializeComponent();
             this.rbHistorial.ReadOnly = true;
+            if (deserializado == string.Empty || deserializado == null) { deserializado = "ERROR"; }
             this.rbHistorial.Text = deserializado;
             this.RecorridoTexto();
         }

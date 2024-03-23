@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PruebasUnitariasTruco")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+83eea3db32b309b467f19105de6e50c272731c15")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+56ff535dbb4b5077f7f982b492c041cebfca6d45")]
 [assembly: System.Reflection.AssemblyProductAttribute("PruebasUnitariasTruco")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PruebasUnitariasTruco")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

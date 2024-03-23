@@ -42,7 +42,7 @@
             // 
             rbHistorial.BackColor = Color.FromArgb(45, 50, 59);
             rbHistorial.BorderStyle = BorderStyle.FixedSingle;
-            rbHistorial.Font = new Font("Century Gothic", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            rbHistorial.Font = new Font("Century Gothic", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rbHistorial.ForeColor = Color.LightGray;
             rbHistorial.Location = new Point(21, 193);
             rbHistorial.Name = "rbHistorial";

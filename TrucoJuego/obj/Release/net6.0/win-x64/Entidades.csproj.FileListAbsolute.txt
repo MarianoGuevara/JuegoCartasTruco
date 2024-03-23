@@ -1,0 +1,15 @@
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\bin\Release\net6.0\win-x64\Entidades.deps.json
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\bin\Release\net6.0\win-x64\Entidades.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\bin\Release\net6.0\win-x64\Entidades.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.csproj.ResolveComReference.cache
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.Properties.Resources.resources
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.csproj.GenerateResource.cache
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.AssemblyInfoInputs.cache
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.AssemblyInfo.cs
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.csproj.CoreCompileInputs.cache
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.sourcelink.json
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\refint\Entidades.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\Entidades.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\TrucoJuego\obj\Release\net6.0\win-x64\ref\Entidades.dll

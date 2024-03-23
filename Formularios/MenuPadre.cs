@@ -25,8 +25,6 @@ namespace Formularios
             this.Text = "Menu";
 
             this.MusicaActivada = true;
-            //this.MusicaFondo = new SoundPlayer("../../../../media/sounds/maharanjan_partida.wav");
-            //this.pbVolumen.Image = Image.FromFile("../../../../media/sound.png");
         }
 
         #region Animaciones
@@ -82,17 +80,6 @@ namespace Formularios
         #endregion
         private void pbVolumen_Click(object sender, EventArgs e)
         {
-            //this.MusicaActivada = !this.MusicaActivada;
-            //if (this.MusicaActivada)
-            //{
-            //    this.MusicaFondo.PlayLooping();
-            //    this.pbVolumen.Image = Image.FromFile("../../../../media/sound.png");
-            //}
-            //else
-            //{
-            //    this.MusicaFondo.Stop();
-            //    this.pbVolumen.Image = Image.FromFile("../../../../media/soundOFF.png");
-            //}
         }
     }
 }

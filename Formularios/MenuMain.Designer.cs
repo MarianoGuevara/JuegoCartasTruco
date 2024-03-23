@@ -33,6 +33,7 @@
             lblPerfil = new Label();
             lblTutorial = new Label();
             lblSalir = new Label();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pbLogo).BeginInit();
             SuspendLayout();
             // 
@@ -98,12 +99,24 @@
             lblSalir.MouseEnter += MenuMain_MouseEnter;
             lblSalir.MouseLeave += MenuMain_MouseLeave;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Century Gothic", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.LightGray;
+            label1.Location = new Point(145, 607);
+            label1.Name = "label1";
+            label1.Size = new Size(169, 23);
+            label1.TabIndex = 25;
+            label1.Text = "Truco version 1.0";
+            // 
             // MenuMain
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(459, 641);
+            Controls.Add(label1);
             Controls.Add(lblSalir);
             Controls.Add(lblTutorial);
             Controls.Add(lblPerfil);
@@ -117,6 +130,7 @@
             Controls.SetChildIndex(lblPerfil, 0);
             Controls.SetChildIndex(lblTutorial, 0);
             Controls.SetChildIndex(lblSalir, 0);
+            Controls.SetChildIndex(label1, 0);
             ((System.ComponentModel.ISupportInitialize)pbLogo).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -128,5 +142,6 @@
         private Label lblPerfil;
         private Label lblTutorial;
         private Label lblSalir;
+        private Label label1;
     }
 }

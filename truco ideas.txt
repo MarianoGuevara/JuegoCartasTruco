@@ -1,15 +1,7 @@
 COSAS RARAS/A MEJORAR
 -> no juega bien la parda; se guarda mejor carta
--> cuando aprete salir BORRAR el objeto partida actual. (o = null o alguna otra no sé)
+-> rutas absolutas para imagenes
 
 COSAS A AGREGAR
- menu
- 
-  JUGAR
-    . JUGAR PARTIDA (generar rivales aleatorios)
-  PERFIL
-    . Cambiar nombre y foto de perfil // (poder crear rivales) OPENFILEDIALOG
-    . btn COMO JUGAR
-  HISTORIAL DE PARTIDAS
-    . Aparecería una patalla con info: Contra quien & Resultado
-  SALIR
+-> Actualizar readme.md
+-> Hacer empaquetado v 1.0

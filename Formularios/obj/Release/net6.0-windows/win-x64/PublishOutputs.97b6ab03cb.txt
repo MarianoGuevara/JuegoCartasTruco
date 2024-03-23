@@ -1,0 +1,9 @@
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\Truco.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\D3DCompiler_47_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\PenImc_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\PresentationNative_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\vcruntime140_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\wpfgfx_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\sni.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\Entidades.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\empaquetado\Truco.exe

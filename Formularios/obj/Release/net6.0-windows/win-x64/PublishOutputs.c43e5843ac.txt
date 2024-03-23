@@ -1,0 +1,11 @@
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\Truco.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\Partida.cs
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\Truco.dll.config
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\D3DCompiler_47_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\PenImc_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\PresentationNative_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\vcruntime140_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\wpfgfx_cor3.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\sni.dll
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\Entidades.pdb
+C:\Users\Mariano\Desktop\JuegoCartasTruco\appEjecutable\Truco.exe

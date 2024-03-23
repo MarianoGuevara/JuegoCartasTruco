@@ -15,12 +15,18 @@ namespace Formularios
 {
     public partial class MenuMain : MenuAbstract
     {
+        private bool cerrarError;
         Persona yoPersona;
         public MenuMain()
         {
             InitializeComponent();
+            this.cerrarError = false;
             this.Text = "Menu";
             this.ShowIcon = false;
+            if (this.yoPersona == null)
+            {
+                this.yoPersona = new Persona("Usuario1", "media/perfiles/default.jpg");
+            }
         }
         [DebuggerStepThrough]
         private void MenuMain_MouseEnter(object sender, EventArgs e) { base.Menu_MouseEnter(sender, e); }
@@ -42,32 +48,45 @@ namespace Formularios
                 this.yoPersona.ImagenDireccion = perfil.direccionImagen;
             }
         }
-        private void lblTutorial_Click(object sender, EventArgs e) { MessageBox.Show("Tutorial aún no disponible en la app, vea las otras opciones.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+        private void lblTutorial_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show($"{Environment.CurrentDirectory}", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Tutorial aún no disponible en la app, vea las otras opciones.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+        }
         private void lblSalir_Click(object sender, EventArgs e) { this.Close(); }
         private void MenuMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            CerrarMenu c = new CerrarMenu("¿Realmente desea cerrar la aplicación? ¡Hay mucho por jugar! ", "SI", "NO");
-            c.ShowDialog();
-            if (c.DialogResult == DialogResult.No) { e.Cancel = true; }
-            else
+            if (!this.cerrarError)
             {
-                //this.yoPersona = new Persona("mariano", "../../../../media/perfiles/default.jpg");
-
-                bool serializacion = Serializadora<Persona>.SerializarJson(this.yoPersona, "../../../../persona.json");
-                if (!serializacion) { MessageBox.Show("Ha ocurrido un error con la serializacion de su perfil. Comuniquese con el desarrollador. Mail: marianoguevara2005@gmail.com"); }
+                CerrarMenu c = new CerrarMenu("¿Realmente desea cerrar la aplicación? ¡Hay mucho por jugar! ", "SI", "NO");
+                c.ShowDialog();
+                if (c.DialogResult == DialogResult.No) { e.Cancel = true; }
+                else
+                {
+                    bool serializacion = Serializadora<Persona>.SerializarJson(this.yoPersona, "persona.json");
+                }
             }
         }
         private void MenuMain_Load(object sender, EventArgs e)
         {
             try
             {
-                this.yoPersona = Serializadora<Persona>.DeserializarJson("../../../../persona.json");
+                if (File.Exists("persona.json"))
+                {
+                    this.yoPersona = Serializadora<Persona>.DeserializarJson("persona.json");
+                    if (this.yoPersona == null || this.yoPersona.Nombre == string.Empty) { this.yoPersona = new Persona("Usuario1", "media/perfiles/default.jpg"); }
+                }
+                else
+                {
+                    this.yoPersona = new Persona("Usuario1", "media/perfiles/default.jpg");
+                }
             }
             catch
-            { 
-                MessageBox.Show("Ha ocurrido un error con la deserializacion de su perfil. Comuniquese con el desarrollador. Mail: marianoguevara2005@gmail.com"); 
+            {
+                MessageBox.Show($"Ha ocurrido un error con la deserializacion de su perfil. Comuniquese con el desarrollador. Mail: marianoguevara2005@gmail.com");
+                this.cerrarError = true;
                 this.Close();
             }
         }
     }
-}
+} 

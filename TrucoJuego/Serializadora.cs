@@ -11,7 +11,7 @@ namespace Entidades
     {
         public static bool SerializarJson(T objeto, string pathSerializacion)
         {
-            //string path = "../../../../media/perfiles/";
+            //string path = "media/perfiles/";
 
             try
             {
@@ -30,11 +30,12 @@ namespace Entidades
         }
         public static T DeserializarJson(string pathSerializacion)
         {
-            StreamReader lectorJson = new StreamReader(pathSerializacion);
-            string jsonString = lectorJson.ReadToEnd();
-            T p = (T)JsonSerializer.Deserialize(jsonString, typeof(T));
-            lectorJson.Close();
-            return p;
+            using(StreamReader lectorJson = new StreamReader(pathSerializacion))
+            {
+                string jsonString = lectorJson.ReadToEnd();
+                T p = (T)JsonSerializer.Deserialize(jsonString, typeof(T));
+                return p;
+            }
         }
 
         public static string DeserializarStr(string ruta)

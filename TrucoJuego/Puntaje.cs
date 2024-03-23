@@ -17,7 +17,7 @@ namespace Entidades
         public static string ImagenPuntaje(int puntaje)
         {
             string stringFinal = Puntaje.ObtenerPuntaje(puntaje);
-            return $"../../../../media/puntaje/{stringFinal}";
+            return $"media/puntaje/{stringFinal}";
         }
         public static void SumarPuntaje(Jugador player, int sumaPuntaje)
         {

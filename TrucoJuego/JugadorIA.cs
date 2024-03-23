@@ -256,6 +256,8 @@ namespace Entidades
                 aCantar = this.MentiraTruco(aCantar, ronda);
             }
 
+            if (yo.Puntaje > 27 ) aCantar = "quiero";
+
             if (!ronda.truco && cartaYo != null &&
                 Regex.Match(cartaYo.CartaActual, "4").ToString() != string.Empty)
             {

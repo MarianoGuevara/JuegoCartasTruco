@@ -156,7 +156,7 @@ namespace Entidades
 
             //casoRival = "noQuiero"; // hardcodear tanto
 
-            if (this.yo.Puntaje == 29 && casoRival == "noQuiero") casoRival = "quiero";
+            if (this.yo.Puntaje > 27 && casoRival == "noQuiero") retorno = "quiero";
 
             switch (casoRival)
             {

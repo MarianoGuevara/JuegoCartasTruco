@@ -44,7 +44,7 @@ namespace Entidades
             int random = a.Next(0, 6); // 0 a 6
 
             Nombre = Persona.listaNombres[random];
-            ImagenDireccion = $"../../../../media/perfiles/{Nombre}.jpg";
+            ImagenDireccion = $"media/perfiles/{Nombre}.jpg";
         }
     }
 }
